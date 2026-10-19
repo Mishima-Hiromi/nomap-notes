@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://no-map-sandbox.vercel.app/notes/sitemap.xml
+Sitemap: https://mishima-hiromi.github.io/nomap-notes/sitemap.xml
