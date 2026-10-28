@@ -8,7 +8,7 @@
 <link rel="canonical" href="https://notes.hibiki-tech.com/posts/2026-10-08-ai-mechatech-6227/">
 <link rel="alternate" hreflang="en" href="https://notes.hibiki-tech.com/posts/2026-10-08-ai-mechatech-6227/">
 <link rel="alternate" hreflang="ja" href="https://note.com/pochin_shachou/n/nff01cd6f80b7">
-<meta property="og:site_name" content="pochin — Japan Notes">
+<meta property="og:site_name" content="Filed in Japan">
 <meta property="og:title" content="AI Mechatec (6227 JP): net income up 9.5x in one year">
 <meta property="og:description" content="A 250-person Japanese equipment maker, read straight from its EDINET filings">
 <meta property="og:url" content="https://notes.hibiki-tech.com/posts/2026-10-08-ai-mechatech-6227/">
@@ -17,40 +17,128 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
 <style>
-:root { --bg:#fbfaf7; --fg:#1f1d1a; --muted:#6b665e; --rule:#e2ddd3; --link:#1d4e89; }
+:root { color-scheme:light dark;
+  --bg:#f6f5f2; --surface:#ffffff; --fg:#16181d; --muted:#626873; --rule:#e4e2dc;
+  --accent:#d6283b; --accent-fg:#ffffff; --chip:#fbe9eb; --chip-fg:#a3172a;
+  --shadow:0 1px 2px rgba(16,24,40,.05), 0 8px 24px rgba(16,24,40,.06);
+  --sans:ui-sans-serif, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --serif:"Iowan Old Style", Charter, Georgia, serif; }
+@media (prefers-color-scheme: dark) { :root {
+  --bg:#0f1115; --surface:#171a21; --fg:#e8e9ec; --muted:#9aa0ab; --rule:#262a33;
+  --accent:#ff4d5e; --chip:#2a1619; --chip-fg:#ff8a95;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35); } }
 * { box-sizing:border-box; }
-body { margin:0; background:var(--bg); color:var(--fg);
-  font:17px/1.75 Georgia, "Times New Roman", serif; }
-main, header, footer { max-width:680px; margin:0 auto; padding:0 16px; }
-header { padding-top:32px; border-bottom:1px solid var(--rule); padding-bottom:12px; }
-header a.site { color:var(--fg); text-decoration:none; font-weight:bold; }
-header p { margin:4px 0 0; color:var(--muted); font-size:15px; }
-h1 { font-size:30px; line-height:1.3; margin:32px 0 8px; }
-h2 { font-size:22px; margin:40px 0 8px; }
-.sub { color:var(--muted); margin:0 0 24px; }
-.meta { color:var(--muted); font-size:14px; }
-a { color:var(--link); }
-img { max-width:100%; height:auto; }
-figure { margin:24px 0; }
-blockquote { margin:24px 0; padding-left:16px; border-left:3px solid var(--rule); color:var(--muted); }
-ol.posts { list-style:none; padding:0; }
-ol.posts li { padding:16px 0; border-bottom:1px solid var(--rule); overflow:hidden; }
-ol.posts img.thumb { float:right; width:160px; margin:4px 0 8px 16px; border:1px solid var(--rule); }
-footer { color:var(--muted); font-size:14px; padding:40px 16px; }
-.cta { margin:32px 0; padding:16px; border:1px solid var(--rule); background:#fff; }
-.cta a.btn { display:inline-block; margin-top:8px; padding:8px 16px; background:var(--link);
-  color:#fff; text-decoration:none; border-radius:4px; }
+html { -webkit-text-size-adjust:100%; }
+body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.6 var(--sans);
+  -webkit-font-smoothing:antialiased; }
+a { color:inherit; }
+img { max-width:100%; height:auto; display:block; }
+.wrap { max-width:1080px; margin:0 auto; padding:0 20px; }
+.narrow { max-width:720px; margin:0 auto; padding:0 20px; }
+
+.top { position:sticky; top:0; z-index:10; background:color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter:saturate(1.4) blur(10px); -webkit-backdrop-filter:saturate(1.4) blur(10px);
+  border-bottom:1px solid var(--rule); }
+.top .wrap { display:flex; align-items:center; justify-content:space-between; height:60px; }
+.brand { display:flex; align-items:center; gap:10px; text-decoration:none; font-weight:700;
+  letter-spacing:-.01em; font-size:17px; }
+.brand .mark { width:18px; height:18px; border-radius:50%; background:var(--accent);
+  box-shadow:0 0 0 4px var(--chip); }
+.btn { display:inline-flex; align-items:center; padding:9px 16px; border-radius:999px;
+  background:var(--accent); color:var(--accent-fg); text-decoration:none; font-weight:600;
+  font-size:14px; transition:transform .15s ease, filter .15s ease; }
+.btn:hover { transform:translateY(-1px); filter:brightness(1.06); }
+.btn.ghost { background:transparent; color:var(--fg); border:1px solid var(--rule); }
+
+.hero { padding:72px 0 8px; }
+.eyebrow { text-transform:uppercase; letter-spacing:.12em; font-size:12px; font-weight:700;
+  color:var(--accent); margin:0 0 14px; }
+.hero h1 { font-size:clamp(38px, 6.5vw, 64px); line-height:1.03; letter-spacing:-.035em;
+  margin:0 0 18px; max-width:13ch; }
+.hero .lead { font-size:clamp(17px, 2vw, 20px); color:var(--muted); max-width:56ch; margin:0 0 28px; }
+.hero .actions { display:flex; gap:10px; flex-wrap:wrap; }
+.stats { display:flex; gap:40px; margin-top:44px; padding-top:22px; border-top:1px solid var(--rule);
+  flex-wrap:wrap; }
+.stats b { display:block; font-size:26px; letter-spacing:-.02em; font-variant-numeric:tabular-nums; }
+.stats span { color:var(--muted); font-size:13px; }
+
+.section-h { margin:48px 0 18px; font-size:13px; text-transform:uppercase; letter-spacing:.12em;
+  color:var(--muted); font-weight:700; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:20px;
+  padding:0; margin:0 0 64px; list-style:none; }
+.card { background:var(--surface); border:1px solid var(--rule); border-radius:16px; overflow:hidden;
+  box-shadow:var(--shadow); display:flex; flex-direction:column; text-decoration:none; height:100%;
+  transition:transform .2s ease, box-shadow .2s ease; }
+.card:hover { transform:translateY(-3px);
+  box-shadow:0 2px 4px rgba(16,24,40,.06), 0 18px 40px rgba(16,24,40,.13); }
+.card .thumb { aspect-ratio:16/10; background:#fff; border-bottom:1px solid var(--rule); overflow:hidden; }
+.card .thumb img { width:100%; height:100%; object-fit:contain; padding:12px; }
+.card .body { padding:18px 20px 22px; display:flex; flex-direction:column; gap:8px; flex:1; }
+.card h3 { font-size:19px; line-height:1.3; letter-spacing:-.01em; margin:0; }
+.card p { color:var(--muted); font-size:14.5px; margin:0; }
+.featured { grid-column:1 / -1; }
+.featured .card { flex-direction:row; }
+.featured .thumb { flex:1.25; aspect-ratio:auto; min-height:340px; border-bottom:0;
+  border-right:1px solid var(--rule); }
+.featured .body { flex:1; padding:36px; justify-content:center; gap:12px; }
+.featured h3 { font-size:clamp(23px, 3vw, 31px); line-height:1.2; }
+.featured p { font-size:16px; }
+@media (max-width:760px) {
+  .featured .card { flex-direction:column; }
+  .featured .thumb { min-height:0; aspect-ratio:16/10; border-right:0; border-bottom:1px solid var(--rule); }
+  .featured .body { padding:20px; }
+  .hero { padding-top:48px; } }
+
+.chips { display:flex; gap:10px; align-items:center; flex-wrap:wrap; font-size:12.5px; color:var(--muted); }
+.chip { display:inline-block; padding:3px 9px; border-radius:999px; background:var(--chip);
+  color:var(--chip-fg); font-weight:700; font-variant-numeric:tabular-nums; letter-spacing:.03em; }
+
+.post-head { padding:48px 0 8px; }
+.back { display:inline-block; color:var(--muted); text-decoration:none; font-size:14px; margin-bottom:28px; }
+.back:hover { color:var(--fg); }
+.post-head h1 { font-size:clamp(30px, 5vw, 46px); line-height:1.12; letter-spacing:-.025em;
+  margin:16px 0 14px; }
+.post-head .sub { font-size:19px; color:var(--muted); margin:0 0 8px; }
+.post-head .chips a { color:var(--muted); }
+.prose { font:19px/1.75 var(--serif); padding:16px 0 8px; }
+.prose p { margin:0 0 1.15em; }
+.prose h2, .prose h3, .prose h4 { font-family:var(--sans); letter-spacing:-.015em; line-height:1.25; }
+.prose h2 { font-size:26px; margin:2.1em 0 .7em; padding-top:.9em; border-top:1px solid var(--rule); }
+.prose h3 { font-size:20px; margin:1.8em 0 .6em; }
+.prose a { color:var(--accent); text-underline-offset:3px; }
+.prose ul, .prose ol { padding-left:1.3em; margin:0 0 1.2em; }
+.prose li { margin:.35em 0; }
+.prose figure { margin:2em 0; background:#fff; border:1px solid var(--rule); border-radius:14px;
+  padding:14px; box-shadow:var(--shadow); }
+.prose figure img { margin:0 auto; border-radius:6px; }
+.prose blockquote { margin:1.6em 0; padding:4px 0 4px 20px; border-left:3px solid var(--accent);
+  color:var(--muted); font-style:italic; }
+
+.cta { margin:40px 0 56px; padding:28px; border-radius:18px; color:#fff; font-family:var(--sans);
+  background:radial-gradient(120% 140% at 100% 0%, #ff5a6b 0%, #d6283b 45%, #8e1022 100%);
+  box-shadow:var(--shadow); }
+.cta h4 { margin:0 0 6px; font-size:20px; letter-spacing:-.01em; }
+.cta p { margin:0 0 16px; opacity:.92; font-size:15.5px; line-height:1.55; }
+.cta .btn { background:#fff; color:#b01d30; }
+
+footer.site { border-top:1px solid var(--rule); color:var(--muted); font-size:13.5px; padding:32px 0 48px; }
+footer.site .wrap { display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+footer.site p { margin:0; max-width:60ch; }
+footer.site nav { display:flex; gap:18px; }
+footer.site a { text-decoration:none; }
+footer.site a:hover { color:var(--fg); }
 </style>
 <meta property="og:image" content="https://notes.hibiki-tech.com/images/2026-10-08-ai-mechatech-6227-trend1.en.png">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "AI Mechatec (6227 JP): net income up 9.5x in one year", "description": "A 250-person Japanese equipment maker, read straight from its EDINET filings", "inLanguage": "en", "mainEntityOfPage": "https://notes.hibiki-tech.com/posts/2026-10-08-ai-mechatech-6227/", "publisher": {"@type": "Organization", "name": "pochin — Japan Notes", "url": "https://notes.hibiki-tech.com/"}, "datePublished": "2026-10-08", "image": ["https://notes.hibiki-tech.com/images/2026-10-08-ai-mechatech-6227-trend1.en.png"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "AI Mechatec (6227 JP): net income up 9.5x in one year", "description": "A 250-person Japanese equipment maker, read straight from its EDINET filings", "inLanguage": "en", "mainEntityOfPage": "https://notes.hibiki-tech.com/posts/2026-10-08-ai-mechatech-6227/", "publisher": {"@type": "Organization", "name": "Filed in Japan", "url": "https://notes.hibiki-tech.com/"}, "datePublished": "2026-10-08", "image": ["https://notes.hibiki-tech.com/images/2026-10-08-ai-mechatech-6227-trend1.en.png"]}</script>
 </head>
 <body>
-<header><a class="site" href="../../">pochin — Japan Notes</a><p>Japanese company filings, read and translated into English. Often from Japanese-only sources such as EDINET. Information only, not investment advice.</p></header>
+<header class="top"><div class="wrap"><a class="brand" href="../../"><span class="mark" aria-hidden="true"></span>Filed in Japan</a><a class="btn" href="https://pochin.substack.com/subscribe">Subscribe</a></div></header>
 <main>
-<article>
-<h1>AI Mechatec (6227 JP): net income up 9.5x in one year</h1>
+<article class="narrow">
+<div class="post-head"><a class="back" href="../../">&larr; All filings</a><div class="chips"><span class="chip">6227 JP</span><time datetime="2026-10-08">Oct 8, 2026</time><span>·</span><a href="https://note.com/pochin_shachou/n/nff01cd6f80b7" hreflang="ja" lang="ja">日本語版</a></div><h1>AI Mechatec (6227 JP): net income up 9.5x in one year</h1>
 <p class="sub">A 250-person Japanese equipment maker, read straight from its EDINET filings</p>
-<p class="meta">2026-10-08 · <a href="https://note.com/pochin_shachou/n/nff01cd6f80b7" hreflang="ja">日本語版</a></p>
+</div>
+<div class="prose">
 <p>A Japanese company grew its net income 9.5x in a single year.</p>
 <p>It is not a household name. It has about 250 employees.</p>
 <p>Here is what it does, and what changed, using the numbers in its own filings.</p>
@@ -87,9 +175,10 @@ footer { color:var(--muted); font-size:14px; padding:40px 16px; }
 <li>AI Mechatec official website - <a href="https://www.ai-mech.com/">https://www.ai-mech.com/</a></li>
 </ol>
 <blockquote><p>This post is for information only and is not investment advice. Make your own investment decisions, and check the primary sources linked above. Figures are translated from Japanese filings; in case of any difference, the original filings prevail.</p></blockquote>
-<aside class="cta"><div>Get new posts by email. Free on Substack.</div><a class="btn" href="https://pochin.substack.com/subscribe">Subscribe</a></aside>
+</div>
+<aside class="cta"><h4>New filings, in your inbox</h4><p>One short read when a Japanese company files something worth knowing. Free on Substack.</p><a class="btn" href="https://pochin.substack.com/subscribe">Subscribe</a></aside>
 </article>
 </main>
-<footer>Information only, not investment advice. Figures are translated from Japanese filings; the original filings prevail.</footer>
+<footer class="site"><div class="wrap"><p>Information only, not investment advice. Figures are translated from Japanese filings (EDINET); the original filings prevail.</p><nav><a href="../../">Home</a><a href="../../feed.xml">RSS</a><a href="https://pochin.substack.com/subscribe">Newsletter</a></nav></div></footer>
 </body>
 </html>
