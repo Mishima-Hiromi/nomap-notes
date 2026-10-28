@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kakaku.com (2371 JP): the JPY 1 that moves a tender offer</title>
+<meta name="description" content="How a one-yen bid increase shifts two conditions at once">
+<link rel="canonical" href="https://notes.hibiki-tech.com/posts/2026-10-16-kakaku-2371-tob-one-yen/">
+<link rel="alternate" hreflang="en" href="https://notes.hibiki-tech.com/posts/2026-10-16-kakaku-2371-tob-one-yen/">
+<link rel="alternate" hreflang="ja" href="https://note.com/pochin_shachou/n/nc8edbbb12f38">
+<meta property="og:site_name" content="Filed in Japan">
+<meta property="og:title" content="Kakaku.com (2371 JP): the JPY 1 that moves a tender offer">
+<meta property="og:description" content="How a one-yen bid increase shifts two conditions at once">
+<meta property="og:url" content="https://notes.hibiki-tech.com/posts/2026-10-16-kakaku-2371-tob-one-yen/">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
+<style>
+:root { color-scheme:light dark;
+  --bg:#f6f5f2; --surface:#ffffff; --fg:#16181d; --muted:#626873; --rule:#e4e2dc;
+  --accent:#d6283b; --accent-fg:#ffffff; --chip:#fbe9eb; --chip-fg:#a3172a;
+  --shadow:0 1px 2px rgba(16,24,40,.05), 0 8px 24px rgba(16,24,40,.06);
+  --sans:ui-sans-serif, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --serif:"Iowan Old Style", Charter, Georgia, serif; }
+@media (prefers-color-scheme: dark) { :root {
+  --bg:#0f1115; --surface:#171a21; --fg:#e8e9ec; --muted:#9aa0ab; --rule:#262a33;
+  --accent:#ff4d5e; --chip:#2a1619; --chip-fg:#ff8a95;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35); } }
+* { box-sizing:border-box; }
+html { -webkit-text-size-adjust:100%; }
+body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.6 var(--sans);
+  -webkit-font-smoothing:antialiased; }
+a { color:inherit; }
+img { max-width:100%; height:auto; display:block; }
+.wrap { max-width:1080px; margin:0 auto; padding:0 20px; }
+.narrow { max-width:720px; margin:0 auto; padding:0 20px; }
+
+.top { position:sticky; top:0; z-index:10; background:color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter:saturate(1.4) blur(10px); -webkit-backdrop-filter:saturate(1.4) blur(10px);
+  border-bottom:1px solid var(--rule); }
+.top .wrap { display:flex; align-items:center; justify-content:space-between; height:60px; }
+.brand { display:flex; align-items:center; gap:10px; text-decoration:none; font-weight:700;
+  letter-spacing:-.01em; font-size:17px; }
+.brand .mark { width:18px; height:18px; border-radius:50%; background:var(--accent);
+  box-shadow:0 0 0 4px var(--chip); }
+.btn { display:inline-flex; align-items:center; padding:9px 16px; border-radius:999px;
+  background:var(--accent); color:var(--accent-fg); text-decoration:none; font-weight:600;
+  font-size:14px; transition:transform .15s ease, filter .15s ease; }
+.btn:hover { transform:translateY(-1px); filter:brightness(1.06); }
+.btn.ghost { background:transparent; color:var(--fg); border:1px solid var(--rule); }
+
+.hero { padding:72px 0 8px; }
+.eyebrow { text-transform:uppercase; letter-spacing:.12em; font-size:12px; font-weight:700;
+  color:var(--accent); margin:0 0 14px; }
+.hero h1 { font-size:clamp(38px, 6.5vw, 64px); line-height:1.03; letter-spacing:-.035em;
+  margin:0 0 18px; max-width:13ch; }
+.hero .lead { font-size:clamp(17px, 2vw, 20px); color:var(--muted); max-width:56ch; margin:0 0 28px; }
+.hero .actions { display:flex; gap:10px; flex-wrap:wrap; }
+.stats { display:flex; gap:40px; margin-top:44px; padding-top:22px; border-top:1px solid var(--rule);
+  flex-wrap:wrap; }
+.stats b { display:block; font-size:26px; letter-spacing:-.02em; font-variant-numeric:tabular-nums; }
+.stats span { color:var(--muted); font-size:13px; }
+
+.section-h { margin:48px 0 18px; font-size:13px; text-transform:uppercase; letter-spacing:.12em;
+  color:var(--muted); font-weight:700; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:20px;
+  padding:0; margin:0 0 64px; list-style:none; }
+.card { background:var(--surface); border:1px solid var(--rule); border-radius:16px; overflow:hidden;
+  box-shadow:var(--shadow); display:flex; flex-direction:column; text-decoration:none; height:100%;
+  transition:transform .2s ease, box-shadow .2s ease; }
+.card:hover { transform:translateY(-3px);
+  box-shadow:0 2px 4px rgba(16,24,40,.06), 0 18px 40px rgba(16,24,40,.13); }
+.card .thumb { aspect-ratio:16/10; background:#fff; border-bottom:1px solid var(--rule); overflow:hidden; }
+.card .thumb img { width:100%; height:100%; object-fit:contain; padding:12px; }
+.card .body { padding:18px 20px 22px; display:flex; flex-direction:column; gap:8px; flex:1; }
+.card h3 { font-size:19px; line-height:1.3; letter-spacing:-.01em; margin:0; }
+.card p { color:var(--muted); font-size:14.5px; margin:0; }
+.featured { grid-column:1 / -1; }
+.featured .card { flex-direction:row; }
+.featured .thumb { flex:1.25; aspect-ratio:auto; min-height:340px; border-bottom:0;
+  border-right:1px solid var(--rule); }
+.featured .body { flex:1; padding:36px; justify-content:center; gap:12px; }
+.featured h3 { font-size:clamp(23px, 3vw, 31px); line-height:1.2; }
+.featured p { font-size:16px; }
+@media (max-width:760px) {
+  .featured .card { flex-direction:column; }
+  .featured .thumb { min-height:0; aspect-ratio:16/10; border-right:0; border-bottom:1px solid var(--rule); }
+  .featured .body { padding:20px; }
+  .hero { padding-top:48px; } }
+
+.chips { display:flex; gap:10px; align-items:center; flex-wrap:wrap; font-size:12.5px; color:var(--muted); }
+.chip { display:inline-block; padding:3px 9px; border-radius:999px; background:var(--chip);
+  color:var(--chip-fg); font-weight:700; font-variant-numeric:tabular-nums; letter-spacing:.03em; }
+
+.post-head { padding:48px 0 8px; }
+.back { display:inline-block; color:var(--muted); text-decoration:none; font-size:14px; margin-bottom:28px; }
+.back:hover { color:var(--fg); }
+.post-head h1 { font-size:clamp(30px, 5vw, 46px); line-height:1.12; letter-spacing:-.025em;
+  margin:16px 0 14px; }
+.post-head .sub { font-size:19px; color:var(--muted); margin:0 0 8px; }
+.post-head .chips a { color:var(--muted); }
+.prose { font:19px/1.75 var(--serif); padding:16px 0 8px; }
+.prose p { margin:0 0 1.15em; }
+.prose h2, .prose h3, .prose h4 { font-family:var(--sans); letter-spacing:-.015em; line-height:1.25; }
+.prose h2 { font-size:26px; margin:2.1em 0 .7em; padding-top:.9em; border-top:1px solid var(--rule); }
+.prose h3 { font-size:20px; margin:1.8em 0 .6em; }
+.prose a { color:var(--accent); text-underline-offset:3px; }
+.prose ul, .prose ol { padding-left:1.3em; margin:0 0 1.2em; }
+.prose li { margin:.35em 0; }
+.prose figure { margin:2em 0; background:#fff; border:1px solid var(--rule); border-radius:14px;
+  padding:14px; box-shadow:var(--shadow); }
+.prose figure img { margin:0 auto; border-radius:6px; }
+.prose blockquote { margin:1.6em 0; padding:4px 0 4px 20px; border-left:3px solid var(--accent);
+  color:var(--muted); font-style:italic; }
+
+.cta { margin:40px 0 56px; padding:28px; border-radius:18px; color:#fff; font-family:var(--sans);
+  background:radial-gradient(120% 140% at 100% 0%, #ff5a6b 0%, #d6283b 45%, #8e1022 100%);
+  box-shadow:var(--shadow); }
+.cta h4 { margin:0 0 6px; font-size:20px; letter-spacing:-.01em; }
+.cta p { margin:0 0 16px; opacity:.92; font-size:15.5px; line-height:1.55; }
+.cta .btn { background:#fff; color:#b01d30; }
+
+footer.site { border-top:1px solid var(--rule); color:var(--muted); font-size:13.5px; padding:32px 0 48px; }
+footer.site .wrap { display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+footer.site p { margin:0; max-width:60ch; }
+footer.site nav { display:flex; gap:18px; }
+footer.site a { text-decoration:none; }
+footer.site a:hover { color:var(--fg); }
+</style>
+<meta property="og:image" content="https://notes.hibiki-tech.com/images/2026-10-16-kakaku-2371-tob-one-yen-trend1.en.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Kakaku.com (2371 JP): the JPY 1 that moves a tender offer", "description": "How a one-yen bid increase shifts two conditions at once", "inLanguage": "en", "mainEntityOfPage": "https://notes.hibiki-tech.com/posts/2026-10-16-kakaku-2371-tob-one-yen/", "publisher": {"@type": "Organization", "name": "Filed in Japan", "url": "https://notes.hibiki-tech.com/"}, "datePublished": "2026-10-16", "image": ["https://notes.hibiki-tech.com/images/2026-10-16-kakaku-2371-tob-one-yen-trend1.en.png"]}</script>
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="brand" href="../../"><span class="mark" aria-hidden="true"></span>Filed in Japan</a><a class="btn" href="https://pochin.substack.com/subscribe">Subscribe</a></div></header>
+<main>
+<article class="narrow">
+<div class="post-head"><a class="back" href="../../">&larr; All filings</a><div class="chips"><span class="chip">2371 JP</span><time datetime="2026-10-16">Oct 16, 2026</time><span>·</span><a href="https://note.com/pochin_shachou/n/nc8edbbb12f38" hreflang="ja" lang="ja">日本語版</a></div><h1>Kakaku.com (2371 JP): the JPY 1 that moves a tender offer</h1>
+<p class="sub">How a one-yen bid increase shifts two conditions at once</p>
+</div>
+<div class="prose">
+<p>A tender offer price was raised by one yen. On its own, that sounds like a meaningless gesture.</p>
+<p>In the Kakaku.com (2371) tender offer announced on October 14, however, that one yen has a mechanism behind it.</p>
+<p><em>About this series: each post takes one listed Japanese company and reads its disclosures on EDINET, the Japanese regulator's filing system (Japan's counterpart to SEC EDGAR), where most documents are published only in Japanese.</em></p>
+<h2>Summary</h2>
+<ul>
+<li>Kamgras 1, the buyer backed by EQT, raised its offer price from JPY 3,681 to JPY 3,682 on October 14 and extended the offer period to October 28.</li>
+<li>That one yen simultaneously raises, by one yen each, the minimum level a competing bid needs for the company's support and the level at which KDDI can accept a competing bid.</li>
+<li>The competing bid is JPY 3,597 at its base price, or JPY 3,720 with KDDI's condition. Neither reaches KDDI's current level of JPY 3,756.</li>
+<li>The thesis of this post: the one-yen raises are not a move to compete on price, but a move that keeps shifting the entry conditions for the competing bid.</li>
+</ul>
+<h2>1. The three parties, and the situation before the one yen</h2>
+<h3>Kakaku.com (2371)</h3>
+<p>Kakaku.com operates online services such as Kakaku.com and Tabelog. It is listed on the Prime Market of the Tokyo Stock Exchange.</p>
+<p>Company website: <a href="https://corporate.kakaku.com/">https://corporate.kakaku.com/</a></p>
+<h3>Kamgras 1 and EQT</h3>
+<p>Kamgras 1 is the buyer making the tender offer to take Kakaku.com private.</p>
+<p>According to the disclosed materials, the acquisition structure involves EQT.</p>
+<p>EQT is an investment firm headquartered in Stockholm, Sweden.</p>
+<p>Company website: <a href="https://eqtgroup.com/">https://eqtgroup.com/</a></p>
+<h3>The competing side</h3>
+<p>A group of funds advised by Bain Capital Private Equity, together with LINE Yahoo, has announced a competing tender offer.</p>
+<p>The disclosure refers to the two together as "the proposer."</p>
+<p>The two tender offers cannot both succeed.</p>
+<p>Kakaku.com's board and special committee are considering which one serves corporate value and shareholder interests.</p>
+<p>Kakaku.com itself issued an opinion in favor of the tender offer on July 2.</p>
+<p>It then left the decision on whether to tender to shareholders. That opinion had not changed as of October 15.</p>
+<h2>2. From JPY 3,450 to JPY 3,682: how the moves got smaller</h2>
+<p>Here are the offer price moves that can be confirmed in the disclosed materials.</p>
+<p>The starting point for comparison is the closing price of JPY 2,121 on April 22, the day before the reported approach.</p>
+<figure><img src="https://notes.hibiki-tech.com/images/2026-10-16-kakaku-2371-tob-one-yen-trend1.en.png" alt="Kakaku.com offer price (JPY)"></figure>
+<p>From JPY 3,450 to JPY 3,570 on August 13.</p>
+<p>To JPY 3,571 on August 27.</p>
+<p>To JPY 3,680 on September 10.</p>
+<p>To JPY 3,681 on September 29.</p>
+<p>To JPY 3,682 on October 14.</p>
+<p>August 27, September 29 and October 14 were each a one-yen increase.</p>
+<p>JPY 3,682 is 73.60% above the April 22 close of JPY 2,121.</p>
+<p>It is 32.73% above the May 11 close of JPY 2,774, the last trading day before the announcement.</p>
+<p>Meanwhile, according to the buyer's disclosure, the market price was above the tender offer price as of October 14.</p>
+<p>If the share price is above the tender offer price, there is no reason to tender at that price.</p>
+<p>So why one yen?</p>
+<h2>3. Two lines move with one yen</h2>
+<p>The key is the tender offer agreement between the buyer and the company.</p>
+<p>According to the buyer's disclosure, for the company to support a competing bid and recommend tendering, the competing price must be at least the buyer's offer price.</p>
+<p>As of September 16, that level was JPY 3,680 or more.</p>
+<p>After the October 14 change, it became JPY 3,682 or more.</p>
+<p>The other line is the non-tender agreement with KDDI.</p>
+<p>KDDI has agreed not to tender into the buyer's offer.</p>
+<p>KDDI can accept a competing bid only if the competing price is 2% above the buyer's price.</p>
+<p>That level was JPY 3,754 as of September 16, JPY 3,755 after September 29, and JPY 3,756 after October 14.</p>
+<p>2% above JPY 3,682 is JPY 3,755.64; the buyer discloses JPY 3,756.</p>
+<p>In other words, each one-yen increase moves two lines.</p>
+<figure><img src="https://notes.hibiki-tech.com/images/2026-10-16-kakaku-2371-tob-one-yen-trend2.en.png" alt="Competing bid vs current offer and KDDI threshold (JPY)"></figure>
+<p>The base price of the competing bid is JPY 3,597, which is JPY 85 below the current JPY 3,682.</p>
+<p>The price conditional on KDDI's agreement is JPY 3,720.</p>
+<p>That is also JPY 36 short of KDDI's level of JPY 3,756.</p>
+<p>The buyer argues in its disclosure that the competing bid has created conditions it cannot itself meet.</p>
+<p>It also points out that the competing side changed its start date from "mid-September" to "undecided" in September.</p>
+<p>This is the buyer's claim, and it needs to be read separately from the competing side's account.</p>
+<p>What can be confirmed as fact is the relative position of the numbers.</p>
+<p>At either price, the competing bid has not caught up with the buyer's moves.</p>
+<h2>4. Shareholders who will not tender, and 115 business days</h2>
+<p>Shareholders who will not tender account for a large part of this tender offer.</p>
+<p>Digital Garage holds 20.64%, according to its large shareholding report on EDINET (reference date October 14).</p>
+<p>Kakaku.com's September 28 disclosure shows that KDDI holds 17.67% of shares outstanding (35,016,000 shares).</p>
+<figure><img src="https://notes.hibiki-tech.com/images/2026-10-16-kakaku-2371-tob-one-yen-share1.en.png" alt="Holdings of shareholders not tendering"></figure>
+<p>KDDI and Kakaku.com ended their capital alliance on September 28.</p>
+<p>The business alliance continues.</p>
+<p>The shares of shareholders who do not tender are to be acquired by the company as treasury shares after the tender offer succeeds.</p>
+<p>That price is JPY 2,993 per share (raised by one yen from JPY 2,992 on October 14).</p>
+<p>The disclosure says the price is lower than the JPY 3,682 offer because it is designed so that after-tax proceeds are equivalent.</p>
+<p>The minimum number of shares to be purchased is 34,941,000.</p>
+<p>The period runs from May 13 to October 28, 115 business days, far longer than the statutory minimum of 20 business days.</p>
+<p>The buyer explains that the aim is to secure an opportunity for rivals to bid and to ensure the fairness of the price.</p>
+<p>There is also a move by a shareholder called Oasis.</p>
+<p>According to the buyer's disclosure, Oasis stated on August 18 that it would not support a tender offer below JPY 3,640.</p>
+<p>The current price of JPY 3,680 or more is above that level, but no agreement to tender has been reached.</p>
+<p>The settlement start date changed from October 21 to November 5.</p>
+<p>The scheduled timing of the extraordinary shareholders meeting has also moved from early December to mid-December.</p>
+<h2>Why it matters for global investors</h2>
+<p>Japanese tender offer documents and the company's opinions are mostly published only in Japanese, on EDINET and on the TDnet release service, so the conditions that decide the outcome are easy to miss if you read only the headline price. This deal turns on two thresholds written into contracts: the price at which the target's board can support a rival bid, and the price at which a committed non-tendering shareholder can switch. A large shareholder's non-tender commitment, disclosed through a large shareholding report on EDINET, can therefore matter as much as the offer price itself.</p>
+<h2>Closing</h2>
+<p>One yen is, on its own, a small move.</p>
+<p>Set next to the contract clauses, though, it looks like a procedural move that shifts the other side's entry conditions one yen at a time.</p>
+<p>That is the part easily missed if you watch only the size of the raise in tender offer news.</p>
+<p>The next time the price moves, look not at the size but at which line moved.</p>
+<p>The original Japanese version of this post is on note: <a href="https://note.com/pochin_shachou/n/nc8edbbb12f38">https://note.com/pochin_shachou/n/nc8edbbb12f38</a></p>
+<h2>Sources</h2>
+<ol>
+<li>Kamgras 1, "Notice regarding change of purchase conditions for the tender offer for the shares of Kakaku.com, Inc." (October 14, 2026) - <a href="https://www.release.tdnet.info/inbs/140120261014550805.pdf">https://www.release.tdnet.info/inbs/140120261014550805.pdf</a></li>
+<li>Kakaku.com, "Notice regarding partial amendment to the notice of opinion in support of, and recommendation to tender into, the tender offer by Kamgras 1" (October 15, 2026) - <a href="https://www.release.tdnet.info/inbs/140120261015550498.pdf">https://www.release.tdnet.info/inbs/140120261015550498.pdf</a></li>
+<li>Kakaku.com, "Notice regarding dissolution of the capital alliance with KDDI, continuation of the business alliance, and change of other related company" (September 28, 2026) - <a href="https://www.release.tdnet.info/inbs/140120260928541074.pdf">https://www.release.tdnet.info/inbs/140120260928541074.pdf</a></li>
+<li>Kamgras 1, "Notice regarding change of purchase conditions" (September 10, 2026) - <a href="https://www.release.tdnet.info/inbs/140120260910534451.pdf">https://www.release.tdnet.info/inbs/140120260910534451.pdf</a></li>
+<li>Large shareholding report (Digital Garage, reference date October 14, 2026, via EDINET) - <a href="https://disclosure2.edinet-fsa.go.jp/">https://disclosure2.edinet-fsa.go.jp/</a></li>
+</ol>
+<blockquote><p>This post is for information only and is not investment advice. Make your own investment decisions, and check the primary sources linked above. Figures are translated from Japanese filings; in case of any difference, the original filings prevail.</p></blockquote>
+</div>
+<aside class="cta"><h4>Get the full filing pack</h4><p>Financial tables, shareholders, segments and risk factors for this company, translated from the Japanese filings. For paid subscribers on Substack.</p><a class="btn" href="https://pochin.substack.com/subscribe">Subscribe</a></aside>
+</article>
+</main>
+<footer class="site"><div class="wrap"><p>Information only, not investment advice. Figures are translated from Japanese filings (EDINET); the original filings prevail.</p><nav><a href="../../">Home</a><a href="../../feed.xml">RSS</a><a href="https://pochin.substack.com/subscribe">Newsletter</a></nav></div></footer>
+</body>
+</html>
