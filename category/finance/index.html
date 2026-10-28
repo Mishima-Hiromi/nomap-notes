@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Finance — Filed in Japan</title>
+<meta name="description" content="Finance: Japanese company filings, translated into English. 2 reports.">
+<link rel="canonical" href="https://notes.hibiki-tech.com/category/finance/">
+<link rel="alternate" hreflang="en" href="https://notes.hibiki-tech.com/category/finance/">
+<meta property="og:site_name" content="Filed in Japan">
+<meta property="og:title" content="Finance — Filed in Japan">
+<meta property="og:description" content="Finance: Japanese company filings, translated into English. 2 reports.">
+<meta property="og:url" content="https://notes.hibiki-tech.com/category/finance/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
+<style>
+:root { color-scheme:light dark;
+  --bg:#f6f5f2; --surface:#ffffff; --fg:#16181d; --muted:#626873; --rule:#e4e2dc;
+  --accent:#d6283b; --accent-fg:#ffffff; --chip:#fbe9eb; --chip-fg:#a3172a;
+  --shadow:0 1px 2px rgba(16,24,40,.05), 0 8px 24px rgba(16,24,40,.06);
+  --sans:ui-sans-serif, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --serif:"Iowan Old Style", Charter, Georgia, serif; }
+@media (prefers-color-scheme: dark) { :root {
+  --bg:#0f1115; --surface:#171a21; --fg:#e8e9ec; --muted:#9aa0ab; --rule:#262a33;
+  --accent:#ff4d5e; --chip:#2a1619; --chip-fg:#ff8a95;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35); } }
+* { box-sizing:border-box; }
+html { -webkit-text-size-adjust:100%; }
+body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.6 var(--sans);
+  -webkit-font-smoothing:antialiased; }
+a { color:inherit; }
+img { max-width:100%; height:auto; display:block; }
+.wrap { max-width:1080px; margin:0 auto; padding:0 20px; }
+.narrow { max-width:720px; margin:0 auto; padding:0 20px; }
+
+.top { position:sticky; top:0; z-index:10; background:color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter:saturate(1.4) blur(10px); -webkit-backdrop-filter:saturate(1.4) blur(10px);
+  border-bottom:1px solid var(--rule); }
+.top .wrap { display:flex; align-items:center; justify-content:space-between; height:60px; }
+.brand { display:flex; align-items:center; gap:10px; text-decoration:none; font-weight:700;
+  letter-spacing:-.01em; font-size:17px; }
+.brand .mark { width:18px; height:18px; border-radius:50%; background:var(--accent);
+  box-shadow:0 0 0 4px var(--chip); }
+.btn { display:inline-flex; align-items:center; padding:9px 16px; border-radius:999px;
+  background:var(--accent); color:var(--accent-fg); text-decoration:none; font-weight:600;
+  font-size:14px; transition:transform .15s ease, filter .15s ease; }
+.btn:hover { transform:translateY(-1px); filter:brightness(1.06); }
+.btn.ghost { background:transparent; color:var(--fg); border:1px solid var(--rule); }
+
+.hero { padding:72px 0 8px; }
+.eyebrow { text-transform:uppercase; letter-spacing:.12em; font-size:12px; font-weight:700;
+  color:var(--accent); margin:0 0 14px; }
+.hero h1 { font-size:clamp(38px, 6.5vw, 64px); line-height:1.03; letter-spacing:-.035em;
+  margin:0 0 18px; max-width:13ch; }
+.hero .lead { font-size:clamp(17px, 2vw, 20px); color:var(--muted); max-width:56ch; margin:0 0 28px; }
+.hero .actions { display:flex; gap:10px; flex-wrap:wrap; }
+.stats { display:flex; gap:40px; margin-top:44px; padding-top:22px; border-top:1px solid var(--rule);
+  flex-wrap:wrap; }
+.stats b { display:block; font-size:26px; letter-spacing:-.02em; font-variant-numeric:tabular-nums; }
+.stats span { color:var(--muted); font-size:13px; }
+
+.section-h { margin:48px 0 18px; font-size:13px; text-transform:uppercase; letter-spacing:.12em;
+  color:var(--muted); font-weight:700; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:20px;
+  padding:0; margin:0 0 64px; list-style:none; }
+.card { background:var(--surface); border:1px solid var(--rule); border-radius:16px; overflow:hidden;
+  box-shadow:var(--shadow); display:flex; flex-direction:column; text-decoration:none; height:100%;
+  transition:transform .2s ease, box-shadow .2s ease; }
+.card:hover { transform:translateY(-3px);
+  box-shadow:0 2px 4px rgba(16,24,40,.06), 0 18px 40px rgba(16,24,40,.13); }
+.card .thumb { aspect-ratio:16/10; background:#fff; border-bottom:1px solid var(--rule); overflow:hidden; }
+.card .thumb img { width:100%; height:100%; object-fit:contain; padding:12px; }
+.card .body { padding:18px 20px 22px; display:flex; flex-direction:column; gap:8px; flex:1; }
+.card h3 { font-size:19px; line-height:1.3; letter-spacing:-.01em; margin:0; }
+.card p { color:var(--muted); font-size:14.5px; margin:0; }
+.featured { grid-column:1 / -1; }
+.featured .card { flex-direction:row; }
+.featured .thumb { flex:1.25; aspect-ratio:auto; min-height:340px; border-bottom:0;
+  border-right:1px solid var(--rule); }
+.featured .body { flex:1; padding:36px; justify-content:center; gap:12px; }
+.featured h3 { font-size:clamp(23px, 3vw, 31px); line-height:1.2; }
+.featured p { font-size:16px; }
+@media (max-width:760px) {
+  .featured .card { flex-direction:column; }
+  .featured .thumb { min-height:0; aspect-ratio:16/10; border-right:0; border-bottom:1px solid var(--rule); }
+  .featured .body { padding:20px; }
+  .hero { padding-top:48px; } }
+
+.chips { display:flex; gap:10px; align-items:center; flex-wrap:wrap; font-size:12.5px; color:var(--muted); }
+.chip { display:inline-block; padding:3px 9px; border-radius:999px; background:var(--chip);
+  color:var(--chip-fg); font-weight:700; font-variant-numeric:tabular-nums; letter-spacing:.03em; }
+
+.post-head { padding:48px 0 8px; }
+.back { display:inline-block; color:var(--muted); text-decoration:none; font-size:14px; margin-bottom:28px; }
+.back:hover { color:var(--fg); }
+.post-head h1 { font-size:clamp(30px, 5vw, 46px); line-height:1.12; letter-spacing:-.025em;
+  margin:16px 0 14px; }
+.post-head .sub { font-size:19px; color:var(--muted); margin:0 0 8px; }
+.post-head .chips a { color:var(--muted); }
+.prose { font:19px/1.75 var(--serif); padding:16px 0 8px; }
+.prose p { margin:0 0 1.15em; }
+.prose h2, .prose h3, .prose h4 { font-family:var(--sans); letter-spacing:-.015em; line-height:1.25; }
+.prose h2 { font-size:26px; margin:2.1em 0 .7em; padding-top:.9em; border-top:1px solid var(--rule); }
+.prose h3 { font-size:20px; margin:1.8em 0 .6em; }
+.prose a { color:var(--accent); text-underline-offset:3px; }
+.prose ul, .prose ol { padding-left:1.3em; margin:0 0 1.2em; }
+.prose li { margin:.35em 0; }
+.prose figure { margin:2em 0; background:#fff; border:1px solid var(--rule); border-radius:14px;
+  padding:14px; box-shadow:var(--shadow); }
+.prose figure img { margin:0 auto; border-radius:6px; }
+.prose blockquote { margin:1.6em 0; padding:4px 0 4px 20px; border-left:3px solid var(--accent);
+  color:var(--muted); font-style:italic; }
+
+.cta { margin:40px 0 56px; padding:28px; border-radius:18px; color:#fff; font-family:var(--sans);
+  background:radial-gradient(120% 140% at 100% 0%, #ff5a6b 0%, #d6283b 45%, #8e1022 100%);
+  box-shadow:var(--shadow); }
+.cta h4 { margin:0 0 6px; font-size:20px; letter-spacing:-.01em; }
+.cta p { margin:0 0 16px; opacity:.92; font-size:15.5px; line-height:1.55; }
+.cta .btn { background:#fff; color:#b01d30; }
+
+footer.site { border-top:1px solid var(--rule); color:var(--muted); font-size:13.5px; padding:32px 0 48px; }
+footer.site .wrap { display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+footer.site p { margin:0; max-width:60ch; }
+footer.site nav { display:flex; gap:8px 18px; flex-wrap:wrap; }
+.top .links { display:flex; align-items:center; gap:16px; }
+.top .links a.plain { color:var(--muted); text-decoration:none; font-size:14px; font-weight:600; }
+.top .links a.plain:hover { color:var(--fg); }
+.tag { display:inline-block; padding:2px 9px; border-radius:999px; border:1px solid var(--rule);
+  color:var(--muted); text-decoration:none; font-weight:600; }
+a.tag:hover { color:var(--fg); border-color:var(--muted); }
+.filters { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 22px; }
+.filters a { padding:6px 13px; border-radius:999px; border:1px solid var(--rule); background:var(--surface);
+  text-decoration:none; font-size:14px; font-weight:600; color:var(--muted); }
+.filters a:hover, .filters a[aria-current] { color:var(--fg); border-color:var(--fg); }
+.filters a small { font-weight:500; margin-left:4px; }
+.share { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin:8px 0 0; font-size:14px;
+  color:var(--muted); font-family:var(--sans); }
+.share a { padding:6px 13px; border-radius:999px; border:1px solid var(--rule); text-decoration:none;
+  font-weight:600; color:var(--fg); }
+.share a:hover { border-color:var(--fg); }
+.cat-head .eyebrow { margin-top:56px; }
+.cat-head h1 { font-size:clamp(30px, 5vw, 44px); letter-spacing:-.025em; margin:0 0 24px; }
+.page h1 { font-size:clamp(30px, 5vw, 44px); letter-spacing:-.025em; margin:48px 0 18px; }
+.page h2 { font-family:var(--sans); font-size:21px; margin:1.8em 0 .5em; }
+.page p, .page li { font-size:17px; }
+@media (max-width:520px) { .top .links a.plain { display:none; } }
+footer.site a { text-decoration:none; }
+footer.site a:hover { color:var(--fg); }
+</style>
+<meta property="og:image" content="https://notes.hibiki-tech.com/images/2026-10-25-shiga-bank-ikeda-senshu-integration-bar1.en.png">
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="brand" href="../../"><span class="mark" aria-hidden="true"></span>Filed in Japan</a><div class="links"><a class="plain" href="../../about/">About</a><a class="plain" href="https://bsky.app/profile/pochin-shachou.bsky.social" rel="me">Bluesky</a><a class="btn" href="https://pochin.substack.com/subscribe">Subscribe</a></div></div></header>
+<main>
+<section class="wrap cat-head"><p class="eyebrow">Category</p><h1>Finance</h1><nav class="filters" aria-label="Categories"><a href="../../">All<small>17</small></a><a href="../../category/deals/">Deals<small>3</small></a><a href="../../category/shareholder-returns/">Shareholder returns<small>2</small></a><a href="../../category/earnings/">Earnings<small>12</small></a><a href="../../category/semiconductors-electronics/">Semiconductors &amp; Electronics<small>1</small></a><a href="../../category/machinery/">Machinery<small>2</small></a><a href="../../category/materials/">Materials<small>2</small></a><a href="../../category/retail/">Retail<small>4</small></a><a href="../../category/real-estate/">Real Estate<small>1</small></a><a href="../../category/media-internet/">Media &amp; Internet<small>2</small></a><a href="../../category/services/">Services<small>3</small></a><a href="../../category/finance/" aria-current="page">Finance<small>2</small></a></nav>
+<ol class="grid">
+<li><a class="card" href="../../posts/2026-10-25-shiga-bank-ikeda-senshu-integration/"><div class="thumb"><img src="https://notes.hibiki-tech.com/images/2026-10-25-shiga-bank-ikeda-senshu-integration-bar1.en.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">8366 JP</span><span class="tag">Deals</span><span class="tag">Finance</span><time datetime="2026-10-25">Oct 25, 2026</time></div><h3>Shiga Bank and Senshu Ikeda (8366 / 8714 JP): integration talks, no bank merger planned</h3><p>Two Kansai regional banking groups confirm they are studying a joint holding company, read from their own disclosures</p></div></a></li>
+<li><a class="card" href="../../posts/2026-10-22-company-spotlight-3350/"><div class="thumb"><img src="https://notes.hibiki-tech.com/images/2026-10-22-company-spotlight-3350-share1.en.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">3350 JP</span><span class="tag">Earnings</span><span class="tag">Finance</span><time datetime="2026-10-22">Oct 22, 2026</time></div><h3>Metaplanet (3350 JP): revenue up 8.4x, and a JPY 95.05bn net loss</h3><p>A bitcoin treasury company on the Tokyo Stock Exchange Standard Market, read straight from its EDINET filings</p></div></a></li>
+</ol></section>
+</main>
+<footer class="site"><div class="wrap"><p>Information only, not investment advice. Figures are translated from Japanese filings (EDINET); the original filings prevail.</p><nav><a href="../../">Home</a><a href="../../about/">About</a><a href="../../contact/">Contact</a><a href="../../privacy/">Privacy</a><a href="../../feed.xml">RSS</a><a href="https://bsky.app/profile/pochin-shachou.bsky.social" rel="me">Bluesky</a><a href="https://pochin.substack.com/subscribe">Newsletter</a></nav></div></footer>
+</body>
+</html>

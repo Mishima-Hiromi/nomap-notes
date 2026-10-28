@@ -124,7 +124,29 @@ img { max-width:100%; height:auto; display:block; }
 footer.site { border-top:1px solid var(--rule); color:var(--muted); font-size:13.5px; padding:32px 0 48px; }
 footer.site .wrap { display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; }
 footer.site p { margin:0; max-width:60ch; }
-footer.site nav { display:flex; gap:18px; }
+footer.site nav { display:flex; gap:8px 18px; flex-wrap:wrap; }
+.top .links { display:flex; align-items:center; gap:16px; }
+.top .links a.plain { color:var(--muted); text-decoration:none; font-size:14px; font-weight:600; }
+.top .links a.plain:hover { color:var(--fg); }
+.tag { display:inline-block; padding:2px 9px; border-radius:999px; border:1px solid var(--rule);
+  color:var(--muted); text-decoration:none; font-weight:600; }
+a.tag:hover { color:var(--fg); border-color:var(--muted); }
+.filters { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 22px; }
+.filters a { padding:6px 13px; border-radius:999px; border:1px solid var(--rule); background:var(--surface);
+  text-decoration:none; font-size:14px; font-weight:600; color:var(--muted); }
+.filters a:hover, .filters a[aria-current] { color:var(--fg); border-color:var(--fg); }
+.filters a small { font-weight:500; margin-left:4px; }
+.share { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin:8px 0 0; font-size:14px;
+  color:var(--muted); font-family:var(--sans); }
+.share a { padding:6px 13px; border-radius:999px; border:1px solid var(--rule); text-decoration:none;
+  font-weight:600; color:var(--fg); }
+.share a:hover { border-color:var(--fg); }
+.cat-head .eyebrow { margin-top:56px; }
+.cat-head h1 { font-size:clamp(30px, 5vw, 44px); letter-spacing:-.025em; margin:0 0 24px; }
+.page h1 { font-size:clamp(30px, 5vw, 44px); letter-spacing:-.025em; margin:48px 0 18px; }
+.page h2 { font-family:var(--sans); font-size:21px; margin:1.8em 0 .5em; }
+.page p, .page li { font-size:17px; }
+@media (max-width:520px) { .top .links a.plain { display:none; } }
 footer.site a { text-decoration:none; }
 footer.site a:hover { color:var(--fg); }
 </style>
@@ -132,10 +154,10 @@ footer.site a:hover { color:var(--fg); }
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Kakaku.com (2371 JP): the JPY 1 that moves a tender offer", "description": "How a one-yen bid increase shifts two conditions at once", "inLanguage": "en", "mainEntityOfPage": "https://notes.hibiki-tech.com/posts/2026-10-16-kakaku-2371-tob-one-yen/", "publisher": {"@type": "Organization", "name": "Filed in Japan", "url": "https://notes.hibiki-tech.com/"}, "datePublished": "2026-10-16", "image": ["https://notes.hibiki-tech.com/images/2026-10-16-kakaku-2371-tob-one-yen-trend1.en.png"]}</script>
 </head>
 <body>
-<header class="top"><div class="wrap"><a class="brand" href="../../"><span class="mark" aria-hidden="true"></span>Filed in Japan</a><a class="btn" href="https://pochin.substack.com/subscribe">Subscribe</a></div></header>
+<header class="top"><div class="wrap"><a class="brand" href="../../"><span class="mark" aria-hidden="true"></span>Filed in Japan</a><div class="links"><a class="plain" href="../../about/">About</a><a class="plain" href="https://bsky.app/profile/pochin-shachou.bsky.social" rel="me">Bluesky</a><a class="btn" href="https://pochin.substack.com/subscribe">Subscribe</a></div></div></header>
 <main>
 <article class="narrow">
-<div class="post-head"><a class="back" href="../../">&larr; All filings</a><div class="chips"><span class="chip">2371 JP</span><time datetime="2026-10-16">Oct 16, 2026</time><span>·</span><a href="https://note.com/pochin_shachou/n/nc8edbbb12f38" hreflang="ja" lang="ja">日本語版</a></div><h1>Kakaku.com (2371 JP): the JPY 1 that moves a tender offer</h1>
+<div class="post-head"><a class="back" href="../../">&larr; All filings</a><div class="chips"><span class="chip">2371 JP</span><a class="tag" href="../../category/deals/">Deals</a><a class="tag" href="../../category/media-internet/">Media &amp; Internet</a><time datetime="2026-10-16">Oct 16, 2026</time><span>·</span><a href="https://note.com/pochin_shachou/n/nc8edbbb12f38" hreflang="ja" lang="ja">日本語版</a></div><h1>Kakaku.com (2371 JP): the JPY 1 that moves a tender offer</h1>
 <p class="sub">How a one-yen bid increase shifts two conditions at once</p>
 </div>
 <div class="prose">
@@ -236,9 +258,10 @@ footer.site a:hover { color:var(--fg); }
 </ol>
 <blockquote><p>This post is for information only and is not investment advice. Make your own investment decisions, and check the primary sources linked above. Figures are translated from Japanese filings; in case of any difference, the original filings prevail.</p></blockquote>
 </div>
+<div class="share"><span>Share</span><a href="https://x.com/intent/post?text=Kakaku.com%20%282371%20JP%29%3A%20the%20JPY%201%20that%20moves%20a%20tender%20offer&amp;url=https%3A%2F%2Fnotes.hibiki-tech.com%2Fposts%2F2026-10-16-kakaku-2371-tob-one-yen%2F" rel="noopener" target="_blank">X</a><a href="https://bsky.app/intent/compose?text=Kakaku.com%20%282371%20JP%29%3A%20the%20JPY%201%20that%20moves%20a%20tender%20offer%20https%3A%2F%2Fnotes.hibiki-tech.com%2Fposts%2F2026-10-16-kakaku-2371-tob-one-yen%2F" rel="noopener" target="_blank">Bluesky</a><a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fnotes.hibiki-tech.com%2Fposts%2F2026-10-16-kakaku-2371-tob-one-yen%2F" rel="noopener" target="_blank">LinkedIn</a></div>
 <aside class="cta"><h4>Get the full filing pack</h4><p>Financial tables, shareholders, segments and risk factors for this company, translated from the Japanese filings. For paid subscribers on Substack.</p><a class="btn" href="https://pochin.substack.com/subscribe">Subscribe</a></aside>
 </article>
 </main>
-<footer class="site"><div class="wrap"><p>Information only, not investment advice. Figures are translated from Japanese filings (EDINET); the original filings prevail.</p><nav><a href="../../">Home</a><a href="../../feed.xml">RSS</a><a href="https://pochin.substack.com/subscribe">Newsletter</a></nav></div></footer>
+<footer class="site"><div class="wrap"><p>Information only, not investment advice. Figures are translated from Japanese filings (EDINET); the original filings prevail.</p><nav><a href="../../">Home</a><a href="../../about/">About</a><a href="../../contact/">Contact</a><a href="../../privacy/">Privacy</a><a href="../../feed.xml">RSS</a><a href="https://bsky.app/profile/pochin-shachou.bsky.social" rel="me">Bluesky</a><a href="https://pochin.substack.com/subscribe">Newsletter</a></nav></div></footer>
 </body>
 </html>

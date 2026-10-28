@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Three Japanese data breaches, read from the companies&#x27; own statements</title>
+<meta name="description" content="Times Car, Citizen Watch and infoQ — what each disclosed, and what the three have in common">
+<link rel="canonical" href="https://notes.hibiki-tech.com/posts/2026-10-09-data-leak-roundup/">
+<link rel="alternate" hreflang="en" href="https://notes.hibiki-tech.com/posts/2026-10-09-data-leak-roundup/">
+<link rel="alternate" hreflang="ja" href="https://note.com/pochin_shachou/n/n5525c4d82e0d">
+<meta property="og:site_name" content="Filed in Japan">
+<meta property="og:title" content="Three Japanese data breaches, read from the companies&#x27; own statements">
+<meta property="og:description" content="Times Car, Citizen Watch and infoQ — what each disclosed, and what the three have in common">
+<meta property="og:url" content="https://notes.hibiki-tech.com/posts/2026-10-09-data-leak-roundup/">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
+<style>
+:root { color-scheme:light dark;
+  --bg:#f6f5f2; --surface:#ffffff; --fg:#16181d; --muted:#626873; --rule:#e4e2dc;
+  --accent:#d6283b; --accent-fg:#ffffff; --chip:#fbe9eb; --chip-fg:#a3172a;
+  --shadow:0 1px 2px rgba(16,24,40,.05), 0 8px 24px rgba(16,24,40,.06);
+  --sans:ui-sans-serif, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --serif:"Iowan Old Style", Charter, Georgia, serif; }
+@media (prefers-color-scheme: dark) { :root {
+  --bg:#0f1115; --surface:#171a21; --fg:#e8e9ec; --muted:#9aa0ab; --rule:#262a33;
+  --accent:#ff4d5e; --chip:#2a1619; --chip-fg:#ff8a95;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35); } }
+* { box-sizing:border-box; }
+html { -webkit-text-size-adjust:100%; }
+body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.6 var(--sans);
+  -webkit-font-smoothing:antialiased; }
+a { color:inherit; }
+img { max-width:100%; height:auto; display:block; }
+.wrap { max-width:1080px; margin:0 auto; padding:0 20px; }
+.narrow { max-width:720px; margin:0 auto; padding:0 20px; }
+
+.top { position:sticky; top:0; z-index:10; background:color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter:saturate(1.4) blur(10px); -webkit-backdrop-filter:saturate(1.4) blur(10px);
+  border-bottom:1px solid var(--rule); }
+.top .wrap { display:flex; align-items:center; justify-content:space-between; height:60px; }
+.brand { display:flex; align-items:center; gap:10px; text-decoration:none; font-weight:700;
+  letter-spacing:-.01em; font-size:17px; }
+.brand .mark { width:18px; height:18px; border-radius:50%; background:var(--accent);
+  box-shadow:0 0 0 4px var(--chip); }
+.btn { display:inline-flex; align-items:center; padding:9px 16px; border-radius:999px;
+  background:var(--accent); color:var(--accent-fg); text-decoration:none; font-weight:600;
+  font-size:14px; transition:transform .15s ease, filter .15s ease; }
+.btn:hover { transform:translateY(-1px); filter:brightness(1.06); }
+.btn.ghost { background:transparent; color:var(--fg); border:1px solid var(--rule); }
+
+.hero { padding:72px 0 8px; }
+.eyebrow { text-transform:uppercase; letter-spacing:.12em; font-size:12px; font-weight:700;
+  color:var(--accent); margin:0 0 14px; }
+.hero h1 { font-size:clamp(38px, 6.5vw, 64px); line-height:1.03; letter-spacing:-.035em;
+  margin:0 0 18px; max-width:13ch; }
+.hero .lead { font-size:clamp(17px, 2vw, 20px); color:var(--muted); max-width:56ch; margin:0 0 28px; }
+.hero .actions { display:flex; gap:10px; flex-wrap:wrap; }
+.stats { display:flex; gap:40px; margin-top:44px; padding-top:22px; border-top:1px solid var(--rule);
+  flex-wrap:wrap; }
+.stats b { display:block; font-size:26px; letter-spacing:-.02em; font-variant-numeric:tabular-nums; }
+.stats span { color:var(--muted); font-size:13px; }
+
+.section-h { margin:48px 0 18px; font-size:13px; text-transform:uppercase; letter-spacing:.12em;
+  color:var(--muted); font-weight:700; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:20px;
+  padding:0; margin:0 0 64px; list-style:none; }
+.card { background:var(--surface); border:1px solid var(--rule); border-radius:16px; overflow:hidden;
+  box-shadow:var(--shadow); display:flex; flex-direction:column; text-decoration:none; height:100%;
+  transition:transform .2s ease, box-shadow .2s ease; }
+.card:hover { transform:translateY(-3px);
+  box-shadow:0 2px 4px rgba(16,24,40,.06), 0 18px 40px rgba(16,24,40,.13); }
+.card .thumb { aspect-ratio:16/10; background:#fff; border-bottom:1px solid var(--rule); overflow:hidden; }
+.card .thumb img { width:100%; height:100%; object-fit:contain; padding:12px; }
+.card .body { padding:18px 20px 22px; display:flex; flex-direction:column; gap:8px; flex:1; }
+.card h3 { font-size:19px; line-height:1.3; letter-spacing:-.01em; margin:0; }
+.card p { color:var(--muted); font-size:14.5px; margin:0; }
+.featured { grid-column:1 / -1; }
+.featured .card { flex-direction:row; }
+.featured .thumb { flex:1.25; aspect-ratio:auto; min-height:340px; border-bottom:0;
+  border-right:1px solid var(--rule); }
+.featured .body { flex:1; padding:36px; justify-content:center; gap:12px; }
+.featured h3 { font-size:clamp(23px, 3vw, 31px); line-height:1.2; }
+.featured p { font-size:16px; }
+@media (max-width:760px) {
+  .featured .card { flex-direction:column; }
+  .featured .thumb { min-height:0; aspect-ratio:16/10; border-right:0; border-bottom:1px solid var(--rule); }
+  .featured .body { padding:20px; }
+  .hero { padding-top:48px; } }
+
+.chips { display:flex; gap:10px; align-items:center; flex-wrap:wrap; font-size:12.5px; color:var(--muted); }
+.chip { display:inline-block; padding:3px 9px; border-radius:999px; background:var(--chip);
+  color:var(--chip-fg); font-weight:700; font-variant-numeric:tabular-nums; letter-spacing:.03em; }
+
+.post-head { padding:48px 0 8px; }
+.back { display:inline-block; color:var(--muted); text-decoration:none; font-size:14px; margin-bottom:28px; }
+.back:hover { color:var(--fg); }
+.post-head h1 { font-size:clamp(30px, 5vw, 46px); line-height:1.12; letter-spacing:-.025em;
+  margin:16px 0 14px; }
+.post-head .sub { font-size:19px; color:var(--muted); margin:0 0 8px; }
+.post-head .chips a { color:var(--muted); }
+.prose { font:19px/1.75 var(--serif); padding:16px 0 8px; }
+.prose p { margin:0 0 1.15em; }
+.prose h2, .prose h3, .prose h4 { font-family:var(--sans); letter-spacing:-.015em; line-height:1.25; }
+.prose h2 { font-size:26px; margin:2.1em 0 .7em; padding-top:.9em; border-top:1px solid var(--rule); }
+.prose h3 { font-size:20px; margin:1.8em 0 .6em; }
+.prose a { color:var(--accent); text-underline-offset:3px; }
+.prose ul, .prose ol { padding-left:1.3em; margin:0 0 1.2em; }
+.prose li { margin:.35em 0; }
+.prose figure { margin:2em 0; background:#fff; border:1px solid var(--rule); border-radius:14px;
+  padding:14px; box-shadow:var(--shadow); }
+.prose figure img { margin:0 auto; border-radius:6px; }
+.prose blockquote { margin:1.6em 0; padding:4px 0 4px 20px; border-left:3px solid var(--accent);
+  color:var(--muted); font-style:italic; }
+
+.cta { margin:40px 0 56px; padding:28px; border-radius:18px; color:#fff; font-family:var(--sans);
+  background:radial-gradient(120% 140% at 100% 0%, #ff5a6b 0%, #d6283b 45%, #8e1022 100%);
+  box-shadow:var(--shadow); }
+.cta h4 { margin:0 0 6px; font-size:20px; letter-spacing:-.01em; }
+.cta p { margin:0 0 16px; opacity:.92; font-size:15.5px; line-height:1.55; }
+.cta .btn { background:#fff; color:#b01d30; }
+
+footer.site { border-top:1px solid var(--rule); color:var(--muted); font-size:13.5px; padding:32px 0 48px; }
+footer.site .wrap { display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+footer.site p { margin:0; max-width:60ch; }
+footer.site nav { display:flex; gap:8px 18px; flex-wrap:wrap; }
+.top .links { display:flex; align-items:center; gap:16px; }
+.top .links a.plain { color:var(--muted); text-decoration:none; font-size:14px; font-weight:600; }
+.top .links a.plain:hover { color:var(--fg); }
+.tag { display:inline-block; padding:2px 9px; border-radius:999px; border:1px solid var(--rule);
+  color:var(--muted); text-decoration:none; font-weight:600; }
+a.tag:hover { color:var(--fg); border-color:var(--muted); }
+.filters { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 22px; }
+.filters a { padding:6px 13px; border-radius:999px; border:1px solid var(--rule); background:var(--surface);
+  text-decoration:none; font-size:14px; font-weight:600; color:var(--muted); }
+.filters a:hover, .filters a[aria-current] { color:var(--fg); border-color:var(--fg); }
+.filters a small { font-weight:500; margin-left:4px; }
+.share { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin:8px 0 0; font-size:14px;
+  color:var(--muted); font-family:var(--sans); }
+.share a { padding:6px 13px; border-radius:999px; border:1px solid var(--rule); text-decoration:none;
+  font-weight:600; color:var(--fg); }
+.share a:hover { border-color:var(--fg); }
+.cat-head .eyebrow { margin-top:56px; }
+.cat-head h1 { font-size:clamp(30px, 5vw, 44px); letter-spacing:-.025em; margin:0 0 24px; }
+.page h1 { font-size:clamp(30px, 5vw, 44px); letter-spacing:-.025em; margin:48px 0 18px; }
+.page h2 { font-family:var(--sans); font-size:21px; margin:1.8em 0 .5em; }
+.page p, .page li { font-size:17px; }
+@media (max-width:520px) { .top .links a.plain { display:none; } }
+footer.site a { text-decoration:none; }
+footer.site a:hover { color:var(--fg); }
+</style>
+<meta property="og:image" content="https://notes.hibiki-tech.com/images/2026-10-09-data-leak-roundup-table1.en.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Three Japanese data breaches, read from the companies' own statements", "description": "Times Car, Citizen Watch and infoQ — what each disclosed, and what the three have in common", "inLanguage": "en", "mainEntityOfPage": "https://notes.hibiki-tech.com/posts/2026-10-09-data-leak-roundup/", "publisher": {"@type": "Organization", "name": "Filed in Japan", "url": "https://notes.hibiki-tech.com/"}, "datePublished": "2026-10-09", "image": ["https://notes.hibiki-tech.com/images/2026-10-09-data-leak-roundup-table1.en.png"]}</script>
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="brand" href="../../"><span class="mark" aria-hidden="true"></span>Filed in Japan</a><div class="links"><a class="plain" href="../../about/">About</a><a class="plain" href="https://bsky.app/profile/pochin-shachou.bsky.social" rel="me">Bluesky</a><a class="btn" href="https://pochin.substack.com/subscribe">Subscribe</a></div></div></header>
+<main>
+<article class="narrow">
+<div class="post-head"><a class="back" href="../../">&larr; All filings</a><div class="chips"><span class="chip">4666 JP</span><a class="tag" href="../../category/earnings/">Earnings</a><a class="tag" href="../../category/services/">Services</a><time datetime="2026-10-09">Oct 9, 2026</time><span>·</span><a href="https://note.com/pochin_shachou/n/n5525c4d82e0d" hreflang="ja" lang="ja">日本語版</a></div><h1>Three Japanese data breaches, read from the companies&#x27; own statements</h1>
+<p class="sub">Times Car, Citizen Watch and infoQ — what each disclosed, and what the three have in common</p>
+</div>
+<div class="prose">
+<p>News of personal data leaking out seems to arrive every day.</p>
+<p>Some say attackers now hold an overwhelming advantage in the age of AI, and that may have left you a little uneasy.</p>
+<p>So this time I compared three recent disclosures side by side, using only the primary sources each company published.</p>
+<p><em>About this series: each post reads Japanese primary disclosures — many of them published only in Japanese — and explains what they say for readers outside Japan.</em></p>
+<h2>Summary</h2>
+<ul>
+<li>None of the three says the cause was a sophisticated AI attack. All three came down to an everyday hole: a contractor's system, a software vulnerability, or unauthorized access to a web system.</li>
+<li>At Times Car, identity verification documents (driver's licence images and so on) were affected, about 1.6 million of them.</li>
+<li>At Citizen Watch, a break-in at a contractor's inquiry system may have affected about 100,000 people.</li>
+<li>At infoQ, a vulnerability in software the site was using was exploited, and up to 948,498 records were affected.</li>
+<li>The key to defence is taking stock of what sits outside the company (contractors, reused assets) and clearing out identity documents that were kept longer than needed (the author's view).</li>
+</ul>
+<h2>1. Why the leak news seems nonstop right now</h2>
+<p>The three cases in this post were disclosed over roughly two weeks, from 25 September to 6 October 2026.</p>
+<p>For all of them I use only what can be confirmed in primary sources (each company's official announcement).</p>
+<p>I have not included information that exists only in press reports, or speculation about causes.</p>
+<p>Where a cause has not been disclosed, I say that it has not been disclosed.</p>
+<h2>2. Case 1: Times Car (about 1.6 million identity documents)</h2>
+<h3>What the company does</h3>
+<p>Times Car is a car-sharing service operated by a group company of Park24.</p>
+<p>Park24 runs the "Times" parking lots and is listed on the Tokyo Stock Exchange. Website: <a href="https://www.park24.co.jp/">https://www.park24.co.jp/</a></p>
+<h3>What happened</h3>
+<p>Park24 announced on 25 September 2026 that it had detected unauthorized access to the Times Car web system.</p>
+<p>In its third report, on 29 September, it said the number of accounts where leakage of identity verification documents had been confirmed was about 1.6 million.</p>
+<p>The information confirmed to have leaked is driver's licence images, proof-of-address document images (such as utility bills), student ID images (for the student plan) and family confirmation document images (for the family plan).</p>
+<h3>How the company responded</h3>
+<p>From the same day, it began contacting affected members individually by email.</p>
+<p>It says the detailed content for each member will be explained again, within about two weeks, based on the findings of an external specialist investigation.</p>
+<p>The body of the third report contains no description of the cause.</p>
+<h2>3. Case 2: Citizen Watch (via a contractor, about 100,000 people)</h2>
+<h3>What the company does</h3>
+<p>Citizen Watch makes watches under the Citizen brand and is listed on the Tokyo Stock Exchange. Website: <a href="https://www.citizen.co.jp/">https://www.citizen.co.jp/</a></p>
+<p>Scala Communications, where the leak originated, provides FAQ systems and similar services, and belongs to the Scala group.</p>
+<h3>What happened</h3>
+<p>On 6 October 2026, Citizen Watch announced that a server at Scala Communications, to which it had outsourced inquiry handling, had been subject to unauthorized access, and that information on about 100,000 people may have leaked.</p>
+<p>The data affected is names, addresses, telephone numbers, email addresses and similar details submitted through the inquiry form.</p>
+<p>If bank account or credit card details were written in the inquiry body, those may also be affected.</p>
+<p>The unauthorized access ran from around 20:33 on 2 October to around 08:01 on 3 October. No unauthorized access to Citizen's own systems has been confirmed.</p>
+<h3>The contractor's statement</h3>
+<p>Scala Communications says a third party logged in illegally to the administration site of its FAQ system "i-ask" and installed an unauthorized program.</p>
+<p>Inquiry data at up to five companies sharing the same server was affected, and the count is up to 713,126 inquiries. The same person may be counted more than once, and the number of individuals is still being confirmed.</p>
+<p>As preventive measures it cites stronger administrator authentication (including multi-factor authentication) and separation of environments.</p>
+<p>Citizen Watch plans to stop using the system in mid-October and to delete all stored data after the migration period.</p>
+<h2>4. Case 3: GMO Research &amp; AI "infoQ" (up to 948,498 records)</h2>
+<h3>What the company does</h3>
+<p>GMO Research &amp; AI runs a market research and survey business and is listed on the Tokyo Stock Exchange. infoQ is the survey site it operates. Website: <a href="https://gmo-research.ai/">https://gmo-research.ai/</a></p>
+<h3>What happened</h3>
+<p>On 5 October 2026, the company announced that unauthorized access to infoQ may have leaked up to 948,498 records — all of the personal information it holds.</p>
+<p>The data affected is names, the kana reading of names, gender, date of birth, email addresses, addresses, telephone numbers, encrypted passwords, member IDs, point balances and similar items.</p>
+<p>It does not hold credit card information or My Number (Japan's national identification number), and says those are not affected.</p>
+<p>The cause is said to be a vulnerability in software used on the site, exploited by a third party.</p>
+<h3>Points exchanged without consent</h3>
+<p>Points in 611 cases, worth a total of JPY 2,869,500, were exchanged for Amazon gift codes against the members' wishes.</p>
+<p>The company says it will compensate the full amount.</p>
+<p>It suspended point exchange on 3 October and stopped the service as well. Restarting is planned once safety has been confirmed.</p>
+<h2>5. What the three have in common</h2>
+<p>I put the three disclosures into a single table.</p>
+<figure><img src="https://notes.hibiki-tech.com/images/2026-10-09-data-leak-roundup-table1.en.png" alt="Table: the three cases compared"></figure>
+<p>The entry points are all different.</p>
+<p>But none of them discloses that the attacker used AI.</p>
+<p>A contractor's administration site, a software vulnerability, a web system — the targets sit close to the basics of defence.</p>
+<p>The other thing they share is that the size of the damage was set by how much data had been accumulated.</p>
+<p>At Times Car it was licence images; at infoQ, all of the members' personal information; at Citizen, what people had written in the inquiry field.</p>
+<p>Note that Times Car's cause is not described as of the third report, so I do not conclude anything about it here.</p>
+<h2>6. What defenders should do in the age of AI</h2>
+<p>From here on, this is the author's view.</p>
+<p>Whether or not attackers use AI, these three cases show that the more entry points you have, the more holes you have.</p>
+<p>In Citizen Watch's case, its own systems were fine, yet one administration site at a contractor was broken into and the damage followed.</p>
+<p>Systems outside the company are still part of the company's defence.</p>
+<p>Three concrete steps come to mind:</p>
+<ul>
+<li>List the customer data of yours that sits with contractors and external services.</li>
+<li>Put multi-factor authentication on administration sites, and do not stop updating software.</li>
+<li>Delete data that has served its purpose, such as identity documents and inquiry content.</li>
+</ul>
+<p>If you do not accumulate it, the damage is smaller when it does leak.</p>
+<p>Citizen Watch's plan to delete all the data in the old system follows the same thinking.</p>
+<h2>7. What users can do</h2>
+<p>This is also the author's view, and it overlaps with the warnings the companies themselves issued.</p>
+<ul>
+<li>Watch out for emails, SMS messages and calls that impersonate the companies. Do not open links or attachments.</li>
+<li>If you use the same password as on infoQ elsewhere, change it.</li>
+<li>Check for charges or point exchanges you do not recognise.</li>
+<li>Close accounts for services you no longer use.</li>
+</ul>
+<p>Closing an account does not necessarily delete your data straight away.</p>
+<p>In the Times Car case, it has been reported that information of members who had already left was also affected.</p>
+<p>If you are worried, check through each company's official contact point.</p>
+<h2>Why it matters for global investors</h2>
+<p>Japan's listed companies publish incident notices like these on their own websites, in Japanese, and they are not filings on EDINET — the regulator's disclosure system, Japan's counterpart to SEC EDGAR, where listed Japanese companies publish their annual securities reports. For a reader outside Japan, those notices are written in Japanese, so the useful read is the pattern rather than the individual headline: the entry point is often a contractor or a piece of software rather than the company's own core system, and the scale of the damage tracks how much customer data was retained. How a company handles notification, compensation and deletion is also a signal about its operational controls.</p>
+<h2>Closing</h2>
+<p>Feeling anxious every time you see the news is natural.</p>
+<p>But these three cases were less a set of exotic techniques than a set of basic holes lining up.</p>
+<p>That is exactly why small actions work: reviewing reused passwords, closing services you no longer use.</p>
+<p>Try just one thing today.</p>
+<p>The original Japanese version of this post is on note: <a href="https://note.com/pochin_shachou/n/n5525c4d82e0d">https://note.com/pochin_shachou/n/n5525c4d82e0d</a></p>
+<h2>Sources</h2>
+<ol>
+<li>Park24, "Unauthorized access to the Times Car web system (third report)" - <a href="https://www.park24.co.jp/news/2026/09/20260929-1.html">https://www.park24.co.jp/news/2026/09/20260929-1.html</a></li>
+<li>Citizen Watch, "Possible leakage of customer information due to unauthorized access to a contractor" - <a href="https://www.citizen.co.jp/release/news/detail/2026/20261006.html">https://www.citizen.co.jp/release/news/detail/2026/20261006.html</a></li>
+<li>Scala Communications, "Notice regarding unauthorized access" - <a href="https://scala-com.jp/news/2026/10-1/">https://scala-com.jp/news/2026/10-1/</a></li>
+<li>GMO Research &amp; AI, "Notice of personal information leakage due to unauthorized access to infoQ" - <a href="https://gmo-research.ai/pressroom/notice/notice-20261005">https://gmo-research.ai/pressroom/notice/notice-20261005</a></li>
+<li>EDINET, Japan's official disclosure system (annual securities reports of listed companies) - <a href="https://disclosure2.edinet-fsa.go.jp/">https://disclosure2.edinet-fsa.go.jp/</a></li>
+</ol>
+<blockquote><p>This post is for information only and is not investment advice. Make your own investment decisions, and check the primary sources linked above. Figures are translated from Japanese disclosures; in case of any difference, the originals prevail.</p></blockquote>
+</div>
+<div class="share"><span>Share</span><a href="https://x.com/intent/post?text=Three%20Japanese%20data%20breaches%2C%20read%20from%20the%20companies%27%20own%20statements&amp;url=https%3A%2F%2Fnotes.hibiki-tech.com%2Fposts%2F2026-10-09-data-leak-roundup%2F" rel="noopener" target="_blank">X</a><a href="https://bsky.app/intent/compose?text=Three%20Japanese%20data%20breaches%2C%20read%20from%20the%20companies%27%20own%20statements%20https%3A%2F%2Fnotes.hibiki-tech.com%2Fposts%2F2026-10-09-data-leak-roundup%2F" rel="noopener" target="_blank">Bluesky</a><a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fnotes.hibiki-tech.com%2Fposts%2F2026-10-09-data-leak-roundup%2F" rel="noopener" target="_blank">LinkedIn</a></div>
+<aside class="cta"><h4>Get the full filing pack</h4><p>Financial tables, shareholders, segments and risk factors for this company, translated from the Japanese filings. For paid subscribers on Substack.</p><a class="btn" href="https://pochin.substack.com/subscribe">Subscribe</a></aside>
+</article>
+</main>
+<footer class="site"><div class="wrap"><p>Information only, not investment advice. Figures are translated from Japanese filings (EDINET); the original filings prevail.</p><nav><a href="../../">Home</a><a href="../../about/">About</a><a href="../../contact/">Contact</a><a href="../../privacy/">Privacy</a><a href="../../feed.xml">RSS</a><a href="https://bsky.app/profile/pochin-shachou.bsky.social" rel="me">Bluesky</a><a href="https://pochin.substack.com/subscribe">Newsletter</a></nav></div></footer>
+</body>
+</html>
