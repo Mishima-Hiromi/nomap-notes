@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mishima-hiromi.github.io/nomap-notes/sitemap.xml
+Sitemap: https://notes.hibiki-tech.com/sitemap.xml
