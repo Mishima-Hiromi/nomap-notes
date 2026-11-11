@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>【株の基礎講座#6】配当性向とは</title>
+<meta name="description" content="「配当性向」という言葉を、決算のニュースや株主向けの資料で見たことはありませんか。">
+<link rel="canonical" href="https://notes.hibiki-tech.com/ja/posts/2026-10-19-beginner-course-6/">
+<link rel="alternate" hreflang="ja" href="https://notes.hibiki-tech.com/ja/posts/2026-10-19-beginner-course-6/">
+<meta property="og:site_name" content="Filed in Japan">
+<meta property="og:title" content="【株の基礎講座#6】配当性向とは">
+<meta property="og:description" content="「配当性向」という言葉を、決算のニュースや株主向けの資料で見たことはありませんか。">
+<meta property="og:url" content="https://notes.hibiki-tech.com/ja/posts/2026-10-19-beginner-course-6/">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
+<style>
+:root { color-scheme:light dark;
+  --bg:#f6f5f2; --surface:#ffffff; --fg:#16181d; --muted:#626873; --rule:#e4e2dc;
+  --accent:#d6283b; --accent-fg:#ffffff; --chip:#fbe9eb; --chip-fg:#a3172a;
+  --shadow:0 1px 2px rgba(16,24,40,.05), 0 8px 24px rgba(16,24,40,.06);
+  --sans:ui-sans-serif, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --serif:"Iowan Old Style", Charter, Georgia, serif; }
+@media (prefers-color-scheme: dark) { :root {
+  --bg:#0f1115; --surface:#171a21; --fg:#e8e9ec; --muted:#9aa0ab; --rule:#262a33;
+  --accent:#ff4d5e; --chip:#2a1619; --chip-fg:#ff8a95;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35); } }
+* { box-sizing:border-box; }
+html { -webkit-text-size-adjust:100%; }
+body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.6 var(--sans);
+  -webkit-font-smoothing:antialiased; }
+a { color:inherit; }
+img { max-width:100%; height:auto; display:block; }
+.wrap { max-width:1080px; margin:0 auto; padding:0 20px; }
+.narrow { max-width:720px; margin:0 auto; padding:0 20px; }
+
+.top { position:sticky; top:0; z-index:10; background:color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter:saturate(1.4) blur(10px); -webkit-backdrop-filter:saturate(1.4) blur(10px);
+  border-bottom:1px solid var(--rule); }
+.top .wrap { display:flex; align-items:center; justify-content:space-between; height:60px; }
+.brand { display:flex; align-items:center; gap:10px; text-decoration:none; font-weight:700;
+  letter-spacing:-.01em; font-size:17px; }
+.brand .mark { width:18px; height:18px; border-radius:50%; background:var(--accent);
+  box-shadow:0 0 0 4px var(--chip); }
+.btn { display:inline-flex; align-items:center; padding:9px 16px; border-radius:999px;
+  background:var(--accent); color:var(--accent-fg); text-decoration:none; font-weight:600;
+  font-size:14px; transition:transform .15s ease, filter .15s ease; }
+.btn:hover { transform:translateY(-1px); filter:brightness(1.06); }
+.btn.ghost { background:transparent; color:var(--fg); border:1px solid var(--rule); }
+
+.hero { padding:72px 0 8px; }
+.eyebrow { text-transform:uppercase; letter-spacing:.12em; font-size:12px; font-weight:700;
+  color:var(--accent); margin:0 0 14px; }
+.hero h1 { font-size:clamp(38px, 6.5vw, 64px); line-height:1.03; letter-spacing:-.035em;
+  margin:0 0 18px; max-width:13ch; }
+.hero .lead { font-size:clamp(17px, 2vw, 20px); color:var(--muted); max-width:56ch; margin:0 0 28px; }
+.hero .actions { display:flex; gap:10px; flex-wrap:wrap; }
+.stats { display:flex; gap:40px; margin-top:44px; padding-top:22px; border-top:1px solid var(--rule);
+  flex-wrap:wrap; }
+.stats b { display:block; font-size:26px; letter-spacing:-.02em; font-variant-numeric:tabular-nums; }
+.stats span { color:var(--muted); font-size:13px; }
+
+.section-h { margin:48px 0 18px; font-size:13px; text-transform:uppercase; letter-spacing:.12em;
+  color:var(--muted); font-weight:700; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:20px;
+  padding:0; margin:0 0 64px; list-style:none; }
+.card { background:var(--surface); border:1px solid var(--rule); border-radius:16px; overflow:hidden;
+  box-shadow:var(--shadow); display:flex; flex-direction:column; text-decoration:none; height:100%;
+  transition:transform .2s ease, box-shadow .2s ease; }
+.card:hover { transform:translateY(-3px);
+  box-shadow:0 2px 4px rgba(16,24,40,.06), 0 18px 40px rgba(16,24,40,.13); }
+.card .thumb { aspect-ratio:16/10; background:#fff; border-bottom:1px solid var(--rule); overflow:hidden; }
+.card .thumb img { width:100%; height:100%; object-fit:contain; padding:12px; }
+.card .body { padding:18px 20px 22px; display:flex; flex-direction:column; gap:8px; flex:1; }
+.card h3 { font-size:19px; line-height:1.3; letter-spacing:-.01em; margin:0; }
+.card p { color:var(--muted); font-size:14.5px; margin:0; }
+.featured { grid-column:1 / -1; }
+.featured .card { flex-direction:row; }
+.featured .thumb { flex:1.25; aspect-ratio:auto; min-height:340px; border-bottom:0;
+  border-right:1px solid var(--rule); }
+.featured .body { flex:1; padding:36px; justify-content:center; gap:12px; }
+.featured h3 { font-size:clamp(23px, 3vw, 31px); line-height:1.2; }
+.featured p { font-size:16px; }
+@media (max-width:760px) {
+  .featured .card { flex-direction:column; }
+  .featured .thumb { min-height:0; aspect-ratio:16/10; border-right:0; border-bottom:1px solid var(--rule); }
+  .featured .body { padding:20px; }
+  .hero { padding-top:48px; } }
+
+.chips { display:flex; gap:10px; align-items:center; flex-wrap:wrap; font-size:12.5px; color:var(--muted); }
+.chip { display:inline-block; padding:3px 9px; border-radius:999px; background:var(--chip);
+  color:var(--chip-fg); font-weight:700; font-variant-numeric:tabular-nums; letter-spacing:.03em; }
+
+.post-head { padding:48px 0 8px; }
+.back { display:inline-block; color:var(--muted); text-decoration:none; font-size:14px; margin-bottom:28px; }
+.back:hover { color:var(--fg); }
+.post-head h1 { font-size:clamp(30px, 5vw, 46px); line-height:1.12; letter-spacing:-.025em;
+  margin:16px 0 14px; }
+.post-head .sub { font-size:19px; color:var(--muted); margin:0 0 8px; }
+.post-head .chips a { color:var(--muted); }
+.prose { font:19px/1.75 var(--serif); padding:16px 0 8px; }
+.prose p { margin:0 0 1.15em; }
+.prose h2, .prose h3, .prose h4 { font-family:var(--sans); letter-spacing:-.015em; line-height:1.25; }
+.prose h2 { font-size:26px; margin:2.1em 0 .7em; padding-top:.9em; border-top:1px solid var(--rule); }
+.prose h3 { font-size:20px; margin:1.8em 0 .6em; }
+.prose a { color:var(--accent); text-underline-offset:3px; }
+.prose ul, .prose ol { padding-left:1.3em; margin:0 0 1.2em; }
+.prose li { margin:.35em 0; }
+.prose figure { margin:2em 0; background:#fff; border:1px solid var(--rule); border-radius:14px;
+  padding:14px; box-shadow:var(--shadow); }
+.prose figure img { margin:0 auto; border-radius:6px; }
+.prose blockquote { margin:1.6em 0; padding:4px 0 4px 20px; border-left:3px solid var(--accent);
+  color:var(--muted); font-style:italic; }
+
+.cta { margin:40px 0 56px; padding:28px; border-radius:18px; color:#fff; font-family:var(--sans);
+  background:radial-gradient(120% 140% at 100% 0%, #ff5a6b 0%, #d6283b 45%, #8e1022 100%);
+  box-shadow:var(--shadow); }
+.cta h4 { margin:0 0 6px; font-size:20px; letter-spacing:-.01em; }
+.cta p { margin:0 0 16px; opacity:.92; font-size:15.5px; line-height:1.55; }
+.cta .btn { background:#fff; color:#b01d30; }
+
+footer.site { border-top:1px solid var(--rule); color:var(--muted); font-size:13.5px; padding:32px 0 48px; }
+footer.site .wrap { display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+footer.site p { margin:0; max-width:60ch; }
+footer.site nav { display:flex; gap:8px 18px; flex-wrap:wrap; }
+.top .links { display:flex; align-items:center; gap:16px; }
+.top .links a.plain { color:var(--muted); text-decoration:none; font-size:14px; font-weight:600; }
+.top .links a.plain:hover { color:var(--fg); }
+.tag { display:inline-block; padding:2px 9px; border-radius:999px; border:1px solid var(--rule);
+  color:var(--muted); text-decoration:none; font-weight:600; }
+a.tag:hover { color:var(--fg); border-color:var(--muted); }
+.filters { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 22px; }
+.filters a { padding:6px 13px; border-radius:999px; border:1px solid var(--rule); background:var(--surface);
+  text-decoration:none; font-size:14px; font-weight:600; color:var(--muted); }
+.filters a:hover, .filters a[aria-current] { color:var(--fg); border-color:var(--fg); }
+.filters a small { font-weight:500; margin-left:4px; }
+.share { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin:8px 0 0; font-size:14px;
+  color:var(--muted); font-family:var(--sans); }
+.share a { padding:6px 13px; border-radius:999px; border:1px solid var(--rule); text-decoration:none;
+  font-weight:600; color:var(--fg); }
+.share a:hover { border-color:var(--fg); }
+.cat-head .eyebrow { margin-top:56px; }
+.cat-head h1 { font-size:clamp(30px, 5vw, 44px); letter-spacing:-.025em; margin:0 0 24px; }
+.page h1 { font-size:clamp(30px, 5vw, 44px); letter-spacing:-.025em; margin:48px 0 18px; }
+.page h2 { font-family:var(--sans); font-size:21px; margin:1.8em 0 .5em; }
+.page p, .page li { font-size:17px; }
+@media (max-width:520px) { .top .links a.plain { display:none; } }
+.ad { margin:28px 0; min-height:100px; }
+footer.site a { text-decoration:none; }
+footer.site a:hover { color:var(--fg); }
+</style>
+<meta property="og:image" content="https://notes.hibiki-tech.com/ja/images/2026-10-19-beginner-course-6-thumb.png">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8065890671425926" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JJ4YKNLJJ1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-JJ4YKNLJJ1');</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "【株の基礎講座#6】配当性向とは", "description": "「配当性向」という言葉を、決算のニュースや株主向けの資料で見たことはありませんか。", "inLanguage": "ja", "mainEntityOfPage": "https://notes.hibiki-tech.com/ja/posts/2026-10-19-beginner-course-6/", "publisher": {"@type": "Organization", "name": "Filed in Japan", "url": "https://notes.hibiki-tech.com/"}, "datePublished": "2026-10-19", "image": ["https://notes.hibiki-tech.com/ja/images/2026-10-19-beginner-course-6-thumb.png"]}</script>
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="brand" href="../../"><span class="mark" aria-hidden="true"></span>Filed in Japan</a><div class="links"><a class="plain" href="../../../">English</a><a class="plain" href="../../about/">このサイトについて</a><a class="plain" href="https://bsky.app/profile/pochin-shachou.bsky.social" rel="me">Bluesky</a><a class="btn" href="https://pochin.substack.com/subscribe">購読</a></div></div></header>
+<main>
+<article class="narrow">
+<div class="post-head"><a class="back" href="../../">&larr; 記事一覧</a><div class="chips"><span class="chip">2875</span><a class="tag" href="../../category/beginner-course/">株の基礎講座</a><time datetime="2026-10-19">2026年10月19日</time></div><h1>【株の基礎講座#6】配当性向とは</h1>
+</div>
+<div class="prose">
+<p>「配当性向」という言葉を、決算のニュースや株主向けの資料で見たことはありませんか。</p>
+<p>会社が1年間で稼いだ利益のうち、どれくらいを配当に回しているかを表す数字です。</p>
+<h2>配当性向は、稼いだ利益のうち配当に回す割合</h2>
+<figure><img src="https://notes.hibiki-tech.com/ja/images/2026-10-19-beginner-course-6-formula1.png" alt="図: 配当100円÷利益500円×100で配当性向20％"></figure>
+<p>会社は、1年間の活動で利益を出します。</p>
+<p>その一部を株主に配当として渡し、残りは会社に残します。</p>
+<p>配当性向は、この利益のうち配当に回した割合です。</p>
+<p>計算式はこうです。</p>
+<p>配当性向（％）＝ 1株当たりの年間配当金 ÷ 1株当たりの当期純利益 × 100</p>
+<p>たとえば、1株当たりの年間配当金が100円、1株当たりの当期純利益が500円なら、100 ÷ 500 × 100 で20％です。</p>
+<p>1株当たりの当期純利益は、会社の利益を発行済みの株の数で割った金額です。</p>
+<p>株価とこの利益を比べたものが<a href="https://note.com/pochin_shachou/n/n769f4d015c66">PER</a>なので、PERの回で見た「1株当たりの利益」と同じものです。</p>
+<h2>実際の数字で見てみる</h2>
+<p>東洋水産株式会社（証券コード2875、「マルちゃん」の即席麺で知られる食品会社。公式サイト <a href="https://www.maruchan.co.jp/">https://www.maruchan.co.jp/</a> ）を例にします。</p>
+<p>2026年3月期の1株当たりの年間配当金は220円、1株当たりの当期純利益は713.27円でした。</p>
+<p>220 ÷ 713.27 × 100 を計算すると、約30.8％になります。</p>
+<p>東洋水産は中期経営計画で、連結配当性向を30％超にすることを目標に掲げています。実際の30.8％は、この目標に沿った水準です。</p>
+<h2>同じ即席麺の会社でも、10ポイント以上の差がある</h2>
+<figure><img src="https://notes.hibiki-tech.com/ja/images/2026-10-19-beginner-course-6-table1.png" alt="表: 東洋水産30.8％、日清食品HD44.5％"></figure>
+<p>同じ即席麺の会社として、日清食品ホールディングス株式会社（証券コード2897、「カップヌードル」で知られる即席麺の会社。公式サイト <a href="https://www.nissin.com/jp/">https://www.nissin.com/jp/</a> ）を並べます。</p>
+<p>2026年3月期の1株当たりの年間配当金は70円、1株当たりの当期純利益は157.33円でした。</p>
+<p>70 ÷ 157.33 × 100 で、約44.5％になります。</p>
+<p>日清食品HDは、連結配当性向約40％を目安に増配していく方針を示しています。</p>
+<p>両社とも、即席麺の事業が売上の6割超です。</p>
+<p>同じ即席麺の会社で、東洋水産は約30.8％、日清食品HDは約44.5％です。10ポイント以上の差があります。</p>
+<h2>この指標だけで判断してはいけない理由</h2>
+<p>配当性向だけで会社を選べない理由は、3つあります。</p>
+<p>1つ目は、配当性向が利益で割って出す数字だからです。</p>
+<p>利益が減れば、配当を変えなくても配当性向は上がります。</p>
+<p>逆に増益なら、配当を増やしても下がります。</p>
+<p>東洋水産は、1株当たりの年間配当金を200円から220円に増やしました。</p>
+<p>それでも配当性向は31.4％から30.8％へ下がりました。利益の伸びのほうが大きかったからです。</p>
+<p>2つ目は、高いほど良いとは限らないことです。</p>
+<p>配当性向が高い会社は、利益の多くを配当に回しています。</p>
+<p>そのぶん、工場や研究開発など、これから稼ぐための投資や、将来への蓄えに回せるお金が少なくなります。</p>
+<p>反対に低い会社は、配当を抑えて成長に使っている可能性があります。</p>
+<p>東洋水産も、配当に回さなかった利益を、生産能力の増強や開発への投資に使う方針を示しています。</p>
+<p>2026年3月期の設備投資は約467億円で、当期純利益の3分の2ほどにあたります。</p>
+<p>3つ目は、同じ業種でも水準が違うことです。</p>
+<p><a href="https://note.com/pochin_shachou/n/n9a22fd079c07">配当利回り</a>の回で見たとおり、配当の指標には「この数字以上なら良い」という基準がありません。</p>
+<p>同じ業種の会社と比べ、数年の推移を見るほうが役に立ちます。</p>
+<h2>関連記事</h2>
+<ul>
+<li><a href="https://note.com/pochin_shachou/n/n9a22fd079c07">【株の基礎講座#5】配当利回りとは</a></li>
+<li><a href="https://note.com/pochin_shachou/n/n769f4d015c66">【株の基礎講座#1】PERとは</a></li>
+<li><a href="https://note.com/pochin_shachou/m/mccb3f9f58aab">株の基礎講座マガジン</a></li>
+</ul>
+<p>前回は配当利回りを見ました。</p>
+<p>株価に対して、1年でどれだけの配当が受け取れるかという数字です。</p>
+<p>今回は、その配当が会社の利益のうちどれくらいなのかを、配当性向で見ました。</p>
+<p>2つをあわせて見ると、その会社の配当が株価から見て高いのか、利益から見て無理がないのかを、確かめられます。</p>
+<h2>出典</h2>
+<ol>
+<li>東洋水産株式会社 2026年3月期 有価証券報告書（配当政策・事業の内容） - <a href="https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YDW0">https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YDW0</a></li>
+<li>日清食品ホールディングス株式会社 2026年3月期 有価証券報告書（配当政策・事業の内容） - <a href="https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YEWB">https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YEWB</a></li>
+<li>EDINET DB（東洋水産株式会社 2026年3月期 セグメント売上・財務データ） - <a href="https://edinetdb.jp/company/E00461">https://edinetdb.jp/company/E00461</a></li>
+<li>EDINET DB（日清食品ホールディングス株式会社 2026年3月期 セグメント売上・財務データ） - <a href="https://edinetdb.jp/company/E00457">https://edinetdb.jp/company/E00457</a></li>
+<li>EDINET（金融庁 電子開示システム） - <a href="https://disclosure2.edinet-fsa.go.jp/">https://disclosure2.edinet-fsa.go.jp/</a></li>
+</ol>
+<blockquote><p>本記事は情報提供を目的としており、投資判断は自己責任で行ってください。記載内容については、出典元の一次情報をご自身でもご確認ください。</p></blockquote>
+</div>
+<div class="share"><span>シェア</span><a href="https://x.com/intent/post?text=%E3%80%90%E6%A0%AA%E3%81%AE%E5%9F%BA%E7%A4%8E%E8%AC%9B%E5%BA%A7%236%E3%80%91%E9%85%8D%E5%BD%93%E6%80%A7%E5%90%91%E3%81%A8%E3%81%AF&amp;url=https%3A%2F%2Fnotes.hibiki-tech.com%2Fja%2Fposts%2F2026-10-19-beginner-course-6%2F" rel="noopener" target="_blank">X</a><a href="https://bsky.app/intent/compose?text=%E3%80%90%E6%A0%AA%E3%81%AE%E5%9F%BA%E7%A4%8E%E8%AC%9B%E5%BA%A7%236%E3%80%91%E9%85%8D%E5%BD%93%E6%80%A7%E5%90%91%E3%81%A8%E3%81%AF%20https%3A%2F%2Fnotes.hibiki-tech.com%2Fja%2Fposts%2F2026-10-19-beginner-course-6%2F" rel="noopener" target="_blank">Bluesky</a></div>
+<aside class="cta"><h4>続きはnoteでも</h4><p>コメント・スキ（いいね）はnote版でどうぞ。</p><a class="btn" href="https://note.com/pochin_shachou/n/ncf584fb6854e">noteで読む</a></aside>
+</article>
+</main>
+<footer class="site"><div class="wrap"><p>情報提供のみを目的としたもので、投資助言ではありません。数字は開示資料（EDINET等）や各社の発表をもとに作成しており、原文の記載が優先されます。</p><nav><a href="../../">トップ</a><a href="../../about/">このサイトについて</a><a href="../../contact/">お問い合わせ</a><a href="../../privacy/">プライバシーポリシー</a><a href="../../feed.xml">RSS</a><a href="https://bsky.app/profile/pochin-shachou.bsky.social" rel="me">Bluesky</a><a href="../../../">English edition</a></nav></div></footer>
+</body>
+</html>

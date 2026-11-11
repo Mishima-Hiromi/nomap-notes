@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cloudflareとは</title>
+<meta name="description" content="Cloudflareの本質は「サイトを速くするCDN」ではなく、DNSを書き換えるだけでWebサイトの全通信が通過するリバースプロキシ（インターネットの関所）である。学ぶ価値は、CDN、WAF、DDoS対策、SSL/TLS、DNSという別々に見える技術が1社のネットワークに束ねら">
+<link rel="canonical" href="https://notes.hibiki-tech.com/ja/posts/2026-10-18-request-08438325/">
+<link rel="alternate" hreflang="ja" href="https://notes.hibiki-tech.com/ja/posts/2026-10-18-request-08438325/">
+<meta property="og:site_name" content="Filed in Japan">
+<meta property="og:title" content="Cloudflareとは">
+<meta property="og:description" content="Cloudflareの本質は「サイトを速くするCDN」ではなく、DNSを書き換えるだけでWebサイトの全通信が通過するリバースプロキシ（インターネットの関所）である。学ぶ価値は、CDN、WAF、DDoS対策、SSL/TLS、DNSという別々に見える技術が1社のネットワークに束ねら">
+<meta property="og:url" content="https://notes.hibiki-tech.com/ja/posts/2026-10-18-request-08438325/">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
+<style>
+:root { color-scheme:light dark;
+  --bg:#f6f5f2; --surface:#ffffff; --fg:#16181d; --muted:#626873; --rule:#e4e2dc;
+  --accent:#d6283b; --accent-fg:#ffffff; --chip:#fbe9eb; --chip-fg:#a3172a;
+  --shadow:0 1px 2px rgba(16,24,40,.05), 0 8px 24px rgba(16,24,40,.06);
+  --sans:ui-sans-serif, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --serif:"Iowan Old Style", Charter, Georgia, serif; }
+@media (prefers-color-scheme: dark) { :root {
+  --bg:#0f1115; --surface:#171a21; --fg:#e8e9ec; --muted:#9aa0ab; --rule:#262a33;
+  --accent:#ff4d5e; --chip:#2a1619; --chip-fg:#ff8a95;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35); } }
+* { box-sizing:border-box; }
+html { -webkit-text-size-adjust:100%; }
+body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.6 var(--sans);
+  -webkit-font-smoothing:antialiased; }
+a { color:inherit; }
+img { max-width:100%; height:auto; display:block; }
+.wrap { max-width:1080px; margin:0 auto; padding:0 20px; }
+.narrow { max-width:720px; margin:0 auto; padding:0 20px; }
+
+.top { position:sticky; top:0; z-index:10; background:color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter:saturate(1.4) blur(10px); -webkit-backdrop-filter:saturate(1.4) blur(10px);
+  border-bottom:1px solid var(--rule); }
+.top .wrap { display:flex; align-items:center; justify-content:space-between; height:60px; }
+.brand { display:flex; align-items:center; gap:10px; text-decoration:none; font-weight:700;
+  letter-spacing:-.01em; font-size:17px; }
+.brand .mark { width:18px; height:18px; border-radius:50%; background:var(--accent);
+  box-shadow:0 0 0 4px var(--chip); }
+.btn { display:inline-flex; align-items:center; padding:9px 16px; border-radius:999px;
+  background:var(--accent); color:var(--accent-fg); text-decoration:none; font-weight:600;
+  font-size:14px; transition:transform .15s ease, filter .15s ease; }
+.btn:hover { transform:translateY(-1px); filter:brightness(1.06); }
+.btn.ghost { background:transparent; color:var(--fg); border:1px solid var(--rule); }
+
+.hero { padding:72px 0 8px; }
+.eyebrow { text-transform:uppercase; letter-spacing:.12em; font-size:12px; font-weight:700;
+  color:var(--accent); margin:0 0 14px; }
+.hero h1 { font-size:clamp(38px, 6.5vw, 64px); line-height:1.03; letter-spacing:-.035em;
+  margin:0 0 18px; max-width:13ch; }
+.hero .lead { font-size:clamp(17px, 2vw, 20px); color:var(--muted); max-width:56ch; margin:0 0 28px; }
+.hero .actions { display:flex; gap:10px; flex-wrap:wrap; }
+.stats { display:flex; gap:40px; margin-top:44px; padding-top:22px; border-top:1px solid var(--rule);
+  flex-wrap:wrap; }
+.stats b { display:block; font-size:26px; letter-spacing:-.02em; font-variant-numeric:tabular-nums; }
+.stats span { color:var(--muted); font-size:13px; }
+
+.section-h { margin:48px 0 18px; font-size:13px; text-transform:uppercase; letter-spacing:.12em;
+  color:var(--muted); font-weight:700; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:20px;
+  padding:0; margin:0 0 64px; list-style:none; }
+.card { background:var(--surface); border:1px solid var(--rule); border-radius:16px; overflow:hidden;
+  box-shadow:var(--shadow); display:flex; flex-direction:column; text-decoration:none; height:100%;
+  transition:transform .2s ease, box-shadow .2s ease; }
+.card:hover { transform:translateY(-3px);
+  box-shadow:0 2px 4px rgba(16,24,40,.06), 0 18px 40px rgba(16,24,40,.13); }
+.card .thumb { aspect-ratio:16/10; background:#fff; border-bottom:1px solid var(--rule); overflow:hidden; }
+.card .thumb img { width:100%; height:100%; object-fit:contain; padding:12px; }
+.card .body { padding:18px 20px 22px; display:flex; flex-direction:column; gap:8px; flex:1; }
+.card h3 { font-size:19px; line-height:1.3; letter-spacing:-.01em; margin:0; }
+.card p { color:var(--muted); font-size:14.5px; margin:0; }
+.featured { grid-column:1 / -1; }
+.featured .card { flex-direction:row; }
+.featured .thumb { flex:1.25; aspect-ratio:auto; min-height:340px; border-bottom:0;
+  border-right:1px solid var(--rule); }
+.featured .body { flex:1; padding:36px; justify-content:center; gap:12px; }
+.featured h3 { font-size:clamp(23px, 3vw, 31px); line-height:1.2; }
+.featured p { font-size:16px; }
+@media (max-width:760px) {
+  .featured .card { flex-direction:column; }
+  .featured .thumb { min-height:0; aspect-ratio:16/10; border-right:0; border-bottom:1px solid var(--rule); }
+  .featured .body { padding:20px; }
+  .hero { padding-top:48px; } }
+
+.chips { display:flex; gap:10px; align-items:center; flex-wrap:wrap; font-size:12.5px; color:var(--muted); }
+.chip { display:inline-block; padding:3px 9px; border-radius:999px; background:var(--chip);
+  color:var(--chip-fg); font-weight:700; font-variant-numeric:tabular-nums; letter-spacing:.03em; }
+
+.post-head { padding:48px 0 8px; }
+.back { display:inline-block; color:var(--muted); text-decoration:none; font-size:14px; margin-bottom:28px; }
+.back:hover { color:var(--fg); }
+.post-head h1 { font-size:clamp(30px, 5vw, 46px); line-height:1.12; letter-spacing:-.025em;
+  margin:16px 0 14px; }
+.post-head .sub { font-size:19px; color:var(--muted); margin:0 0 8px; }
+.post-head .chips a { color:var(--muted); }
+.prose { font:19px/1.75 var(--serif); padding:16px 0 8px; }
+.prose p { margin:0 0 1.15em; }
+.prose h2, .prose h3, .prose h4 { font-family:var(--sans); letter-spacing:-.015em; line-height:1.25; }
+.prose h2 { font-size:26px; margin:2.1em 0 .7em; padding-top:.9em; border-top:1px solid var(--rule); }
+.prose h3 { font-size:20px; margin:1.8em 0 .6em; }
+.prose a { color:var(--accent); text-underline-offset:3px; }
+.prose ul, .prose ol { padding-left:1.3em; margin:0 0 1.2em; }
+.prose li { margin:.35em 0; }
+.prose figure { margin:2em 0; background:#fff; border:1px solid var(--rule); border-radius:14px;
+  padding:14px; box-shadow:var(--shadow); }
+.prose figure img { margin:0 auto; border-radius:6px; }
+.prose blockquote { margin:1.6em 0; padding:4px 0 4px 20px; border-left:3px solid var(--accent);
+  color:var(--muted); font-style:italic; }
+
+.cta { margin:40px 0 56px; padding:28px; border-radius:18px; color:#fff; font-family:var(--sans);
+  background:radial-gradient(120% 140% at 100% 0%, #ff5a6b 0%, #d6283b 45%, #8e1022 100%);
+  box-shadow:var(--shadow); }
+.cta h4 { margin:0 0 6px; font-size:20px; letter-spacing:-.01em; }
+.cta p { margin:0 0 16px; opacity:.92; font-size:15.5px; line-height:1.55; }
+.cta .btn { background:#fff; color:#b01d30; }
+
+footer.site { border-top:1px solid var(--rule); color:var(--muted); font-size:13.5px; padding:32px 0 48px; }
+footer.site .wrap { display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+footer.site p { margin:0; max-width:60ch; }
+footer.site nav { display:flex; gap:8px 18px; flex-wrap:wrap; }
+.top .links { display:flex; align-items:center; gap:16px; }
+.top .links a.plain { color:var(--muted); text-decoration:none; font-size:14px; font-weight:600; }
+.top .links a.plain:hover { color:var(--fg); }
+.tag { display:inline-block; padding:2px 9px; border-radius:999px; border:1px solid var(--rule);
+  color:var(--muted); text-decoration:none; font-weight:600; }
+a.tag:hover { color:var(--fg); border-color:var(--muted); }
+.filters { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 22px; }
+.filters a { padding:6px 13px; border-radius:999px; border:1px solid var(--rule); background:var(--surface);
+  text-decoration:none; font-size:14px; font-weight:600; color:var(--muted); }
+.filters a:hover, .filters a[aria-current] { color:var(--fg); border-color:var(--fg); }
+.filters a small { font-weight:500; margin-left:4px; }
+.share { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin:8px 0 0; font-size:14px;
+  color:var(--muted); font-family:var(--sans); }
+.share a { padding:6px 13px; border-radius:999px; border:1px solid var(--rule); text-decoration:none;
+  font-weight:600; color:var(--fg); }
+.share a:hover { border-color:var(--fg); }
+.cat-head .eyebrow { margin-top:56px; }
+.cat-head h1 { font-size:clamp(30px, 5vw, 44px); letter-spacing:-.025em; margin:0 0 24px; }
+.page h1 { font-size:clamp(30px, 5vw, 44px); letter-spacing:-.025em; margin:48px 0 18px; }
+.page h2 { font-family:var(--sans); font-size:21px; margin:1.8em 0 .5em; }
+.page p, .page li { font-size:17px; }
+@media (max-width:520px) { .top .links a.plain { display:none; } }
+.ad { margin:28px 0; min-height:100px; }
+footer.site a { text-decoration:none; }
+footer.site a:hover { color:var(--fg); }
+</style>
+<meta property="og:image" content="https://notes.hibiki-tech.com/ja/images/2026-10-18-request-08438325-bar2.png">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8065890671425926" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JJ4YKNLJJ1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-JJ4YKNLJJ1');</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Cloudflareとは", "description": "Cloudflareの本質は「サイトを速くするCDN」ではなく、DNSを書き換えるだけでWebサイトの全通信が通過するリバースプロキシ（インターネットの関所）である。学ぶ価値は、CDN、WAF、DDoS対策、SSL/TLS、DNSという別々に見える技術が1社のネットワークに束ねら", "inLanguage": "ja", "mainEntityOfPage": "https://notes.hibiki-tech.com/ja/posts/2026-10-18-request-08438325/", "publisher": {"@type": "Organization", "name": "Filed in Japan", "url": "https://notes.hibiki-tech.com/"}, "datePublished": "2026-10-18", "image": ["https://notes.hibiki-tech.com/ja/images/2026-10-18-request-08438325-bar2.png"]}</script>
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="brand" href="../../"><span class="mark" aria-hidden="true"></span>Filed in Japan</a><div class="links"><a class="plain" href="../../../">English</a><a class="plain" href="../../about/">このサイトについて</a><a class="plain" href="https://bsky.app/profile/pochin-shachou.bsky.social" rel="me">Bluesky</a><a class="btn" href="https://pochin.substack.com/subscribe">購読</a></div></div></header>
+<main>
+<article class="narrow">
+<div class="post-head"><a class="back" href="../../">&larr; 記事一覧</a><div class="chips"><a class="tag" href="../../category/trend/">トレンド</a><time datetime="2026-10-18">2026年10月18日</time></div><h1>Cloudflareとは</h1>
+</div>
+<div class="prose">
+<p>個人ブログを運営していると、サイトを速くするために「Cloudflareを入れるといい」と聞くことがあります。</p>
+<p>ただ、Cloudflareが何をしている会社なのかと問われると、すぐには答えられないかもしれません。</p>
+<p>Cloudflareは、あなたのサイトの前に立って、すべての通信をいったん受け止める関所のような存在です。</p>
+<p>この記事では、CDN、WAF、DDoS対策、SSL/TLS、DNSという言葉の関係を、順番にかみ砕いて整理します。</p>
+<h2>要旨</h2>
+<ul>
+<li>Cloudflareの本質は「サイトを速くするCDN」ではなく、DNSを書き換えるだけでWebサイトの全通信が通過するリバースプロキシ（インターネットの関所）である。</li>
+<li>学ぶ価値は、CDN、WAF、DDoS対策、SSL/TLS、DNSという別々に見える技術が1社のネットワークに束ねられている構造を一望できる点にある。</li>
+<li>全Webサイトの約27.6%がリバースプロキシとして使い、リバースプロキシ市場では85.8%のシェアを持つ。</li>
+<li>2026年、その関所はAIエージェントやクローラーという人間以外のトラフィックを仕分け、課金する入口へと役割を変えつつある。</li>
+</ul>
+<h2>1. Cloudflareとは何か、「CDN会社」ではなくサイトの前に立つリバースプロキシ</h2>
+<p>Cloudflare, Inc.は、2009年に設立され、2010年9月にサービスを開始したアメリカの企業です（公式サイト <a href="https://www.cloudflare.com/ja-jp/）。">https://www.cloudflare.com/ja-jp/）。</a></p>
+<p>日本では「CDNを提供する会社」として紹介されることが多いのですが、これはCloudflareの一面でしかありません。</p>
+<p>Webサイトを見るときの通信には、決まった流れがあります。</p>
+<p>通常は、利用者のブラウザがDNSに問い合わせてサーバーの住所を知り、そのサーバーと直接やり取りします。</p>
+<p>Cloudflareのようなリバースプロキシを間に置くと、流れが変わります。</p>
+<p>利用者のブラウザはCloudflareとやり取りし、Cloudflareが後ろの本来のサーバーに取り次ぎます。</p>
+<p>後ろ側のサーバーは「オリジンサーバー」と呼ばれます。</p>
+<p>リバースプロキシとは、Webサーバーの前に立って、利用者からのリクエストをいったん受け取り、後ろのサーバーに転送するサーバーのことです。</p>
+<blockquote><p>A reverse proxy is a server that sits in front of web servers and forwards client requests to those web servers.</p></blockquote>
+<blockquote><p>--- Cloudflare公式ドキュメント「Securely deliver applications with Cloudflare」より</p></blockquote>
+<p>すべての通信がこの1か所を通るため、通信を速くする仕組みも、攻撃から守る仕組みも、この同じ場所にまとめて足せます。</p>
+<p>CDNは、そこに足せる機能の一つにすぎません。</p>
+<p>Cloudflare自身は、企業のネットワーク、アプリケーション、利用者を単一のクラウドネットワークでつなぎ守る「コネクティビティクラウド」と、自社の事業を説明しています。</p>
+<h2>2. DNSを変えるだけで速く、安全になる仕組み（なぜ導入手順が1ステップで済むのか）</h2>
+<p>Cloudflareの導入が1ステップで済むと言われるのは、DNSの設定を変えるだけで、通信の通り道そのものをCloudflare側へ向けられるからです。</p>
+<p>DNSは、example.comのようなドメイン名を、サーバーのIPアドレス（数字で表した住所）に結びつける仕組みです。</p>
+<p>通常は、利用者のブラウザが受け取ったDNSの答えをもとに、目的のサーバーへ直接アクセスします。</p>
+<p>ところが、ドメインのネームサーバー（ドメイン名の問い合わせに答えるサーバー）をCloudflareのものに変えると、CloudflareのDNSは、問い合わせに対して自分のネットワークのIPアドレスを返します。</p>
+<p>その結果、利用者の通信は必ずCloudflareを通り、そこから後ろのオリジンサーバーへ届きます。</p>
+<p>だから、オリジンサーバー側に特別なソフトウエアを入れる必要はありません。</p>
+<p>サイトを登録し、プランを選び、ネームサーバーを変える。</p>
+<p>これだけで、キャッシュも防御も暗号化もまとめて有効になります。</p>
+<p>導入にかかる時間は、数分から10分程度と紹介されています。</p>
+<p>仕組みとしては、サーバーを触るのではなく、通信の入り口だけを付け替えていると考えると分かりやすいはずです。</p>
+<h2>3. 最初に押さえる5つの機能（CDN、WAF、DDoS対策、SSL/TLS、DNS）</h2>
+<p>Cloudflareを通る通信に対して使える機能は多くありますが、初学者がまず押さえるべきものは5つです。</p>
+<ul>
+<li><strong>CDN</strong>（Content Delivery Network）：画像やCSSなどのファイルを世界各地の拠点にコピーして置き、利用者に最も近い拠点から配信する仕組みです。オリジンサーバーの負荷を減らし、表示を速くします。</li>
+<li><strong>WAF</strong>：Web Application Firewallの略で、Webアプリとインターネットの間に立つ盾です。あらかじめ用意されたルールに沿って、リクエストを検査し、望ましくない通信を遮断します。</li>
+<li><strong>DDoS対策</strong>：DDoSは、大量のアクセスを一斉に送りつけてサーバーを止める攻撃です。Cloudflareは、その通信を世界各地の拠点に分散させて吸収します。</li>
+<li><strong>SSL/TLS</strong>：通信を暗号化してHTTPS（暗号化された通信）にするための証明書を、無料で自動発行し、自動で更新します。</li>
+<li><strong>DNS</strong>：ドメイン名とIPアドレスを結びつけます。同社は、誰でも無料で使えるDNSサービス「1.1.1.1」も運営しています。</li>
+</ul>
+<p>これらは別々の製品というより、同じネットワークの上に載った機能です。</p>
+<p>以前は、CDNはCDN業者、WAFはWAF業者、SSL証明書は購入、DDoS対策は別契約、というように別々にそろえる必要がありました。</p>
+<p>Cloudflareでは、これらを1つの管理画面でまとめて扱えます。</p>
+<p>無料プランでも、CDN、WAF、DDoS対策、SSL証明書、DNSが含まれます。</p>
+<p>5つの言葉を別々に暗記するより、1つの通り道に備わった別々の設備として並べて覚えるほうが、全体像をつかみやすくなります。</p>
+<h2>4. どれだけ使われているか、全Webサイトの約27.6%、リバースプロキシ市場シェア85.8%という規模</h2>
+<figure><img src="https://notes.hibiki-tech.com/ja/images/2026-10-18-request-08438325-bar2.png" alt="図: 上位サイトほどCloudflareのシェアが低い"></figure>
+<p>この構造の影響力は、利用の規模に表れています。</p>
+<p>Web技術の利用状況を調査するW3Techsによると、2026年10月18日時点で、Cloudflareは全Webサイトの27.6%でリバースプロキシとして使われています。</p>
+<p>リバースプロキシを使っていると分かるサイトだけに限ると、その85.8%がCloudflareです。</p>
+<p>27.6%と85.8%は、分母が違う数字です。</p>
+<p>前者はすべてのWebサイトに対する割合、後者はリバースプロキシを使っているサイトの中での割合を表します。</p>
+<p>Cloudflareのネットワークは、2026年4月の時点で125か国以上、330都市以上に広がり、1万3,000以上のネットワークと接続しています。</p>
+<p>外部と接続する回線の容量は、合計で毎秒500テラビット（500 Tbps）を超えました。</p>
+<p>同社の解説では、インターネットにつながる人口のおよそ95%から約50ミリ秒の距離にあると説明されています。</p>
+<p>1つの会社の障害が、多くのサイトに同時に影響しうる規模です。</p>
+<h2>5. 2026年の変化、AIエージェントやクローラーを仕分ける「関所」へ、非人間トラフィックの入口になる</h2>
+<figure><img src="https://notes.hibiki-tech.com/ja/images/2026-10-18-request-08438325-bar1.png" alt="図: AI学習目的のクローラー要求は22%から52%へ増加"></figure>
+<p>Cloudflareは、Webサイトを速く、安全にする関所です。</p>
+<p>2025年から2026年にかけて、この関所に新しい役割が加わっています。</p>
+<p>人間以外のアクセスを仕分け、必要なら課金するという役割です。</p>
+<p>Cloudflareは2025年7月1日、AIクローラーを既定でブロックする方針に切り替えました。</p>
+<p>同社はこれを「Content Independence Day」と呼んでいます。</p>
+<p>許可する場合でも対価を求める仕組みとして、AIクローラーがコンテンツにアクセスするたびに料金を支払う「pay per crawl」を用意しました。</p>
+<p>HTTPの402という「支払いが必要」を表すステータスコードを使い、Cloudflareが決済の窓口も担います。</p>
+<p>この背景には、トラフィックの構成の変化があります。</p>
+<p>Cloudflareの2026年7月の報告では、インターネット上のトラフィックの半分超が人間以外になったとされています。</p>
+<blockquote><p>more than 50% of traffic on the Internet is now non-human</p></blockquote>
+<blockquote><p>--- Cloudflare公式ブログ「building the business model for the agentic Internet」（2026年7月1日）より</p></blockquote>
+<p>AIエージェントとは、人間の代わりにWebページを取得したり、操作したりするソフトウェアのことです。</p>
+<p>同社の別の報告では、AIエージェントからの1日あたりのリクエストが1年で1,700%以上増え、同社が扱うリクエストは平均で毎秒1億1,500万件に達したとされています。</p>
+<p>クローラーの目的も変わりました。</p>
+<p>AI学習目的のリクエストは、2025年春の22%から2026年6月には52%へ増えています。</p>
+<p>関所の仕事は、キャッシュと防御だけではなくなります。</p>
+<p>相手が人間かどうかではなく、どのエージェントか、誰が許可したのか、何をしてよいのかを確かめる仕事です。</p>
+<p>通すか止めるか、いくら請求するかを決める入口になります。</p>
+<p>Cloudflareは2026年4月に「Agents Week」という発表週間を開き、エージェント向けの基盤づくりを進めています。</p>
+<p>すべての通信が1か所を通るという構造は、そのまま、人間以外のアクセスを仕分ける入口の位置でもあります。</p>
+<h2>6. まとめ、初学者がCloudflareから学べるWebインフラの基本</h2>
+<p>Cloudflareを学ぶ価値は、この会社のサービス名を覚えることではありません。</p>
+<p>DNSを変えると通信の通り道が変わること。</p>
+<p>通り道を1か所に集めると、速くする仕組みも守る仕組みも、同じ場所に足せること。</p>
+<p>CDN、WAF、DDoS対策、SSL/TLS、DNSという別々の言葉が、実は同じネットワークの上でつながっていること。</p>
+<p>この構造を一度つかむと、Webサイトの運用で出てくる用語が、ばらばらの暗記ではなく1枚の絵として見えてきます。</p>
+<p>関所は、いま人間以外のアクセスを仕分ける入口へと変わりつつあります。</p>
+<p>その変化を追うことは、これからのWebの形を考えることでもあります。</p>
+<p>まずは自分のブログで無料プランを試し、管理画面を眺めてみてください。</p>
+<p>速さや安全性がどこで効いているのかを自分のサイトで確かめると、理解が早くなります。</p>
+<p>すべての通信が1か所を通るということは、そこが止まれば後ろのサイトも見えなくなるということでもあります。</p>
+<p>便利さと、1か所に依存する危うさは、同じ構造から生じています。</p>
+<h2>出典</h2>
+<ol>
+<li>Cloudflare公式ドキュメント「Securely deliver applications with Cloudflare」（リバースプロキシと通信の流れ、ネットワーク規模） - <a href="https://developers.cloudflare.com/reference-architecture/design-guides/secure-application-delivery/">https://developers.cloudflare.com/reference-architecture/design-guides/secure-application-delivery/</a></li>
+<li>Cloudflare公式ドキュメント「WAF concepts」（WAFの役割と検査の仕組み） - <a href="https://developers.cloudflare.com/waf/concepts/">https://developers.cloudflare.com/waf/concepts/</a></li>
+<li>Cloudflare公式ブログ「500 Tbps of capacity: 16 years of scaling our global network」（2026年4月10日、ネットワーク容量と拠点数） - <a href="https://blog.cloudflare.com/500-tbps-of-capacity/">https://blog.cloudflare.com/500-tbps-of-capacity/</a></li>
+<li>Cloudflare公式ブログ「Content Independence Day: no AI crawl without compensation!」（2025年7月1日、AIクローラーの既定ブロック方針） - <a href="https://blog.cloudflare.com/content-independence-day-no-ai-crawl-without-compensation/">https://blog.cloudflare.com/content-independence-day-no-ai-crawl-without-compensation/</a></li>
+<li>Cloudflare公式ブログ「Introducing pay per crawl」（2025年7月1日、402を使った課金の仕組み） - <a href="https://blog.cloudflare.com/introducing-pay-per-crawl/">https://blog.cloudflare.com/introducing-pay-per-crawl/</a></li>
+<li>Cloudflare公式ブログ「building the business model for the agentic Internet」（2026年7月1日、非人間トラフィックとAI学習クローラーの比率） - <a href="https://blog.cloudflare.com/agentic-internet-bot-report/">https://blog.cloudflare.com/agentic-internet-bot-report/</a></li>
+<li>Cloudflare公式ブログ「The Internet has a second audience」（2026年9月30日、リクエスト数の推移とAIエージェントの増加） - <a href="https://blog.cloudflare.com/agentic-web/">https://blog.cloudflare.com/agentic-web/</a></li>
+<li>Cloudflare公式ブログ「Building the agentic cloud: everything we launched during Agents Week 2026」（2026年4月20日、Agents Week） - <a href="https://blog.cloudflare.com/agents-week-in-review/">https://blog.cloudflare.com/agents-week-in-review/</a></li>
+<li>W3Techs「Cloudflare usage statistics」（2026年10月18日時点の利用率とシェア） - <a href="https://w3techs.com/technologies/comparison/cn-cloudflare">https://w3techs.com/technologies/comparison/cn-cloudflare</a></li>
+<li>Wikipedia「Cloudflare」（沿革、コネクティビティクラウド、1.1.1.1） - <a href="https://ja.wikipedia.org/wiki/Cloudflare">https://ja.wikipedia.org/wiki/Cloudflare</a></li>
+<li>アクセリア「Cloudflareとは？仕組みや導入するメリット」（無料プランの機能、導入手順、依存の注意点） - <a href="https://www.accelia.net/column/beginners/6462/">https://www.accelia.net/column/beginners/6462/</a></li>
+<li>TechLabs「Cloudflareとは？初心者向けに無料でできること・料金・仕組みを解説」（5つの機能の整理、導入手順） - <a href="https://data-engineering.jp/cloudflare/">https://data-engineering.jp/cloudflare/</a></li>
+</ol>
+<blockquote><p>本記事は公開情報をもとにまとめたものです。最新の状況や詳しい内容は、出典元の一次情報をご確認ください。</p></blockquote>
+</div>
+<div class="share"><span>シェア</span><a href="https://x.com/intent/post?text=Cloudflare%E3%81%A8%E3%81%AF&amp;url=https%3A%2F%2Fnotes.hibiki-tech.com%2Fja%2Fposts%2F2026-10-18-request-08438325%2F" rel="noopener" target="_blank">X</a><a href="https://bsky.app/intent/compose?text=Cloudflare%E3%81%A8%E3%81%AF%20https%3A%2F%2Fnotes.hibiki-tech.com%2Fja%2Fposts%2F2026-10-18-request-08438325%2F" rel="noopener" target="_blank">Bluesky</a></div>
+<aside class="cta"><h4>続きはnoteでも</h4><p>コメント・スキ（いいね）はnote版でどうぞ。</p><a class="btn" href="https://note.com/pochin_shachou/n/n096f3df7fccf">noteで読む</a></aside>
+</article>
+</main>
+<footer class="site"><div class="wrap"><p>情報提供のみを目的としたもので、投資助言ではありません。数字は開示資料（EDINET等）や各社の発表をもとに作成しており、原文の記載が優先されます。</p><nav><a href="../../">トップ</a><a href="../../about/">このサイトについて</a><a href="../../contact/">お問い合わせ</a><a href="../../privacy/">プライバシーポリシー</a><a href="../../feed.xml">RSS</a><a href="https://bsky.app/profile/pochin-shachou.bsky.social" rel="me">Bluesky</a><a href="../../../">English edition</a></nav></div></footer>
+</body>
+</html>

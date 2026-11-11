@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Filed in Japan — 日本の開示情報を、わかりやすく。</title>
+<meta name="description" content="EDINET・決算資料などの日本の開示情報を読み解き、短くまとめてお届けします。情報提供のみを目的とし、投資助言ではありません。">
+<link rel="canonical" href="https://notes.hibiki-tech.com/ja/">
+<link rel="alternate" hreflang="ja" href="https://notes.hibiki-tech.com/ja/">
+<meta property="og:site_name" content="Filed in Japan">
+<meta property="og:title" content="Filed in Japan — 日本の開示情報を、わかりやすく。">
+<meta property="og:description" content="EDINET・決算資料などの日本の開示情報を読み解き、短くまとめてお届けします。情報提供のみを目的とし、投資助言ではありません。">
+<meta property="og:url" content="https://notes.hibiki-tech.com/ja/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="./feed.xml">
+<style>
+:root { color-scheme:light dark;
+  --bg:#f6f5f2; --surface:#ffffff; --fg:#16181d; --muted:#626873; --rule:#e4e2dc;
+  --accent:#d6283b; --accent-fg:#ffffff; --chip:#fbe9eb; --chip-fg:#a3172a;
+  --shadow:0 1px 2px rgba(16,24,40,.05), 0 8px 24px rgba(16,24,40,.06);
+  --sans:ui-sans-serif, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --serif:"Iowan Old Style", Charter, Georgia, serif; }
+@media (prefers-color-scheme: dark) { :root {
+  --bg:#0f1115; --surface:#171a21; --fg:#e8e9ec; --muted:#9aa0ab; --rule:#262a33;
+  --accent:#ff4d5e; --chip:#2a1619; --chip-fg:#ff8a95;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35); } }
+* { box-sizing:border-box; }
+html { -webkit-text-size-adjust:100%; }
+body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.6 var(--sans);
+  -webkit-font-smoothing:antialiased; }
+a { color:inherit; }
+img { max-width:100%; height:auto; display:block; }
+.wrap { max-width:1080px; margin:0 auto; padding:0 20px; }
+.narrow { max-width:720px; margin:0 auto; padding:0 20px; }
+
+.top { position:sticky; top:0; z-index:10; background:color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter:saturate(1.4) blur(10px); -webkit-backdrop-filter:saturate(1.4) blur(10px);
+  border-bottom:1px solid var(--rule); }
+.top .wrap { display:flex; align-items:center; justify-content:space-between; height:60px; }
+.brand { display:flex; align-items:center; gap:10px; text-decoration:none; font-weight:700;
+  letter-spacing:-.01em; font-size:17px; }
+.brand .mark { width:18px; height:18px; border-radius:50%; background:var(--accent);
+  box-shadow:0 0 0 4px var(--chip); }
+.btn { display:inline-flex; align-items:center; padding:9px 16px; border-radius:999px;
+  background:var(--accent); color:var(--accent-fg); text-decoration:none; font-weight:600;
+  font-size:14px; transition:transform .15s ease, filter .15s ease; }
+.btn:hover { transform:translateY(-1px); filter:brightness(1.06); }
+.btn.ghost { background:transparent; color:var(--fg); border:1px solid var(--rule); }
+
+.hero { padding:72px 0 8px; }
+.eyebrow { text-transform:uppercase; letter-spacing:.12em; font-size:12px; font-weight:700;
+  color:var(--accent); margin:0 0 14px; }
+.hero h1 { font-size:clamp(38px, 6.5vw, 64px); line-height:1.03; letter-spacing:-.035em;
+  margin:0 0 18px; max-width:13ch; }
+.hero .lead { font-size:clamp(17px, 2vw, 20px); color:var(--muted); max-width:56ch; margin:0 0 28px; }
+.hero .actions { display:flex; gap:10px; flex-wrap:wrap; }
+.stats { display:flex; gap:40px; margin-top:44px; padding-top:22px; border-top:1px solid var(--rule);
+  flex-wrap:wrap; }
+.stats b { display:block; font-size:26px; letter-spacing:-.02em; font-variant-numeric:tabular-nums; }
+.stats span { color:var(--muted); font-size:13px; }
+
+.section-h { margin:48px 0 18px; font-size:13px; text-transform:uppercase; letter-spacing:.12em;
+  color:var(--muted); font-weight:700; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:20px;
+  padding:0; margin:0 0 64px; list-style:none; }
+.card { background:var(--surface); border:1px solid var(--rule); border-radius:16px; overflow:hidden;
+  box-shadow:var(--shadow); display:flex; flex-direction:column; text-decoration:none; height:100%;
+  transition:transform .2s ease, box-shadow .2s ease; }
+.card:hover { transform:translateY(-3px);
+  box-shadow:0 2px 4px rgba(16,24,40,.06), 0 18px 40px rgba(16,24,40,.13); }
+.card .thumb { aspect-ratio:16/10; background:#fff; border-bottom:1px solid var(--rule); overflow:hidden; }
+.card .thumb img { width:100%; height:100%; object-fit:contain; padding:12px; }
+.card .body { padding:18px 20px 22px; display:flex; flex-direction:column; gap:8px; flex:1; }
+.card h3 { font-size:19px; line-height:1.3; letter-spacing:-.01em; margin:0; }
+.card p { color:var(--muted); font-size:14.5px; margin:0; }
+.featured { grid-column:1 / -1; }
+.featured .card { flex-direction:row; }
+.featured .thumb { flex:1.25; aspect-ratio:auto; min-height:340px; border-bottom:0;
+  border-right:1px solid var(--rule); }
+.featured .body { flex:1; padding:36px; justify-content:center; gap:12px; }
+.featured h3 { font-size:clamp(23px, 3vw, 31px); line-height:1.2; }
+.featured p { font-size:16px; }
+@media (max-width:760px) {
+  .featured .card { flex-direction:column; }
+  .featured .thumb { min-height:0; aspect-ratio:16/10; border-right:0; border-bottom:1px solid var(--rule); }
+  .featured .body { padding:20px; }
+  .hero { padding-top:48px; } }
+
+.chips { display:flex; gap:10px; align-items:center; flex-wrap:wrap; font-size:12.5px; color:var(--muted); }
+.chip { display:inline-block; padding:3px 9px; border-radius:999px; background:var(--chip);
+  color:var(--chip-fg); font-weight:700; font-variant-numeric:tabular-nums; letter-spacing:.03em; }
+
+.post-head { padding:48px 0 8px; }
+.back { display:inline-block; color:var(--muted); text-decoration:none; font-size:14px; margin-bottom:28px; }
+.back:hover { color:var(--fg); }
+.post-head h1 { font-size:clamp(30px, 5vw, 46px); line-height:1.12; letter-spacing:-.025em;
+  margin:16px 0 14px; }
+.post-head .sub { font-size:19px; color:var(--muted); margin:0 0 8px; }
+.post-head .chips a { color:var(--muted); }
+.prose { font:19px/1.75 var(--serif); padding:16px 0 8px; }
+.prose p { margin:0 0 1.15em; }
+.prose h2, .prose h3, .prose h4 { font-family:var(--sans); letter-spacing:-.015em; line-height:1.25; }
+.prose h2 { font-size:26px; margin:2.1em 0 .7em; padding-top:.9em; border-top:1px solid var(--rule); }
+.prose h3 { font-size:20px; margin:1.8em 0 .6em; }
+.prose a { color:var(--accent); text-underline-offset:3px; }
+.prose ul, .prose ol { padding-left:1.3em; margin:0 0 1.2em; }
+.prose li { margin:.35em 0; }
+.prose figure { margin:2em 0; background:#fff; border:1px solid var(--rule); border-radius:14px;
+  padding:14px; box-shadow:var(--shadow); }
+.prose figure img { margin:0 auto; border-radius:6px; }
+.prose blockquote { margin:1.6em 0; padding:4px 0 4px 20px; border-left:3px solid var(--accent);
+  color:var(--muted); font-style:italic; }
+
+.cta { margin:40px 0 56px; padding:28px; border-radius:18px; color:#fff; font-family:var(--sans);
+  background:radial-gradient(120% 140% at 100% 0%, #ff5a6b 0%, #d6283b 45%, #8e1022 100%);
+  box-shadow:var(--shadow); }
+.cta h4 { margin:0 0 6px; font-size:20px; letter-spacing:-.01em; }
+.cta p { margin:0 0 16px; opacity:.92; font-size:15.5px; line-height:1.55; }
+.cta .btn { background:#fff; color:#b01d30; }
+
+footer.site { border-top:1px solid var(--rule); color:var(--muted); font-size:13.5px; padding:32px 0 48px; }
+footer.site .wrap { display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+footer.site p { margin:0; max-width:60ch; }
+footer.site nav { display:flex; gap:8px 18px; flex-wrap:wrap; }
+.top .links { display:flex; align-items:center; gap:16px; }
+.top .links a.plain { color:var(--muted); text-decoration:none; font-size:14px; font-weight:600; }
+.top .links a.plain:hover { color:var(--fg); }
+.tag { display:inline-block; padding:2px 9px; border-radius:999px; border:1px solid var(--rule);
+  color:var(--muted); text-decoration:none; font-weight:600; }
+a.tag:hover { color:var(--fg); border-color:var(--muted); }
+.filters { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 22px; }
+.filters a { padding:6px 13px; border-radius:999px; border:1px solid var(--rule); background:var(--surface);
+  text-decoration:none; font-size:14px; font-weight:600; color:var(--muted); }
+.filters a:hover, .filters a[aria-current] { color:var(--fg); border-color:var(--fg); }
+.filters a small { font-weight:500; margin-left:4px; }
+.share { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin:8px 0 0; font-size:14px;
+  color:var(--muted); font-family:var(--sans); }
+.share a { padding:6px 13px; border-radius:999px; border:1px solid var(--rule); text-decoration:none;
+  font-weight:600; color:var(--fg); }
+.share a:hover { border-color:var(--fg); }
+.cat-head .eyebrow { margin-top:56px; }
+.cat-head h1 { font-size:clamp(30px, 5vw, 44px); letter-spacing:-.025em; margin:0 0 24px; }
+.page h1 { font-size:clamp(30px, 5vw, 44px); letter-spacing:-.025em; margin:48px 0 18px; }
+.page h2 { font-family:var(--sans); font-size:21px; margin:1.8em 0 .5em; }
+.page p, .page li { font-size:17px; }
+@media (max-width:520px) { .top .links a.plain { display:none; } }
+.ad { margin:28px 0; min-height:100px; }
+footer.site a { text-decoration:none; }
+footer.site a:hover { color:var(--fg); }
+</style>
+<meta property="og:image" content="https://notes.hibiki-tech.com/ja/images/2026-11-07-toyota-upgrade-buyback-thumb.png">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8065890671425926" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JJ4YKNLJJ1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-JJ4YKNLJJ1');</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Filed in Japan", "description": "EDINET・決算資料などの日本の開示情報を読み解き、短くまとめてお届けします。情報提供のみを目的とし、投資助言ではありません。", "url": "https://notes.hibiki-tech.com/ja/", "inLanguage": "ja"}</script>
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="brand" href="./"><span class="mark" aria-hidden="true"></span>Filed in Japan</a><div class="links"><a class="plain" href="./../">English</a><a class="plain" href="./about/">このサイトについて</a><a class="plain" href="https://bsky.app/profile/pochin-shachou.bsky.social" rel="me">Bluesky</a><a class="btn" href="https://pochin.substack.com/subscribe">購読</a></div></div></header>
+<main>
+<section class="hero wrap"><p class="eyebrow">日本語版</p><h1>日本の開示情報を、わかりやすく。</h1><p class="lead">決算発表の見出しだけでは分からない数字の中身を、一次資料（EDINET・決算説明資料）まで戻って確かめます。</p><div class="actions"><a class="btn" href="feed.xml">RSS</a></div><div class="stats"><div><b>46</b><span>本の記事</span></div><div><b>32</b><span>社</span></div><div><b>EDINET</b><span>一次情報源</span></div></div></section>
+<section class="wrap"><h2 class="section-h">新着</h2><nav class="filters" aria-label="カテゴリ"><a href="./" aria-current="page">すべて<small>46</small></a><a href="./category/market/">マーケット<small>20</small></a><a href="./category/company-spotlight/">日本株銘柄分析<small>8</small></a><a href="./category/beginner-course/">株の基礎講座<small>8</small></a><a href="./category/trend/">トレンド<small>8</small></a><a href="./category/life/">暮らし<small>2</small></a></nav>
+<ol class="grid">
+<li class="featured"><a class="card" href="posts/2026-11-07-toyota-upgrade-buyback/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-11-07-toyota-upgrade-buyback-thumb.png" alt="" loading="eager"></div><div class="body"><div class="chips"><span class="chip">7203</span><span class="tag">マーケット</span><time datetime="2026-11-07">2026年11月7日</time></div><h3>【純利益は7.2%減】トヨタ、営業利益予想を引き上げ自社株の取得枠も積み増した</h3><p>営業利益の通期予想は3兆4,000億円から3兆9,000億円に上がり、前期実績を3.6%上回る見通しになった。</p></div></a></li>
+<li><a class="card" href="posts/2026-11-06-anahd-guidance-raise-fuel/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-11-06-anahd-guidance-raise-fuel-thumb.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">9202</span><span class="tag">マーケット</span><time datetime="2026-11-06">2026年11月6日</time></div><h3>【営業益は据え置き】ANAHD、通期の売上予想を1,000億円引き上げた</h3><p>ANAホールディングス（ANAHD）は2026年10月29日、2027年3月期の売上高予想を27,700億円から28,700億円に引き上げた。営業利益予想は1,500億円のまま据え置いた。</p></div></a></li>
+<li><a class="card" href="posts/2026-11-05-company-spotlight-8306/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-11-05-company-spotlight-8306-thumb.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">8306</span><span class="tag">日本株銘柄分析</span><time datetime="2026-11-05">2026年11月5日</time></div><h3>【日本株銘柄分析#8】三菱UFJFG（8306）、1株配当が4年で3.1倍に</h3></div></a></li>
+<li><a class="card" href="posts/2026-11-05-boj-etf-sale-pace/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-11-05-boj-etf-sale-pace-thumb.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="tag">マーケット</span><time datetime="2026-11-05">2026年11月5日</time></div><h3>【売買代金の0.1%】日銀は、ETFの売却ペースを年8,600億円に引き上げる</h3><p>日銀は2026年10月30日の金融政策決定会合で、保有ETFの売却ペースを年間3,300億円程度から8,600億円程度（どちらも簿価ベース）に引き上げると決めた（2027年1月から）。</p></div></a></li>
+<li><a class="card" href="posts/2026-11-02-ichikawa-deferred-tax-revision/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-11-02-ichikawa-deferred-tax-revision-thumb.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">3513</span><span class="tag">マーケット</span><time datetime="2026-11-02">2026年11月2日</time></div><h3>【64%は税効果】イチカワ、中間純利益の予想を1,180百万円に上げた</h3><p>イチカワは2026年10月30日、2027年3月期の中間純利益の予想を400百万円から1,180百万円（+780百万円）に引き上げた。</p></div></a></li>
+<li><a class="card" href="posts/2026-11-02-beginner-course-8/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-11-02-beginner-course-8-thumb.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">9983</span><span class="tag">株の基礎講座</span><time datetime="2026-11-02">2026年11月2日</time></div><h3>【株の基礎講座#8】営業キャッシュフローとは</h3></div></a></li>
+<li><a class="card" href="posts/2026-10-31-panasonic-guidance-raise-not-only-ai/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-10-31-panasonic-guidance-raise-not-only-ai-thumb.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">6752</span><span class="tag">マーケット</span><time datetime="2026-10-31">2026年10月31日</time></div><h3>【AI以外も】パナソニックHD、今期の営業益予想を7,100億円に上げた</h3><p>パナソニックHDは今期（2027年3月期）の営業利益予想を5,900億円から7,100億円に、20.3%引き上げた。</p></div></a></li>
+<li><a class="card" href="posts/2026-10-30-sapeet-269a-revenue-up-profit-flat/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-10-30-sapeet-269a-revenue-up-profit-flat-thumb.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">269A</span><span class="tag">マーケット</span><time datetime="2026-10-30">2026年10月30日</time></div><h3>【累計で予想超え】Sapeet、営業利益120百万円の予想を据え置いた</h3><p>Sapeetは2026年8月13日、2026年9月期の売上高予想を1,700百万円から1,830百万円に引き上げた。営業利益120百万円の予想は動かさなかった。</p></div></a></li>
+<li><a class="card" href="posts/2026-10-29-company-spotlight-145A/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-10-29-company-spotlight-145A-thumb.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">145A</span><span class="tag">日本株銘柄分析</span><time datetime="2026-10-29">2026年10月29日</time></div><h3>【日本株銘柄分析#7】L is B（145A）、純利益10.6倍でも配当は0円</h3></div></a></li>
+<li><a class="card" href="posts/2026-10-27-japan-buybacks-roe-record/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-10-27-japan-buybacks-roe-record-thumb.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="tag">マーケット</span><time datetime="2026-10-27">2026年10月27日</time></div><h3>【21兆円】日本企業の自社株取得、9月末で過去2年を上回る</h3><p>2026年の日本企業の自社株買いは、9月末時点で約21兆円。2024年の設定額は18.0兆円、2025年は17.8兆円で、すでに上回った。</p></div></a></li>
+<li><a class="card" href="posts/2026-10-26-request-35997257/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-10-26-request-35997257-thumb.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="tag">トレンド</span><time datetime="2026-10-26">2026年10月26日</time></div><h3>今こそ知りたいPHP</h3><p>PHPは、サーバー側の言語が分かるWebサイトの69.2%で使われている（W3Techs、2026年10月25日）。「終わった言語」という印象とは違う。</p></div></a></li>
+<li><a class="card" href="posts/2026-10-26-beginner-course-7/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-10-26-beginner-course-7-thumb.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">3563</span><span class="tag">株の基礎講座</span><time datetime="2026-10-26">2026年10月26日</time></div><h3>【株の基礎講座#7】営業利益率とは</h3></div></a></li>
+<li><a class="card" href="posts/2026-10-25-shiga-bank-ikeda-senshu-integration/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-10-25-shiga-bank-ikeda-senshu-integration-thumb.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">8366</span><span class="tag">マーケット</span><time datetime="2026-10-25">2026年10月25日</time></div><h3>【銀行合併は予定せず】滋賀銀行と池田泉州HDが統合の検討を認めた</h3><p>滋賀銀行と池田泉州ホールディングスは2026年10月23日、経営統合を検討していると公表した。両社とも「具体的に決定した事実はありません」としている。</p></div></a></li>
+<li><a class="card" href="posts/2026-10-24-japan-life-satisfaction-record-investment-appetite/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-10-24-japan-life-satisfaction-record-investment-appetite-thumb.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="tag">暮らし</span><time datetime="2026-10-24">2026年10月24日</time></div><h3>【忠誠心24.6%】日本の生活者、会社より自分の暮らしを重んじるようになった</h3><p>博報堂生活総合研究所の34年調査で、生活満足度70.8%と投資意欲32.8%が過去最高、お歳暮17.1%と会社への忠誠心（有職者）24.6%が過去最低になった。</p></div></a></li>
+<li><a class="card" href="posts/2026-10-23-disco-ai-hbm-midterm-earnings/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-10-23-disco-ai-hbm-midterm-earnings-thumb.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">6146</span><span class="tag">マーケット</span><time datetime="2026-10-23">2026年10月23日</time></div><h3>【47.9%増】ディスコの営業利益、売上高の32.1%増を上回った</h3><p>ディスコの2027年3月期中間期は、売上高2,570億58百万円（前年同期比32.1%増）、営業利益1,166億39百万円（同47.9%増）だった。先端半導体向け需要が高水準で、利益率も上がっている。</p></div></a></li>
+<li><a class="card" href="posts/2026-10-22-japan-robots-third-place-export-shift/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-10-22-japan-robots-third-place-export-shift-thumb.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="tag">トレンド</span><time datetime="2026-10-22">2026年10月22日</time></div><h3>【設置3位】ロボット出荷、台数ベースで82%が輸出</h3><p>2025年の日本への設置台数は3万6,219台で前年比19%減り、米国に抜かれて世界3位になった。</p></div></a></li>
+<li><a class="card" href="posts/2026-10-22-company-spotlight-3350/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-10-22-company-spotlight-3350-thumb.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">3350</span><span class="tag">日本株銘柄分析</span><time datetime="2026-10-22">2026年10月22日</time></div><h3>【日本株銘柄分析#6】メタプラネット（3350）、売上8.4倍も950億円赤字</h3></div></a></li>
+<li><a class="card" href="posts/2026-10-20-imf-growth-concentration/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-10-20-imf-growth-concentration-thumb.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="tag">トレンド</span><time datetime="2026-10-20">2026年10月20日</time></div><h3>【成長の95%は32カ国】世界3.1%の平均は少数が作る</h3><p>2026年の世界成長率は3.1%で、7月の3.0%から0.1ポイント上がったものの、2025年の3.5%を下回る水準です。</p></div></a></li>
+<li><a class="card" href="posts/2026-10-19-beginner-course-6/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-10-19-beginner-course-6-thumb.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">2875</span><span class="tag">株の基礎講座</span><time datetime="2026-10-19">2026年10月19日</time></div><h3>【株の基礎講座#6】配当性向とは</h3></div></a></li>
+<li><a class="card" href="posts/2026-10-18-takeuchi-6432-h1-guidance-buyback/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-10-18-takeuchi-6432-h1-guidance-buyback-thumb.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">6432</span><span class="tag">マーケット</span><time datetime="2026-10-18">2026年10月18日</time></div><h3>【増収16%】竹内製作所、営業利益3.4%増でも自己株取得150億円</h3><p>竹内製作所の2026年3月から8月までの中間期は、売上高が16.0%増えた一方で、営業利益の増加は3.4%でした。</p></div></a></li>
+<li><a class="card" href="posts/2026-10-18-request-08438325/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-10-18-request-08438325-bar2.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="tag">トレンド</span><time datetime="2026-10-18">2026年10月18日</time></div><h3>Cloudflareとは</h3><p>Cloudflareの本質は「サイトを速くするCDN」ではなく、DNSを書き換えるだけでWebサイトの全通信が通過するリバースプロキシ（インターネットの関所）である。</p></div></a></li>
+<li><a class="card" href="posts/2026-10-18-company-spotlight-9215/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-10-18-company-spotlight-9215-thumb.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">9215</span><span class="tag">日本株銘柄分析</span><time datetime="2026-10-18">2026年10月18日</time></div><h3>【日本株銘柄分析#5】CaSy（9215）、初の連結決算で純利益が約8.3倍</h3></div></a></li>
+<li><a class="card" href="posts/2026-10-18-beginner-course-5/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-10-18-beginner-course-5-thumb.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">2897</span><span class="tag">株の基礎講座</span><time datetime="2026-10-18">2026年10月18日</time></div><h3>【株の基礎講座#5】配当利回りとは</h3></div></a></li>
+<li><a class="card" href="posts/2026-10-17-takashimaya-8233-net-profit-down/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-10-17-takashimaya-8233-net-profit-down-table1.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">8233</span><span class="tag">マーケット</span><time datetime="2026-10-17">2026年10月17日</time></div><h3>【営業益+16.4%】高島屋、純利益だけ24.5%減の中間決算</h3><p>高島屋の2027年2月期の中間期(3〜8月)は、営業利益が16.4%増の275億円でした。</p></div></a></li>
+<li><a class="card" href="posts/2026-10-16-kakaku-2371-tob-one-yen/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-10-16-kakaku-2371-tob-one-yen-trend1.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">2371</span><span class="tag">マーケット</span><time datetime="2026-10-16">2026年10月16日</time></div><h3>【1円刻み】カカクコムTOB、3,682円の値上げが意味するもの</h3><p>買収側のKamgras 1（EQT系）は、10月14日に買付価格を3,681円から3,682円へ1円だけ引き上げ、期間を10月28日まで延ばした。</p></div></a></li>
+<li><a class="card" href="posts/2026-10-15-toho-9602-interim-profit-down/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-10-15-toho-9602-interim-profit-down-table1.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">9602</span><span class="tag">マーケット</span><time datetime="2026-10-15">2026年10月15日</time></div><h3>【販管費+19.8%】東宝の営業利益は24.8%減、通期予想は据え置き</h3><p>東宝の2027年2月期の中間期(3〜8月)は、営業利益が24.8%減の309億円でした。</p></div></a></li>
+<li><a class="card" href="posts/2026-10-14-nittobo-3110-operating-profit-4x/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-10-14-nittobo-3110-trend1.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">3110</span><span class="tag">日本株銘柄分析</span><time datetime="2026-10-14">2026年10月14日</time></div><h3>【日本株銘柄分析#4】日東紡績（3110）、営業利益が3年で4.3倍</h3></div></a></li>
+<li><a class="card" href="posts/2026-10-14-jins-3046-sales-up-profit-down/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-10-14-jins-3046-sales-up-profit-down-table1.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">3046</span><span class="tag">マーケット</span><time datetime="2026-10-14">2026年10月14日</time></div><h3>【売上1,000億円超】ジンズは14%増収なのに営業利益が減った</h3><p>ジンズの2026年8月期は、売上高が14.4%増の1,112億円。営業利益は5.3%減の114億円でした。</p></div></a></li>
+<li><a class="card" href="posts/2026-10-13-tobu-jujo-3297-katitas-tob/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-10-13-tobu-jujo-3297-katitas-tob-trend1.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">8919</span><span class="tag">マーケット</span><time datetime="2026-10-13">2026年10月13日</time></div><h3>【72.56%上乗せ】東武住販TOB、2,000円の中身</h3><p>中古住宅再生のカチタス（8919）が、東武住販を完全子会社にするため、1株2,000円でTOBを行う。</p></div></a></li>
+<li><a class="card" href="posts/2026-10-12-beginner-course-equity-ratio/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-10-12-beginner-course-equity-ratio-formula1.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">7974</span><span class="tag">株の基礎講座</span><time datetime="2026-10-12">2026年10月12日</time></div><h3>【株の基礎講座#4】自己資本比率とは</h3></div></a></li>
+<li><a class="card" href="posts/2026-10-11-fastretailing-9983-west-overtakes-china/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-10-11-fastretailing-9983-west-overtakes-china-table1.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">9983</span><span class="tag">マーケット</span><time datetime="2026-10-11">2026年10月11日</time></div><h3>【稼ぎ頭が交代】ユニクロ、欧米の売上が中国圏を初めて上回る</h3><p>ユニクロの稼ぎ頭は、中国圏から欧米へ移りつつある。</p></div></a></li>
+<li><a class="card" href="posts/2026-10-10-himaraya-7514-impairment/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-10-10-himaraya-7514-impairment-table1.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">7514</span><span class="tag">マーケット</span><time datetime="2026-10-10">2026年10月10日</time></div><h3>【赤字転落の中身】ヒマラヤ、営業利益は前期超えでも純利益は8.6億円の赤字に</h3><p>ヒマラヤの2026年8月期は、純利益が3.2億円の黒字予想から8.6億円の赤字予想に変わった。</p></div></a></li>
+<li><a class="card" href="posts/2026-10-09-data-leak-roundup/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/leak-summary-table1.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">4666</span><span class="tag">トレンド</span><time datetime="2026-10-09">2026年10月9日</time></div><h3>最近ホットな情報流出まとめ</h3><p>3件とも、原因は「高度なAI攻撃」とは書かれていない。委託先のシステム、ソフトウェアの脆弱性、Webシステムへの不正アクセスという、足元の穴だった。</p></div></a></li>
+<li><a class="card" href="posts/2026-10-08-strategic-capital-rotation/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-10-08-strategic-capital-rotation-trend1.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">5331</span><span class="tag">マーケット</span><time datetime="2026-10-08">2026年10月8日</time></div><h3>【売る側】ストラテジックキャピタル、4銘柄を減らしA&amp;Dホロンを16.7%まで買い増し</h3><p>ストラテジックキャピタルは、2026年に入ってノリタケ、京阪神ビルディング、ヨドコウ、イエローハットの4銘柄で保有割合を下げ続けている。</p></div></a></li>
+<li><a class="card" href="posts/2026-10-08-beginner-course-roe/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-10-08-beginner-course-roe-formula1.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">7203</span><span class="tag">株の基礎講座</span><time datetime="2026-10-08">2026年10月8日</time></div><h3>【株の基礎講座#3】ROEとは</h3></div></a></li>
+<li><a class="card" href="posts/2026-10-08-ai-mechatech-6227/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-10-08-ai-mechatech-6227-trend1.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">6227</span><span class="tag">日本株銘柄分析</span><time datetime="2026-10-08">2026年10月8日</time></div><h3>【日本株銘柄分析#3】AIメカテック（6227）、純利益が1年で9.5倍</h3></div></a></li>
+<li><a class="card" href="posts/2026-10-01-fpga-unroll-vitis-hls/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-10-01-fpga-unroll-hls-formula1.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="tag">トレンド</span><time datetime="2026-10-01">2026年10月1日</time></div><h3>FPGAそのUNROLL、回路が爆発します：ソフトウェアエンジニアのためのVitis HLS</h3><p>HLSのUNROLLは「ループを速くする指示」ではなく「回路をコピーして並べる指示」である。</p></div></a></li>
+<li><a class="card" href="posts/2026-09-30-umizuri-kisarazu/"><div class="body"><div class="chips"><span class="tag">暮らし</span><time datetime="2026-09-30">2026年9月30日</time></div><h3>海釣り始めました</h3><p>「大人の趣味は始めるのが大変」という思い込みは、思っていたより簡単に崩れる。</p></div></a></li>
+<li><a class="card" href="posts/2026-09-28-daiei-kankyo-9336/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-09-28-daiei-kankyo-9336-trend1.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">9336</span><span class="tag">日本株銘柄分析</span><time datetime="2026-09-28">2026年9月28日</time></div><h3>【日本株銘柄分析#2】大栄環境（9336）、4年連続増配で配当76%増</h3></div></a></li>
+<li><a class="card" href="posts/2026-09-28-beginner-course-pbr/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-09-28-beginner-course-pbr-formula1.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">7203</span><span class="tag">株の基礎講座</span><time datetime="2026-09-28">2026年9月28日</time></div><h3>【株の基礎講座#2】PBRとは</h3></div></a></li>
+<li><a class="card" href="posts/2026-09-26-sumitomo-metal-mining-5713/"><div class="body"><div class="chips"><span class="chip">5713</span><span class="tag">日本株銘柄分析</span><time datetime="2026-09-26">2026年9月26日</time></div><h3>【日本株銘柄分析#1】住友金属鉱山、3年で94%減益からの逆転劇</h3></div></a></li>
+<li><a class="card" href="posts/2026-09-26-beginner-course-per/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-09-26-beginner-course-per-formula1.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">7203</span><span class="tag">株の基礎講座</span><time datetime="2026-09-26">2026年9月26日</time></div><h3>【株の基礎講座#1】PERとは</h3></div></a></li>
+<li><a class="card" href="posts/2026-09-23-hobby-maxxing-japan/"><div class="thumb"><img src="https://notes.hibiki-tech.com/ja/images/2026-09-23-hobby-maxxing-japan-table1.png" alt="" loading="lazy"></div><div class="body"><div class="chips"><span class="chip">7135</span><span class="tag">トレンド</span><time datetime="2026-09-23">2026年9月23日</time></div><h3>【マキシングの片翼だけ届いた】日本で「大人の趣味」が難しい理由</h3><p>大人の趣味が難しいのは時間や金の不足ではなく、日本語圏では趣味が「推し活(消費)」か「副業・自分磨き(投資)」のどちらかにしか着地できず、上達せず稼がず発信しない趣味を正当化する言葉が無いから</p></div></a></li>
+<li><a class="card" href="posts/2026-09-21-soft99-4464-squeeze-out/"><div class="body"><div class="chips"><span class="chip">4464</span><span class="tag">マーケット</span><time datetime="2026-09-21">2026年9月21日</time></div><h3>ソフト99、比率不変の報告書が語る67.72%の意味</h3><p>9月17日提出のエフィッシモの変更報告書は、保有比率53.15%が前回から変化していない。</p></div></a></li>
+<li><a class="card" href="posts/2026-09-21-jev-typed-not-true/"><div class="body"><div class="chips"><span class="tag">トレンド</span><time datetime="2026-09-21">2026年9月21日</time></div><h3>Jevってなんだ？？</h3><p>Jevの「ハルシネーションしない」「型エラー0%」は型の保証であり、判断そのものが正しいという保証ではない</p></div></a></li>
+<li><a class="card" href="posts/2026-09-19-nidec-6594-oasis/"><div class="body"><div class="chips"><span class="chip">6594</span><span class="tag">マーケット</span><time datetime="2026-09-19">2026年9月19日</time></div><h3>ニデック(6594)、Oasisが保有目的を「重要提案行為」に格上げして買い増し</h3><p>Oasis Managementが、ニデック株式会社(6594)の保有比率を6.78%から7.97%へ引き上げた。増加幅は1.19ポイントにとどまる。</p></div></a></li>
+</ol></section>
+</main>
+<footer class="site"><div class="wrap"><p>情報提供のみを目的としたもので、投資助言ではありません。数字は開示資料（EDINET等）や各社の発表をもとに作成しており、原文の記載が優先されます。</p><nav><a href="./">トップ</a><a href="./about/">このサイトについて</a><a href="./contact/">お問い合わせ</a><a href="./privacy/">プライバシーポリシー</a><a href="./feed.xml">RSS</a><a href="https://bsky.app/profile/pochin-shachou.bsky.social" rel="me">Bluesky</a><a href="./../">English edition</a></nav></div></footer>
+</body>
+</html>

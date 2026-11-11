@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FPGAそのUNROLL、回路が爆発します：ソフトウェアエンジニアのためのVitis HLS</title>
+<meta name="description" content="HLSのUNROLLは「ループを速くする指示」ではなく「回路をコピーして並べる指示」である。展開数に比例して、FF・LUT・DSPが増える。">
+<link rel="canonical" href="https://notes.hibiki-tech.com/ja/posts/2026-10-01-fpga-unroll-vitis-hls/">
+<link rel="alternate" hreflang="ja" href="https://notes.hibiki-tech.com/ja/posts/2026-10-01-fpga-unroll-vitis-hls/">
+<meta property="og:site_name" content="Filed in Japan">
+<meta property="og:title" content="FPGAそのUNROLL、回路が爆発します：ソフトウェアエンジニアのためのVitis HLS">
+<meta property="og:description" content="HLSのUNROLLは「ループを速くする指示」ではなく「回路をコピーして並べる指示」である。展開数に比例して、FF・LUT・DSPが増える。">
+<meta property="og:url" content="https://notes.hibiki-tech.com/ja/posts/2026-10-01-fpga-unroll-vitis-hls/">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
+<style>
+:root { color-scheme:light dark;
+  --bg:#f6f5f2; --surface:#ffffff; --fg:#16181d; --muted:#626873; --rule:#e4e2dc;
+  --accent:#d6283b; --accent-fg:#ffffff; --chip:#fbe9eb; --chip-fg:#a3172a;
+  --shadow:0 1px 2px rgba(16,24,40,.05), 0 8px 24px rgba(16,24,40,.06);
+  --sans:ui-sans-serif, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --serif:"Iowan Old Style", Charter, Georgia, serif; }
+@media (prefers-color-scheme: dark) { :root {
+  --bg:#0f1115; --surface:#171a21; --fg:#e8e9ec; --muted:#9aa0ab; --rule:#262a33;
+  --accent:#ff4d5e; --chip:#2a1619; --chip-fg:#ff8a95;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35); } }
+* { box-sizing:border-box; }
+html { -webkit-text-size-adjust:100%; }
+body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.6 var(--sans);
+  -webkit-font-smoothing:antialiased; }
+a { color:inherit; }
+img { max-width:100%; height:auto; display:block; }
+.wrap { max-width:1080px; margin:0 auto; padding:0 20px; }
+.narrow { max-width:720px; margin:0 auto; padding:0 20px; }
+
+.top { position:sticky; top:0; z-index:10; background:color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter:saturate(1.4) blur(10px); -webkit-backdrop-filter:saturate(1.4) blur(10px);
+  border-bottom:1px solid var(--rule); }
+.top .wrap { display:flex; align-items:center; justify-content:space-between; height:60px; }
+.brand { display:flex; align-items:center; gap:10px; text-decoration:none; font-weight:700;
+  letter-spacing:-.01em; font-size:17px; }
+.brand .mark { width:18px; height:18px; border-radius:50%; background:var(--accent);
+  box-shadow:0 0 0 4px var(--chip); }
+.btn { display:inline-flex; align-items:center; padding:9px 16px; border-radius:999px;
+  background:var(--accent); color:var(--accent-fg); text-decoration:none; font-weight:600;
+  font-size:14px; transition:transform .15s ease, filter .15s ease; }
+.btn:hover { transform:translateY(-1px); filter:brightness(1.06); }
+.btn.ghost { background:transparent; color:var(--fg); border:1px solid var(--rule); }
+
+.hero { padding:72px 0 8px; }
+.eyebrow { text-transform:uppercase; letter-spacing:.12em; font-size:12px; font-weight:700;
+  color:var(--accent); margin:0 0 14px; }
+.hero h1 { font-size:clamp(38px, 6.5vw, 64px); line-height:1.03; letter-spacing:-.035em;
+  margin:0 0 18px; max-width:13ch; }
+.hero .lead { font-size:clamp(17px, 2vw, 20px); color:var(--muted); max-width:56ch; margin:0 0 28px; }
+.hero .actions { display:flex; gap:10px; flex-wrap:wrap; }
+.stats { display:flex; gap:40px; margin-top:44px; padding-top:22px; border-top:1px solid var(--rule);
+  flex-wrap:wrap; }
+.stats b { display:block; font-size:26px; letter-spacing:-.02em; font-variant-numeric:tabular-nums; }
+.stats span { color:var(--muted); font-size:13px; }
+
+.section-h { margin:48px 0 18px; font-size:13px; text-transform:uppercase; letter-spacing:.12em;
+  color:var(--muted); font-weight:700; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:20px;
+  padding:0; margin:0 0 64px; list-style:none; }
+.card { background:var(--surface); border:1px solid var(--rule); border-radius:16px; overflow:hidden;
+  box-shadow:var(--shadow); display:flex; flex-direction:column; text-decoration:none; height:100%;
+  transition:transform .2s ease, box-shadow .2s ease; }
+.card:hover { transform:translateY(-3px);
+  box-shadow:0 2px 4px rgba(16,24,40,.06), 0 18px 40px rgba(16,24,40,.13); }
+.card .thumb { aspect-ratio:16/10; background:#fff; border-bottom:1px solid var(--rule); overflow:hidden; }
+.card .thumb img { width:100%; height:100%; object-fit:contain; padding:12px; }
+.card .body { padding:18px 20px 22px; display:flex; flex-direction:column; gap:8px; flex:1; }
+.card h3 { font-size:19px; line-height:1.3; letter-spacing:-.01em; margin:0; }
+.card p { color:var(--muted); font-size:14.5px; margin:0; }
+.featured { grid-column:1 / -1; }
+.featured .card { flex-direction:row; }
+.featured .thumb { flex:1.25; aspect-ratio:auto; min-height:340px; border-bottom:0;
+  border-right:1px solid var(--rule); }
+.featured .body { flex:1; padding:36px; justify-content:center; gap:12px; }
+.featured h3 { font-size:clamp(23px, 3vw, 31px); line-height:1.2; }
+.featured p { font-size:16px; }
+@media (max-width:760px) {
+  .featured .card { flex-direction:column; }
+  .featured .thumb { min-height:0; aspect-ratio:16/10; border-right:0; border-bottom:1px solid var(--rule); }
+  .featured .body { padding:20px; }
+  .hero { padding-top:48px; } }
+
+.chips { display:flex; gap:10px; align-items:center; flex-wrap:wrap; font-size:12.5px; color:var(--muted); }
+.chip { display:inline-block; padding:3px 9px; border-radius:999px; background:var(--chip);
+  color:var(--chip-fg); font-weight:700; font-variant-numeric:tabular-nums; letter-spacing:.03em; }
+
+.post-head { padding:48px 0 8px; }
+.back { display:inline-block; color:var(--muted); text-decoration:none; font-size:14px; margin-bottom:28px; }
+.back:hover { color:var(--fg); }
+.post-head h1 { font-size:clamp(30px, 5vw, 46px); line-height:1.12; letter-spacing:-.025em;
+  margin:16px 0 14px; }
+.post-head .sub { font-size:19px; color:var(--muted); margin:0 0 8px; }
+.post-head .chips a { color:var(--muted); }
+.prose { font:19px/1.75 var(--serif); padding:16px 0 8px; }
+.prose p { margin:0 0 1.15em; }
+.prose h2, .prose h3, .prose h4 { font-family:var(--sans); letter-spacing:-.015em; line-height:1.25; }
+.prose h2 { font-size:26px; margin:2.1em 0 .7em; padding-top:.9em; border-top:1px solid var(--rule); }
+.prose h3 { font-size:20px; margin:1.8em 0 .6em; }
+.prose a { color:var(--accent); text-underline-offset:3px; }
+.prose ul, .prose ol { padding-left:1.3em; margin:0 0 1.2em; }
+.prose li { margin:.35em 0; }
+.prose figure { margin:2em 0; background:#fff; border:1px solid var(--rule); border-radius:14px;
+  padding:14px; box-shadow:var(--shadow); }
+.prose figure img { margin:0 auto; border-radius:6px; }
+.prose blockquote { margin:1.6em 0; padding:4px 0 4px 20px; border-left:3px solid var(--accent);
+  color:var(--muted); font-style:italic; }
+
+.cta { margin:40px 0 56px; padding:28px; border-radius:18px; color:#fff; font-family:var(--sans);
+  background:radial-gradient(120% 140% at 100% 0%, #ff5a6b 0%, #d6283b 45%, #8e1022 100%);
+  box-shadow:var(--shadow); }
+.cta h4 { margin:0 0 6px; font-size:20px; letter-spacing:-.01em; }
+.cta p { margin:0 0 16px; opacity:.92; font-size:15.5px; line-height:1.55; }
+.cta .btn { background:#fff; color:#b01d30; }
+
+footer.site { border-top:1px solid var(--rule); color:var(--muted); font-size:13.5px; padding:32px 0 48px; }
+footer.site .wrap { display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+footer.site p { margin:0; max-width:60ch; }
+footer.site nav { display:flex; gap:8px 18px; flex-wrap:wrap; }
+.top .links { display:flex; align-items:center; gap:16px; }
+.top .links a.plain { color:var(--muted); text-decoration:none; font-size:14px; font-weight:600; }
+.top .links a.plain:hover { color:var(--fg); }
+.tag { display:inline-block; padding:2px 9px; border-radius:999px; border:1px solid var(--rule);
+  color:var(--muted); text-decoration:none; font-weight:600; }
+a.tag:hover { color:var(--fg); border-color:var(--muted); }
+.filters { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 22px; }
+.filters a { padding:6px 13px; border-radius:999px; border:1px solid var(--rule); background:var(--surface);
+  text-decoration:none; font-size:14px; font-weight:600; color:var(--muted); }
+.filters a:hover, .filters a[aria-current] { color:var(--fg); border-color:var(--fg); }
+.filters a small { font-weight:500; margin-left:4px; }
+.share { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin:8px 0 0; font-size:14px;
+  color:var(--muted); font-family:var(--sans); }
+.share a { padding:6px 13px; border-radius:999px; border:1px solid var(--rule); text-decoration:none;
+  font-weight:600; color:var(--fg); }
+.share a:hover { border-color:var(--fg); }
+.cat-head .eyebrow { margin-top:56px; }
+.cat-head h1 { font-size:clamp(30px, 5vw, 44px); letter-spacing:-.025em; margin:0 0 24px; }
+.page h1 { font-size:clamp(30px, 5vw, 44px); letter-spacing:-.025em; margin:48px 0 18px; }
+.page h2 { font-family:var(--sans); font-size:21px; margin:1.8em 0 .5em; }
+.page p, .page li { font-size:17px; }
+@media (max-width:520px) { .top .links a.plain { display:none; } }
+.ad { margin:28px 0; min-height:100px; }
+footer.site a { text-decoration:none; }
+footer.site a:hover { color:var(--fg); }
+</style>
+<meta property="og:image" content="https://notes.hibiki-tech.com/ja/images/2026-10-01-fpga-unroll-hls-formula1.png">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8065890671425926" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JJ4YKNLJJ1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-JJ4YKNLJJ1');</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "FPGAそのUNROLL、回路が爆発します：ソフトウェアエンジニアのためのVitis HLS", "description": "HLSのUNROLLは「ループを速くする指示」ではなく「回路をコピーして並べる指示」である。展開数に比例して、FF・LUT・DSPが増える。", "inLanguage": "ja", "mainEntityOfPage": "https://notes.hibiki-tech.com/ja/posts/2026-10-01-fpga-unroll-vitis-hls/", "publisher": {"@type": "Organization", "name": "Filed in Japan", "url": "https://notes.hibiki-tech.com/"}, "datePublished": "2026-10-01", "image": ["https://notes.hibiki-tech.com/ja/images/2026-10-01-fpga-unroll-hls-formula1.png"]}</script>
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="brand" href="../../"><span class="mark" aria-hidden="true"></span>Filed in Japan</a><div class="links"><a class="plain" href="../../../">English</a><a class="plain" href="../../about/">このサイトについて</a><a class="plain" href="https://bsky.app/profile/pochin-shachou.bsky.social" rel="me">Bluesky</a><a class="btn" href="https://pochin.substack.com/subscribe">購読</a></div></div></header>
+<main>
+<article class="narrow">
+<div class="post-head"><a class="back" href="../../">&larr; 記事一覧</a><div class="chips"><a class="tag" href="../../category/trend/">トレンド</a><time datetime="2026-10-01">2026年10月1日</time></div><h1>FPGAそのUNROLL、回路が爆発します：ソフトウェアエンジニアのためのVitis HLS</h1>
+</div>
+<div class="prose">
+<p>JavaScriptやPythonで書いたコードは、書いた順に実行されます。</p>
+<p>FPGAのHLS（高位合成）では、同じ感覚でCを書くと、書いた行がそのまま「回路」になります。</p>
+<p>その差が一番はっきり出るのが、UNROLLという指示です。</p>
+<p>コードと回路の対応を、ソフトウェアの頭のまま追えるように整理しました。</p>
+<h2>要旨</h2>
+<ul>
+<li>HLSのUNROLLは「ループを速くする指示」ではなく「回路をコピーして並べる指示」である。</li>
+<li>展開数に比例して、FF・LUT・DSPが増える。</li>
+<li>展開内で外部依存のインデックスを引くとMUXが、除算を入れると除算器が、そのまま複製されて爆発する。</li>
+<li>ソフトウェア脳のままだとアンチパターンになる。回路の形を思い描いて書き換えるのがベストプラクティスになる。</li>
+</ul>
+<h2>1. ソフトウェア脳のままHLSを書くと何が起きるか</h2>
+<p>FPGAは、書き換え可能なデジタル回路のチップです。</p>
+<p>HLS（High-Level Synthesis、高位合成）は、CやC++のコードから、その回路を自動生成する技術です。</p>
+<p>Vitis HLSは、AMD（旧Xilinx）が提供するHLSツールです。</p>
+<p>公式サイト: <a href="https://www.amd.com/en/products/software/adaptive-socs-and-fpgas/vitis/vitis-hls.html">https://www.amd.com/en/products/software/adaptive-socs-and-fpgas/vitis/vitis-hls.html</a></p>
+<p>ソフトウェアでは、コードは「CPUが1命令ずつ実行する手順書」です。</p>
+<p>ループを回す回数が増えれば、時間が増えます。</p>
+<p>HLSでは、コードは「どんな回路を作るかの設計図」です。</p>
+<p>ループ本体は、デフォルトでは1つの回路を使い回して、時間をかけて繰り返し実行されます。</p>
+<p>つまり時間と面積（回路の大きさ）を交換する設計になっています。</p>
+<p>この交換レートを、プラグマ（#pragma HLS ...という指示行）で動かすのがHLSの本質です。</p>
+<p>UNROLLは、時間を削って面積を払う方向に、一気に振る指示です。</p>
+<h2>2. UNROLLは「回路のコピペ」：FF・LUT・DSPが展開数に比例して増える</h2>
+<p>次のコードを考えます。</p>
+<blockquote><p>for (int i = 0; i &lt; 8; i++) {</p></blockquote>
+<blockquote><p>#pragma HLS UNROLL</p></blockquote>
+<blockquote><p>y[i] = a[i] * b[i] + c[i];</p></blockquote>
+<blockquote><p>}</p></blockquote>
+<p>ソフトウェア感覚では「ループを8回まとめて回す」です。</p>
+<p>回路としては「乗算器と加算器を8組並べる」になります。</p>
+<p>ここで登場する部品を一言で定義します。</p>
+<h3>FF（フリップフロップ）</h3>
+<p>1ビットの値を記憶する回路です。変数やパイプラインの途中結果を保持します。</p>
+<h3>LUT（ルックアップテーブル）</h3>
+<p>任意の論理演算を表現できる小さな真理値表です。足し算や比較などの汎用ロジックは、LUTの組み合わせで作られます。</p>
+<h3>DSP</h3>
+<p>乗算や積和演算に特化した専用ブロックです。数は有限で、チップごとに上限があります。</p>
+<figure><img src="https://notes.hibiki-tech.com/ja/images/2026-10-01-fpga-unroll-hls-formula1.png" alt="ループ本体の回路が展開数ぶん複製される"></figure>
+<p>1回分の回路が必要とするFF・LUT・DSPを、展開数だけ掛けたものが総コストです。</p>
+<p>係数を8から64に上げれば、DSPは単純計算で8倍になります。</p>
+<p>チップのDSP上限を超えた時点で、合成はエラーになるか、別の部品で代用して遅くなります。</p>
+<p>ソフトウェアで言えば、`for`を8本のスレッドに割り振る話に近く、しかも「スレッド数ぶんのコア」を自分で買って並べる感覚です。</p>
+<h2>3. BRAM・URAMのポート数という壁：UNROLLしても速くならない理由</h2>
+<p>演算器を8組並べても、データが8個同時に届かなければ意味がありません。</p>
+<p>配列は、ふつうFPGA内蔵のメモリに置かれます。</p>
+<h3>BRAM</h3>
+<p>FPGA内蔵のブロックメモリです。容量は数十Kbit単位で、同時に読み書きできるポートは通常2つです。</p>
+<h3>URAM</h3>
+<p>UltraRAMと呼ばれる、より大容量のメモリです。BRAMと同様にポート数が少なく、同時アクセスに制約があります。</p>
+<p>8並列でa[i]を読みたいのに、ポートが2つしかなければ、1サイクルに読めるのは2個までです。</p>
+<p>その結果、ツールは読み出しを複数サイクルに分け、UNROLLしたのに速度が出ない状態になります。</p>
+<p>ソフトウェアで言えば、8本のスレッドが1つの共有変数をロックして取り合っている状態に近いです。</p>
+<p>演算器の数と、メモリのポート数は別々に決まります。</p>
+<p>UNROLLだけでなく、配列をどう配置するかをセットで考える必要があります。</p>
+<h2>4. アンチパターン①：外部依存のインデックスをUNROLL内のforで参照するとMUXが爆発する</h2>
+<p>ここから、もう一段難しい話に入ります。</p>
+<h3>MUX（マルチプレクサ）</h3>
+<p>複数の入力から1つを選んで出力する回路です。ソフトウェアの`switch`や配列の添字アクセスに対応します。</p>
+<p>次のコードは、ソフトウェアでは自然な書き方です。</p>
+<blockquote><p>for (int i = 0; i &lt; 8; i++) {</p></blockquote>
+<blockquote><p>#pragma HLS UNROLL</p></blockquote>
+<blockquote><p>y[i] = table[idx[i]];</p></blockquote>
+<blockquote><p>}</p></blockquote>
+<p>idxは関数の引数など、実行時に決まる値です。</p>
+<p>tableが分割されていない大きな配列だと、idx[i]がどの要素を指すかは、回路には事前にわかりません。</p>
+<p>そのため、各iの読み出しごとに「全要素から1つを選ぶ」MUXが必要になります。</p>
+<p>要素数をN、展開数を8とすると、N対1のMUXが8個できます。</p>
+<p>Nが大きいほど、MUXは巨大になります。</p>
+<p>また、配列を分割してレジスタに展開した場合、MUXの入力が全要素に広がるため、配線も混雑します。</p>
+<p>これが「外部依存のインデックスで参照するとMUXが爆発する」の中身です。</p>
+<p>ソフトウェアでは、添字アクセスはほぼ定数コストです。</p>
+<p>回路では、添字が実行時に決まる場合、選択回路をまるごと作る必要があります。</p>
+<p>回避策は大きく2つあります。</p>
+<p>1つ目は、インデックスの範囲を回路側で絞ることです。たとえばアクセスを`i`に由来する定数オフセットだけに限定すれば、MUXは不要になります。</p>
+<p>2つ目は、ARRAY_PARTITIONで配列を分割し、各iが専用のメモリだけを読むようにデータ配置を設計し直すことです。</p>
+<h2>5. アンチパターン②：UNROLL内の除算・剰余が巨大な除算器を複製する</h2>
+<p>除算も、ソフトウェアでは足し算とほぼ同じ感覚で書けます。</p>
+<p>回路では、除算は乗算より大きく、遅い演算です。</p>
+<p>整数の除算器は、多数のLUTとFFを使い、結果が出るまで複数サイクルかかります。</p>
+<blockquote><p>for (int i = 0; i &lt; 8; i++) {</p></blockquote>
+<blockquote><p>#pragma HLS UNROLL</p></blockquote>
+<blockquote><p>y[i] = x[i] / d;</p></blockquote>
+<blockquote><p>}</p></blockquote>
+<p>dが変数なら、この8行は8個の除算器になります。</p>
+<p>1個でも重い除算器が、そのまま8個複製されます。</p>
+<p>回路が大きくなるだけでなく、除算器の遅延が長いと、動作クロックの上限まで下がることがあります。</p>
+<p>dが2のべき乗の定数なら、除算は右シフトになり、ほぼ配線だけで済みます。</p>
+<p>剰余も同様で、2のべき乗ならビットマスク（`x &amp; (d - 1)`）に置き換えられます。</p>
+<p>定数で割る場合は、ツールが乗算とシフトの組み合わせに置き換えてくれることもあります。</p>
+<p>ただし、それはdがコンパイル時に確定している場合の話です。</p>
+<p>ソフトウェアでは「割り算は少し遅い」程度の認識で済みます。</p>
+<p>HLSでは「割り算1個が、そのままチップ面積の何%か」という見積もりが要ります。</p>
+<h2>6. アンチパターンとベストプラクティスの比較</h2>
+<p>ここまでの内容を、書き方の対比で整理します。</p>
+<figure><img src="https://notes.hibiki-tech.com/ja/images/2026-10-01-fpga-unroll-hls-table1.png" alt="アンチパターンとベストプラクティスの比較"></figure>
+<p>ベストプラクティスの共通点は、「展開する前に、複製されるものが何かを数える」ことです。</p>
+<p>複製されるのが演算器なら、DSPの数を数えます。</p>
+<p>複製されるのがMUXなら、入力数を数えます。</p>
+<p>複製されるのが除算器なら、定数化やシフト化で消せないかを先に考えます。</p>
+<p>また、UNROLLだけに頼らず、PIPELINEとの使い分けも重要です。</p>
+<p>PIPELINEは、ループ本体を段階（ステージ）に分け、前の反復の後半と次の反復の前半を重ねて実行する指示です。</p>
+<p>回路をコピーせず、1つの回路を使い回したまま、スループットを上げます。</p>
+<p>面積の増加が緩やかな分、まずPIPELINEで必要な速度が出るかを確認し、足りない分だけ部分展開（`factor`を指定）で補う順序が堅実です。</p>
+<h2>7. 回路をイメージしながら書くためのチェックリスト</h2>
+<p>UNROLLを書く前に、次の5点を確認します。</p>
+<ul>
+<li>展開数をNとしたとき、複製される演算器（DSP・LUT）はN倍になってよいか。</li>
+<li>展開内で読む配列は、同時アクセス数に見合うポート数があるか（BRAM・URAMは通常2ポート）。</li>
+<li>配列の添字は、定数オフセットか、それとも実行時に決まる値か。後者ならMUXが入る。</li>
+<li>除算・剰余は、定数またはシフト・マスクに置き換えられないか。</li>
+<li>PIPELINEだけで目標の速度に届かないのか。届かないなら、部分展開で足りるか。</li>
+</ul>
+<p>ツールが出す合成レポートで、LUT・FF・DSP・BRAMの使用量を見る習慣をつけると、回路のイメージが少しずつ育ちます。</p>
+<p>読んだ回路の大きさと、頭の中の想像がずれていたら、そこがソフトウェア脳のクセが出ている箇所です。</p>
+<p>ソフトウェアのループは、回すたびに時間を払います。</p>
+<p>HLSのUNROLLは、回す前に面積を払います。</p>
+<p>その払い先を、回路の形で思い描けるようになれば、「速くなるはずなのに爆発する」という失敗はずいぶん減ります。</p>
+<p>まずは小さな係数から展開して、合成レポートの数字を眺めるところから試してみてください。</p>
+<h2>出典</h2>
+<ol>
+<li>AMD Vitis HLS 製品ページ - <a href="https://www.amd.com/en/products/software/adaptive-socs-and-fpgas/vitis/vitis-hls.html">https://www.amd.com/en/products/software/adaptive-socs-and-fpgas/vitis/vitis-hls.html</a></li>
+<li>AMD Vitis High-Level Synthesis User Guide (UG1399) - <a href="https://docs.amd.com/r/en-US/ug1399-vitis-hls">https://docs.amd.com/r/en-US/ug1399-vitis-hls</a></li>
+</ol>
+<blockquote><p>本記事は情報提供を目的としており、実際の設計や投資判断は自己責任で行ってください。記載内容については、出典元の一次情報をご自身でもご確認ください。</p></blockquote>
+</div>
+<div class="share"><span>シェア</span><a href="https://x.com/intent/post?text=FPGA%E3%81%9D%E3%81%AEUNROLL%E3%80%81%E5%9B%9E%E8%B7%AF%E3%81%8C%E7%88%86%E7%99%BA%E3%81%97%E3%81%BE%E3%81%99%EF%BC%9A%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AEVitis%20HLS&amp;url=https%3A%2F%2Fnotes.hibiki-tech.com%2Fja%2Fposts%2F2026-10-01-fpga-unroll-vitis-hls%2F" rel="noopener" target="_blank">X</a><a href="https://bsky.app/intent/compose?text=FPGA%E3%81%9D%E3%81%AEUNROLL%E3%80%81%E5%9B%9E%E8%B7%AF%E3%81%8C%E7%88%86%E7%99%BA%E3%81%97%E3%81%BE%E3%81%99%EF%BC%9A%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AEVitis%20HLS%20https%3A%2F%2Fnotes.hibiki-tech.com%2Fja%2Fposts%2F2026-10-01-fpga-unroll-vitis-hls%2F" rel="noopener" target="_blank">Bluesky</a></div>
+<aside class="cta"><h4>続きはnoteでも</h4><p>コメント・スキ（いいね）はnote版でどうぞ。</p><a class="btn" href="https://note.com/pochin_shachou/n/n7aa97eb49f64">noteで読む</a></aside>
+</article>
+</main>
+<footer class="site"><div class="wrap"><p>情報提供のみを目的としたもので、投資助言ではありません。数字は開示資料（EDINET等）や各社の発表をもとに作成しており、原文の記載が優先されます。</p><nav><a href="../../">トップ</a><a href="../../about/">このサイトについて</a><a href="../../contact/">お問い合わせ</a><a href="../../privacy/">プライバシーポリシー</a><a href="../../feed.xml">RSS</a><a href="https://bsky.app/profile/pochin-shachou.bsky.social" rel="me">Bluesky</a><a href="../../../">English edition</a></nav></div></footer>
+</body>
+</html>

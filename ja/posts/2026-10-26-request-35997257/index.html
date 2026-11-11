@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>今こそ知りたいPHP</title>
+<meta name="description" content="PHPは、サーバー側の言語が分かるWebサイトの69.2%で使われている（W3Techs、2026年10月25日）。「終わった言語」という印象とは違う。支持されている理由は性能や新しさだけではなく、HTMLに埋め込めて、PHPとMySQLが動くサーバーなら置いて動かせる配布の形に">
+<link rel="canonical" href="https://notes.hibiki-tech.com/ja/posts/2026-10-26-request-35997257/">
+<link rel="alternate" hreflang="ja" href="https://notes.hibiki-tech.com/ja/posts/2026-10-26-request-35997257/">
+<meta property="og:site_name" content="Filed in Japan">
+<meta property="og:title" content="今こそ知りたいPHP">
+<meta property="og:description" content="PHPは、サーバー側の言語が分かるWebサイトの69.2%で使われている（W3Techs、2026年10月25日）。「終わった言語」という印象とは違う。支持されている理由は性能や新しさだけではなく、HTMLに埋め込めて、PHPとMySQLが動くサーバーなら置いて動かせる配布の形に">
+<meta property="og:url" content="https://notes.hibiki-tech.com/ja/posts/2026-10-26-request-35997257/">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
+<style>
+:root { color-scheme:light dark;
+  --bg:#f6f5f2; --surface:#ffffff; --fg:#16181d; --muted:#626873; --rule:#e4e2dc;
+  --accent:#d6283b; --accent-fg:#ffffff; --chip:#fbe9eb; --chip-fg:#a3172a;
+  --shadow:0 1px 2px rgba(16,24,40,.05), 0 8px 24px rgba(16,24,40,.06);
+  --sans:ui-sans-serif, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --serif:"Iowan Old Style", Charter, Georgia, serif; }
+@media (prefers-color-scheme: dark) { :root {
+  --bg:#0f1115; --surface:#171a21; --fg:#e8e9ec; --muted:#9aa0ab; --rule:#262a33;
+  --accent:#ff4d5e; --chip:#2a1619; --chip-fg:#ff8a95;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35); } }
+* { box-sizing:border-box; }
+html { -webkit-text-size-adjust:100%; }
+body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.6 var(--sans);
+  -webkit-font-smoothing:antialiased; }
+a { color:inherit; }
+img { max-width:100%; height:auto; display:block; }
+.wrap { max-width:1080px; margin:0 auto; padding:0 20px; }
+.narrow { max-width:720px; margin:0 auto; padding:0 20px; }
+
+.top { position:sticky; top:0; z-index:10; background:color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter:saturate(1.4) blur(10px); -webkit-backdrop-filter:saturate(1.4) blur(10px);
+  border-bottom:1px solid var(--rule); }
+.top .wrap { display:flex; align-items:center; justify-content:space-between; height:60px; }
+.brand { display:flex; align-items:center; gap:10px; text-decoration:none; font-weight:700;
+  letter-spacing:-.01em; font-size:17px; }
+.brand .mark { width:18px; height:18px; border-radius:50%; background:var(--accent);
+  box-shadow:0 0 0 4px var(--chip); }
+.btn { display:inline-flex; align-items:center; padding:9px 16px; border-radius:999px;
+  background:var(--accent); color:var(--accent-fg); text-decoration:none; font-weight:600;
+  font-size:14px; transition:transform .15s ease, filter .15s ease; }
+.btn:hover { transform:translateY(-1px); filter:brightness(1.06); }
+.btn.ghost { background:transparent; color:var(--fg); border:1px solid var(--rule); }
+
+.hero { padding:72px 0 8px; }
+.eyebrow { text-transform:uppercase; letter-spacing:.12em; font-size:12px; font-weight:700;
+  color:var(--accent); margin:0 0 14px; }
+.hero h1 { font-size:clamp(38px, 6.5vw, 64px); line-height:1.03; letter-spacing:-.035em;
+  margin:0 0 18px; max-width:13ch; }
+.hero .lead { font-size:clamp(17px, 2vw, 20px); color:var(--muted); max-width:56ch; margin:0 0 28px; }
+.hero .actions { display:flex; gap:10px; flex-wrap:wrap; }
+.stats { display:flex; gap:40px; margin-top:44px; padding-top:22px; border-top:1px solid var(--rule);
+  flex-wrap:wrap; }
+.stats b { display:block; font-size:26px; letter-spacing:-.02em; font-variant-numeric:tabular-nums; }
+.stats span { color:var(--muted); font-size:13px; }
+
+.section-h { margin:48px 0 18px; font-size:13px; text-transform:uppercase; letter-spacing:.12em;
+  color:var(--muted); font-weight:700; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:20px;
+  padding:0; margin:0 0 64px; list-style:none; }
+.card { background:var(--surface); border:1px solid var(--rule); border-radius:16px; overflow:hidden;
+  box-shadow:var(--shadow); display:flex; flex-direction:column; text-decoration:none; height:100%;
+  transition:transform .2s ease, box-shadow .2s ease; }
+.card:hover { transform:translateY(-3px);
+  box-shadow:0 2px 4px rgba(16,24,40,.06), 0 18px 40px rgba(16,24,40,.13); }
+.card .thumb { aspect-ratio:16/10; background:#fff; border-bottom:1px solid var(--rule); overflow:hidden; }
+.card .thumb img { width:100%; height:100%; object-fit:contain; padding:12px; }
+.card .body { padding:18px 20px 22px; display:flex; flex-direction:column; gap:8px; flex:1; }
+.card h3 { font-size:19px; line-height:1.3; letter-spacing:-.01em; margin:0; }
+.card p { color:var(--muted); font-size:14.5px; margin:0; }
+.featured { grid-column:1 / -1; }
+.featured .card { flex-direction:row; }
+.featured .thumb { flex:1.25; aspect-ratio:auto; min-height:340px; border-bottom:0;
+  border-right:1px solid var(--rule); }
+.featured .body { flex:1; padding:36px; justify-content:center; gap:12px; }
+.featured h3 { font-size:clamp(23px, 3vw, 31px); line-height:1.2; }
+.featured p { font-size:16px; }
+@media (max-width:760px) {
+  .featured .card { flex-direction:column; }
+  .featured .thumb { min-height:0; aspect-ratio:16/10; border-right:0; border-bottom:1px solid var(--rule); }
+  .featured .body { padding:20px; }
+  .hero { padding-top:48px; } }
+
+.chips { display:flex; gap:10px; align-items:center; flex-wrap:wrap; font-size:12.5px; color:var(--muted); }
+.chip { display:inline-block; padding:3px 9px; border-radius:999px; background:var(--chip);
+  color:var(--chip-fg); font-weight:700; font-variant-numeric:tabular-nums; letter-spacing:.03em; }
+
+.post-head { padding:48px 0 8px; }
+.back { display:inline-block; color:var(--muted); text-decoration:none; font-size:14px; margin-bottom:28px; }
+.back:hover { color:var(--fg); }
+.post-head h1 { font-size:clamp(30px, 5vw, 46px); line-height:1.12; letter-spacing:-.025em;
+  margin:16px 0 14px; }
+.post-head .sub { font-size:19px; color:var(--muted); margin:0 0 8px; }
+.post-head .chips a { color:var(--muted); }
+.prose { font:19px/1.75 var(--serif); padding:16px 0 8px; }
+.prose p { margin:0 0 1.15em; }
+.prose h2, .prose h3, .prose h4 { font-family:var(--sans); letter-spacing:-.015em; line-height:1.25; }
+.prose h2 { font-size:26px; margin:2.1em 0 .7em; padding-top:.9em; border-top:1px solid var(--rule); }
+.prose h3 { font-size:20px; margin:1.8em 0 .6em; }
+.prose a { color:var(--accent); text-underline-offset:3px; }
+.prose ul, .prose ol { padding-left:1.3em; margin:0 0 1.2em; }
+.prose li { margin:.35em 0; }
+.prose figure { margin:2em 0; background:#fff; border:1px solid var(--rule); border-radius:14px;
+  padding:14px; box-shadow:var(--shadow); }
+.prose figure img { margin:0 auto; border-radius:6px; }
+.prose blockquote { margin:1.6em 0; padding:4px 0 4px 20px; border-left:3px solid var(--accent);
+  color:var(--muted); font-style:italic; }
+
+.cta { margin:40px 0 56px; padding:28px; border-radius:18px; color:#fff; font-family:var(--sans);
+  background:radial-gradient(120% 140% at 100% 0%, #ff5a6b 0%, #d6283b 45%, #8e1022 100%);
+  box-shadow:var(--shadow); }
+.cta h4 { margin:0 0 6px; font-size:20px; letter-spacing:-.01em; }
+.cta p { margin:0 0 16px; opacity:.92; font-size:15.5px; line-height:1.55; }
+.cta .btn { background:#fff; color:#b01d30; }
+
+footer.site { border-top:1px solid var(--rule); color:var(--muted); font-size:13.5px; padding:32px 0 48px; }
+footer.site .wrap { display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+footer.site p { margin:0; max-width:60ch; }
+footer.site nav { display:flex; gap:8px 18px; flex-wrap:wrap; }
+.top .links { display:flex; align-items:center; gap:16px; }
+.top .links a.plain { color:var(--muted); text-decoration:none; font-size:14px; font-weight:600; }
+.top .links a.plain:hover { color:var(--fg); }
+.tag { display:inline-block; padding:2px 9px; border-radius:999px; border:1px solid var(--rule);
+  color:var(--muted); text-decoration:none; font-weight:600; }
+a.tag:hover { color:var(--fg); border-color:var(--muted); }
+.filters { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 22px; }
+.filters a { padding:6px 13px; border-radius:999px; border:1px solid var(--rule); background:var(--surface);
+  text-decoration:none; font-size:14px; font-weight:600; color:var(--muted); }
+.filters a:hover, .filters a[aria-current] { color:var(--fg); border-color:var(--fg); }
+.filters a small { font-weight:500; margin-left:4px; }
+.share { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin:8px 0 0; font-size:14px;
+  color:var(--muted); font-family:var(--sans); }
+.share a { padding:6px 13px; border-radius:999px; border:1px solid var(--rule); text-decoration:none;
+  font-weight:600; color:var(--fg); }
+.share a:hover { border-color:var(--fg); }
+.cat-head .eyebrow { margin-top:56px; }
+.cat-head h1 { font-size:clamp(30px, 5vw, 44px); letter-spacing:-.025em; margin:0 0 24px; }
+.page h1 { font-size:clamp(30px, 5vw, 44px); letter-spacing:-.025em; margin:48px 0 18px; }
+.page h2 { font-family:var(--sans); font-size:21px; margin:1.8em 0 .5em; }
+.page p, .page li { font-size:17px; }
+@media (max-width:520px) { .top .links a.plain { display:none; } }
+.ad { margin:28px 0; min-height:100px; }
+footer.site a { text-decoration:none; }
+footer.site a:hover { color:var(--fg); }
+</style>
+<meta property="og:image" content="https://notes.hibiki-tech.com/ja/images/2026-10-26-request-35997257-thumb.png">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8065890671425926" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JJ4YKNLJJ1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-JJ4YKNLJJ1');</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "今こそ知りたいPHP", "description": "PHPは、サーバー側の言語が分かるWebサイトの69.2%で使われている（W3Techs、2026年10月25日）。「終わった言語」という印象とは違う。支持されている理由は性能や新しさだけではなく、HTMLに埋め込めて、PHPとMySQLが動くサーバーなら置いて動かせる配布の形に", "inLanguage": "ja", "mainEntityOfPage": "https://notes.hibiki-tech.com/ja/posts/2026-10-26-request-35997257/", "publisher": {"@type": "Organization", "name": "Filed in Japan", "url": "https://notes.hibiki-tech.com/"}, "datePublished": "2026-10-26", "image": ["https://notes.hibiki-tech.com/ja/images/2026-10-26-request-35997257-thumb.png"]}</script>
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="brand" href="../../"><span class="mark" aria-hidden="true"></span>Filed in Japan</a><div class="links"><a class="plain" href="../../../">English</a><a class="plain" href="../../about/">このサイトについて</a><a class="plain" href="https://bsky.app/profile/pochin-shachou.bsky.social" rel="me">Bluesky</a><a class="btn" href="https://pochin.substack.com/subscribe">購読</a></div></div></header>
+<main>
+<article class="narrow">
+<div class="post-head"><a class="back" href="../../">&larr; 記事一覧</a><div class="chips"><a class="tag" href="../../category/trend/">トレンド</a><time datetime="2026-10-26">2026年10月26日</time></div><h1>今こそ知りたいPHP</h1>
+</div>
+<div class="prose">
+<p>PHPと聞くと、古い言語という印象を持つ人がいるかもしれません。</p>
+<p>けれども、いまサーバー側の言語が分かるWebサイトの多くはPHPで動いています。</p>
+<p>なぜ、速さや新しさだけが理由ではない言語が、これほど長く使われているのか。</p>
+<p>その答えは、PHPの「置き方」と、置かれたまま動き続けるサイトの保守にあります。</p>
+<h2>要旨</h2>
+<ul>
+<li>PHPは、サーバー側の言語が分かるWebサイトの69.2%で使われている（W3Techs、2026年10月25日）。「終わった言語」という印象とは違う。</li>
+<li>支持されている理由は性能や新しさだけではなく、HTMLに埋め込めて、PHPとMySQLが動くサーバーなら置いて動かせる配布の形にある。WordPressは全Webサイトの39.6%を占める。</li>
+<li>一方で、PHP利用サイトの少なくとも34.6%は7系以下で、7系はすべて公式のサポートが終了済み。8.2も2026年12月31日でセキュリティ支援が終わる。</li>
+<li>これからPHPを学ぶ意味は、文法の暗記ではなく、動き続けるサイトのバージョンと依存関係を保守する力を身につけることにある。</li>
+</ul>
+<h2>1. PHPは「終わった言語」なのか、サーバー側言語の69.2%という数字から始める</h2>
+<p>W3Techsは2026年10月25日時点で、PHPがサーバー側プログラミング言語の69.2%で使われていると公表しています。</p>
+<p>この調査の分母は、サーバー側の言語が判別できたWebサイトです。</p>
+<p>すべてのWebサイトの69.2%ではありません。</p>
+<p>1つのサイトが複数の言語を使うこともあるため、合計は100%になりません。</p>
+<p>それでも、2位のJavaScriptは8.2%、3位のRubyは7.1%です。</p>
+<p>PHPは2位以下を大きく離しています。</p>
+<p>W3Techsは2026年7月27日の「今日のWeb技術」で、JavaScriptがRubyを抜いてサーバー側言語の2位になったと書いています。</p>
+<p>そのJavaScriptでも8.2%です。</p>
+<p>数字だけを見れば、PHPは終わっていません。</p>
+<p>ただし、使われているサイトが多いことと、新しく選ばれていることは別です。</p>
+<p>古いサイトが動き続けているだけで数字が大きい、という可能性も残ります。</p>
+<p>では、なぜ古いサイトは動き続けられるのか。</p>
+<p>そこにPHPの性質があります。</p>
+<h2>2. なぜ今も使われるのか、性能ではなく「置けば動く」配布の強さ（レンタルサーバーとWordPress、全サイトの39.6%がWordPress）</h2>
+<p>PHPの公式FAQは、PHPを「HTMLに埋め込まれたスクリプト言語」と説明しています。</p>
+<p>目標は、Web開発者が動的に生成されるページを素早く書けるようにすることです。</p>
+<p>HTMLの中にPHPのコードを書き、Webサーバーがそれを実行してページを返します。</p>
+<p>この形は、アプリケーションをビルドして専用の実行環境に配布するのではなく、サーバー上のファイルをそのまま実行する形に近いものです。</p>
+<p>だから、PHPとMySQLが動くサーバーさえあれば、サイトを置けます。</p>
+<p>WordPressの要件ページは、推奨環境としてPHP 8.3以上、MariaDB 10.11以上またはMySQL 8.0以上、HTTPS対応を挙げています。</p>
+<p>そのうえで、PHPとMySQLをサポートするサーバーなら何でもよい、と書いています。</p>
+<blockquote><p>any server that supports PHP and MySQL will do</p></blockquote>
+<blockquote><p>--- WordPress.org「Requirements」より</p></blockquote>
+<p>ApacheやNginxは推奨されていますが、必須ではありません。</p>
+<p>この要件の緩さが、PHPの配布の強さです。</p>
+<p>WordPressは全Webサイトの39.6%で使われ、CMS（ブラウザから記事を編集できるようにするソフト）の中では58.3%のシェアを持っています。</p>
+<p>WordPressを動かすにはPHPが要ります。</p>
+<p>世界で最も多く使われているCMSの土台がPHPであることは、PHPの利用規模の大きさと重なります。</p>
+<p>性能だけが理由ではありません。</p>
+<p>PHP 8.5の発表文は「Smarter, Faster, Built for Tomorrow」を掲げており、速度の改善が続いていることは確かです。</p>
+<p>それでも、69.2%という規模を説明するのは、速度の比較ではありません。</p>
+<p>同じことが、裏返しの弱点にもなります。</p>
+<p>置けば動くということは、置いたままでも動いてしまうということです。</p>
+<p>サイトは、誰かが止めるまで動き続けます。</p>
+<p>PHPのバージョンが古くなっても、サイトが自動で止まるわけではありません。</p>
+<h2>3. 数字で見る現在地、PHP利用サイトのうち8系が65.5%、7系以下が34.6%という現実</h2>
+<p>W3TechsのPHPページは、PHPを使うサイトの内訳をメジャーバージョン別に出しています。</p>
+<p>2026年10月25日時点で、8系が65.5%、7系が26.8%、5系が7.7%、4系が0.1%です。</p>
+<p>7系以下を足すと34.6%になります。四捨五入のため、4つの合計は100.1%になります。</p>
+<p>この内訳はサイト数をもとにした割合で、閲覧数や取引額の割合ではありません。</p>
+<p>PHP 7.4は2022年11月28日にサポートを終え、7.3は2021年12月6日、7.2は2020年11月30日に終わっています。</p>
+<p>5系もすべて終了しており、5.6は2018年12月31日が最後です。</p>
+<p>つまり、少なくとも34.6%のサイトは、公式のサポートが切れたPHPで動いている計算になります。</p>
+<p>8系が65.5%あるからといって、安心はできません。</p>
+<p>8系の中には、2023年11月26日に終了した8.0と、2025年12月31日に終了した8.1も含まれます。</p>
+<p>W3Techsの内訳はメジャーバージョンまでなので、8.0と8.1が何%を占めるかは分かりません。</p>
+<p>分かるのは、セキュリティ支援を受けられないサイトが34.6%より多い可能性がある、ということです。</p>
+<p>現在もセキュリティ支援を受けられるのは、8.2以降です。</p>
+<p>ただし、8.2も2026年12月31日でセキュリティ支援が終わります。</p>
+<p>積極的な支援は2024年12月31日に終わっており、いまは重要なセキュリティ修正だけが提供される期間です。</p>
+<p>PHP利用サイトの3分の1規模が古い版に残っている、という現実は、数字の上ではっきりしています。</p>
+<h2>4. サポート期限を過ぎると何が起きるのか、パッチが当てられないサイトの構造（2年＋2年のサポート方針、8.2は2026年12月31日でセキュリティ支援終了、7.4は2022年、8.1は2025年に終了）</h2>
+<p>PHPのサポート方針は、各リリース系列が最初の安定版を出してから2年間、バグとセキュリティの問題を通常のポイントリリースで直すというものです。</p>
+<p>その後の2年間は、重要なセキュリティ問題だけを、必要に応じて直します。</p>
+<p>合計4年で公式のサポートが終わり、その後はEOL（サポート終了）です。</p>
+<p>EOLを過ぎた系列について、php.netはアップグレードを強く勧めています。</p>
+<blockquote><p>If you are using these releases, you are strongly urged to upgrade</p></blockquote>
+<blockquote><p>--- php.net「Unsupported Branches」より</p></blockquote>
+<p>理由も同じページに書かれています。</p>
+<p>古い版を使うと、新しい版で直されたセキュリティ脆弱性やバグにさらされる可能性がある、というのです。</p>
+<p>このとき効いてくるのが、PHPが「置けば動く」言語だという性質です。</p>
+<p>サイトは、PHP本体の更新をしなくても動き続けます。</p>
+<p>WordPressも、古い環境向けにPHP 7.4以上で動くと案内しています。</p>
+<p>ただし、7.4系はすでにEOLで、セキュリティ脆弱性にさらされる可能性がある、と注意しています。</p>
+<p>つまり、CMSが動くからといって、土台のPHPが守られているわけではありません。</p>
+<p>PHP本体に脆弱性が見つかったとき、WordPressやプラグインを最新にしても、土台の修正は届きません。</p>
+<p>サーバー会社が新しいPHPを用意していなければ、サイトの持ち主がサーバーを移すか、PHPの実行環境を変える必要があります。</p>
+<p>動いていることに気付きにくいと、更新の順番は後回しになりがちです。</p>
+<p>サポート期限は、サイトが止まる日ではありません。</p>
+<p>静かに、修正が届かなくなる日です。</p>
+<h2>5. エンジニア向け、8.2から8.5へ上げる前に確認する移行の勘所（非推奨機能、拡張モジュール、CMSとフレームワークの要求バージョン、検証手順）</h2>
+<p>ここからは、PHP 8.2のサイトを8.5へ上げる作業を任されている人向けです。</p>
+<p>8.2から8.5へは、8.3、8.4、8.5という3つのマイナーバージョンをまたぎます。</p>
+<p>セキュリティ支援は、8.3が2027年12月31日、8.4が2028年12月31日、8.5が2029年12月31日まで続きます。</p>
+<p>一度に飛ばさず、確認する順番を決めてから上げます。</p>
+<p><strong>非推奨機能</strong>：最初に見るのは、いまのコードが警告を出していないかです。</p>
+<p>PHP 8.3では、数値でない文字列に対するインクリメントとデクリメントが非推奨になりました。</p>
+<p>引数なしのget_class()とget_parent_class()も非推奨です。</p>
+<p>PHP 8.4では、型の後にnullを既定値に置く「暗黙的にnullを受け入れる」書き方が非推奨になりました。</p>
+<p>「T1 $a = null」は「?T1 $a = null」か「T1|null $a = null」に直します。</p>
+<p>必須の引数の前に、既定値を持つ引数を置く書き方も非推奨です。</p>
+<p>trigger_error()にE_USER_ERRORを渡す使い方、E_STRICT定数、クラス名を_だけにする書き方も非推奨になりました。</p>
+<p>PHP 8.5では、(boolean)、(integer)、(double)、(binary)というキャスト名が非推奨です。</p>
+<p>(bool)、(int)、(float)、(string)に置き換えます。</p>
+<p>バッククォート演算子、セミコロンで終わるcase文、nullを配列のオフセットに使う書き方も非推奨です。</p>
+<p>__sleep()と__wakeup()は軟非推奨（警告は出ないが、使わないほうがよい状態）になり、__serialize()と__unserialize()が推奨されています。</p>
+<p>非推奨は、すぐに動かなくなるという意味ではありません。</p>
+<p>警告のまま動くものもあります。</p>
+<p>それでも、将来の版で削除される可能性を考えれば、警告をゼロに近づけておくほうが安全です。</p>
+<p><strong>拡張モジュール</strong>：次に見るのは、PHP本体ではなく拡張モジュールの変更です。</p>
+<p>PHP 8.4では、DBA、ODBC、SOAPの一部がリソースからオブジェクトに変わりました。</p>
+<p>DBAの関数はDbaのConnectionオブジェクトを、ODBCはOdbcのResultとConnectionを返すようになります。</p>
+<p>SOAPのSoapClientのhttpurlはSoapのUrl、sdlはSoapのSdlになります。</p>
+<p>is_resource()で判定しているコードは、falseやnullの判定に直す必要があります。</p>
+<p>Date、Intl、PDO、Reflection、SPL、Sqlite、XMLReaderのクラス定数には型が付きました。</p>
+<p>PHP 8.5では、IntlがICU（国際化用のライブラリ）の57.1以上を要求します。</p>
+<p>DOMのノードリストをcloneすると失敗するようになりました。</p>
+<p>finfo_file()は、ファイル名にnullバイトが含まれるとValueErrorを投げます。</p>
+<p>php -mで拡張の一覧を確認し、使っている拡張が新しい版でも入るかを先に確かめます。</p>
+<p>Composerを使っているなら、依存パッケージが要求するPHPの制約も見ます。</p>
+<p><strong>CMSとフレームワークの要求バージョン</strong>：PHPの対応期限より先に、CMSやフレームワークが要求を上げていることがあります。</p>
+<p>WordPressはPHP 8.3以上を推奨しています。</p>
+<p>8.2のサイトは、WordPressの推奨環境には届いていません。</p>
+<p>Symfonyの現行版はPHP 8.4以上を要求しています。</p>
+<p>8.2や8.3では、Symfonyの現行版を動かせません。</p>
+<p>自分のサイトが使っているCMSやフレームワークが、どのPHPを要求しているかを先に確認します。</p>
+<p>そのうえで、PHPの期限と、CMSの要求のどちらが先に来るかを見ます。</p>
+<p><strong>検証手順</strong>：最後に、上げ方そのものです。</p>
+<p>本番をいきなり8.5にしないで、同じ構成のステージング環境を用意します。</p>
+<p>8.2から8.3、8.3から8.4、8.4から8.5と、1つずつ上げます。</p>
+<p>各段階でphp -lによる構文チェック、php -mによる拡張の確認、Composerのプラットフォーム要件チェックを行います。</p>
+<p>テストはerror_reportingをE_ALLにして走らせ、E_DEPRECATEDのログを拾います。</p>
+<p>決済、メール送信、ファイルアップロード、外部API連携など、拡張モジュールに依存する機能は個別に動かします。</p>
+<p>切り戻せるように、旧バージョンの実行環境と手順を残しておきます。</p>
+<p>ここまでやって、初めてバージョンアップは完了です。</p>
+<h2>6. 今こそ知りたいPHP、「書ける」より「保守できる」を学びの基準に</h2>
+<p>PHPの文法は、覚えようとすれば短時間で覚えられます。</p>
+<p>PHPの開始タグと終了タグの間にコードを書き、変数と配列と関数を使えば、簡単な掲示板や問い合わせフォームは作れます。</p>
+<p>だから、PHPは「書ける」ようになるまでの敷居が低い言語です。</p>
+<p>しかし、サイトを長く動かす仕事は、書けることだけでは足りません。</p>
+<p>いま動いているPHPのバージョンを知ること。</p>
+<p>サポートがいつ終わるかを確認すること。</p>
+<p>使っている拡張モジュールと、CMSやフレームワークの要求バージョンを把握すること。</p>
+<p>上げる前に、どこで何が壊れるかを確かめること。</p>
+<p>動き続けるサイトを、止めずに更新する段取りを組むこと。</p>
+<p>これが、これからPHPを学ぶ人の基準になります。</p>
+<p>初学者は、小さなサイトを1つ作って公開してみるとよいでしょう。</p>
+<p>公開したら、借りたサーバーの管理画面でPHPのバージョンを確認します。</p>
+<p>php.netのサポート一覧を眺め、自分の版がいつまで支えられるのかを見ます。</p>
+<p>自分のサイトがどのバージョンで動いているかを知るだけで、見え方が変わります。</p>
+<p>エンジニアは、コードを書く力に加えて、実行環境を保守する力を身につけます。</p>
+<p>PHP本体、拡張モジュール、CMS、フレームワーク、サーバーの層を分けて考えると、何をいつ上げるかが整理できます。</p>
+<h2>関連記事</h2>
+<ul>
+<li><a href="https://note.com/pochin_shachou/n/n096f3df7fccf">Cloudflareとは</a></li>
+<li><a href="https://note.com/pochin_shachou/n/n5525c4d82e0d">最近ホットな情報流出まとめ</a></li>
+</ul>
+<p>PHPが長く使われてきたのは、速さの勝負だけで説明できることではありません。</p>
+<p>置けば動くという配布の形が、Webでサイトを配る形に合っていたからです。</p>
+<p>その同じ形が、置いたままでも動くサイトを生みました。</p>
+<p>これからPHPを学ぶなら、文法を暗記するより先に、動き続けるサイトをどう保守するかを考えてみてください。</p>
+<p>それが、PHPという言語の性格をいちばんよく表しています。</p>
+<h2>出典</h2>
+<ol>
+<li>W3Techs「Usage statistics of server-side programming languages for websites」（2026年10月25日時点） - <a href="https://w3techs.com/technologies/overview/programming_language">https://w3techs.com/technologies/overview/programming_language</a></li>
+<li>W3Techs「Usage statistics of PHP for websites」（バージョン別内訳、2026年10月25日時点） - <a href="https://w3techs.com/technologies/details/pl-php">https://w3techs.com/technologies/details/pl-php</a></li>
+<li>W3Techs「Usage statistics and market share of content management systems」（WordPressの利用率とシェア、2026年10月25日時点） - <a href="https://w3techs.com/technologies/overview/content_management">https://w3techs.com/technologies/overview/content_management</a></li>
+<li>php.net「Supported Versions」（2年＋2年のサポート方針と各系列の期限） - <a href="https://www.php.net/supported-versions.php">https://www.php.net/supported-versions.php</a></li>
+<li>php.net「Unsupported Branches」（EOL日と最後のリリース） - <a href="https://www.php.net/eol.php">https://www.php.net/eol.php</a></li>
+<li>WordPress.org「Requirements」（推奨環境とPHP 7.4以上の扱い） - <a href="https://wordpress.org/about/requirements/">https://wordpress.org/about/requirements/</a></li>
+<li>php.net「PHP FAQ: General Information」（HTMLに埋め込まれたスクリプト言語という説明） - <a href="https://www.php.net/manual/en/faq.general.php">https://www.php.net/manual/en/faq.general.php</a></li>
+<li>php.net「Migrating from PHP 8.2.x to PHP 8.3.x: Deprecated Features」 - <a href="https://www.php.net/manual/en/migration83.deprecated.php">https://www.php.net/manual/en/migration83.deprecated.php</a></li>
+<li>php.net「Migrating from PHP 8.3.x to PHP 8.4.x: Deprecated Features」 - <a href="https://www.php.net/manual/en/migration84.deprecated.php">https://www.php.net/manual/en/migration84.deprecated.php</a></li>
+<li>php.net「Migrating from PHP 8.4.x to PHP 8.5.x: Deprecated Features」 - <a href="https://www.php.net/manual/en/migration85.deprecated.php">https://www.php.net/manual/en/migration85.deprecated.php</a></li>
+<li>php.net「Migrating from PHP 8.3.x to PHP 8.4.x: Backward Incompatible Changes」（リソースからオブジェクトへの移行など） - <a href="https://www.php.net/manual/en/migration84.incompatible.php">https://www.php.net/manual/en/migration84.incompatible.php</a></li>
+<li>php.net「Migrating from PHP 8.4.x to PHP 8.5.x: Backward Incompatible Changes」（Intl、DOM、FileInfoの変更） - <a href="https://www.php.net/manual/en/migration85.incompatible.php">https://www.php.net/manual/en/migration85.incompatible.php</a></li>
+<li>php.net「PHP 8.5 Release Announcement」（2025年11月20日リリース、Smarter, Faster） - <a href="https://www.php.net/releases/8.5/en.php">https://www.php.net/releases/8.5/en.php</a></li>
+<li>Symfony「Symfony Setup」（PHP 8.4以上という要求） - <a href="https://symfony.com/doc/current/setup.html">https://symfony.com/doc/current/setup.html</a></li>
+</ol>
+<blockquote><p>本記事は公開情報をもとにまとめたものです。最新の状況や詳しい内容は、出典元の一次情報をご確認ください。</p></blockquote>
+</div>
+<div class="share"><span>シェア</span><a href="https://x.com/intent/post?text=%E4%BB%8A%E3%81%93%E3%81%9D%E7%9F%A5%E3%82%8A%E3%81%9F%E3%81%84PHP&amp;url=https%3A%2F%2Fnotes.hibiki-tech.com%2Fja%2Fposts%2F2026-10-26-request-35997257%2F" rel="noopener" target="_blank">X</a><a href="https://bsky.app/intent/compose?text=%E4%BB%8A%E3%81%93%E3%81%9D%E7%9F%A5%E3%82%8A%E3%81%9F%E3%81%84PHP%20https%3A%2F%2Fnotes.hibiki-tech.com%2Fja%2Fposts%2F2026-10-26-request-35997257%2F" rel="noopener" target="_blank">Bluesky</a></div>
+<aside class="cta"><h4>続きはnoteでも</h4><p>コメント・スキ（いいね）はnote版でどうぞ。</p><a class="btn" href="https://note.com/pochin_shachou/n/n65afd7a870f9">noteで読む</a></aside>
+</article>
+</main>
+<footer class="site"><div class="wrap"><p>情報提供のみを目的としたもので、投資助言ではありません。数字は開示資料（EDINET等）や各社の発表をもとに作成しており、原文の記載が優先されます。</p><nav><a href="../../">トップ</a><a href="../../about/">このサイトについて</a><a href="../../contact/">お問い合わせ</a><a href="../../privacy/">プライバシーポリシー</a><a href="../../feed.xml">RSS</a><a href="https://bsky.app/profile/pochin-shachou.bsky.social" rel="me">Bluesky</a><a href="../../../">English edition</a></nav></div></footer>
+</body>
+</html>
