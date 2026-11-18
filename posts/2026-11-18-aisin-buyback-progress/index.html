@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AISIN (7259 JP): the buyback&#x27;s cash ceiling is running out ahead of its share ceiling</title>
+<meta name="description" content="77.5% of the JPY 100bn limit used against 57.7% of the 65m-share limit, because the average price sits above the cap-implied JPY 1,538">
+<link rel="canonical" href="https://notes.hibiki-tech.com/posts/2026-11-18-aisin-buyback-progress/">
+<link rel="alternate" hreflang="en" href="https://notes.hibiki-tech.com/posts/2026-11-18-aisin-buyback-progress/">
+<link rel="alternate" hreflang="ja" href="https://notes.hibiki-tech.com/ja/posts/2026-11-18-aisin-buyback-progress/">
+<meta property="og:site_name" content="Filed in Japan">
+<meta property="og:title" content="AISIN (7259 JP): the buyback&#x27;s cash ceiling is running out ahead of its share ceiling">
+<meta property="og:description" content="77.5% of the JPY 100bn limit used against 57.7% of the 65m-share limit, because the average price sits above the cap-implied JPY 1,538">
+<meta property="og:url" content="https://notes.hibiki-tech.com/posts/2026-11-18-aisin-buyback-progress/">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
+<style>
+:root { color-scheme:light dark;
+  --bg:#f6f5f2; --surface:#ffffff; --fg:#16181d; --muted:#626873; --rule:#e4e2dc;
+  --accent:#d6283b; --accent-fg:#ffffff; --chip:#fbe9eb; --chip-fg:#a3172a;
+  --shadow:0 1px 2px rgba(16,24,40,.05), 0 8px 24px rgba(16,24,40,.06);
+  --sans:ui-sans-serif, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --serif:"Iowan Old Style", Charter, Georgia, serif; }
+@media (prefers-color-scheme: dark) { :root {
+  --bg:#0f1115; --surface:#171a21; --fg:#e8e9ec; --muted:#9aa0ab; --rule:#262a33;
+  --accent:#ff4d5e; --chip:#2a1619; --chip-fg:#ff8a95;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35); } }
+* { box-sizing:border-box; }
+html { -webkit-text-size-adjust:100%; }
+body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.6 var(--sans);
+  -webkit-font-smoothing:antialiased; }
+a { color:inherit; }
+img { max-width:100%; height:auto; display:block; }
+.wrap { max-width:1080px; margin:0 auto; padding:0 20px; }
+.narrow { max-width:720px; margin:0 auto; padding:0 20px; }
+
+.top { position:sticky; top:0; z-index:10; background:color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter:saturate(1.4) blur(10px); -webkit-backdrop-filter:saturate(1.4) blur(10px);
+  border-bottom:1px solid var(--rule); }
+.top .wrap { display:flex; align-items:center; justify-content:space-between; height:60px; }
+.brand { display:flex; align-items:center; gap:10px; text-decoration:none; font-weight:700;
+  letter-spacing:-.01em; font-size:17px; }
+.brand .mark { width:18px; height:18px; border-radius:50%; background:var(--accent);
+  box-shadow:0 0 0 4px var(--chip); }
+.btn { display:inline-flex; align-items:center; padding:9px 16px; border-radius:999px;
+  background:var(--accent); color:var(--accent-fg); text-decoration:none; font-weight:600;
+  font-size:14px; transition:transform .15s ease, filter .15s ease; }
+.btn:hover { transform:translateY(-1px); filter:brightness(1.06); }
+.btn.ghost { background:transparent; color:var(--fg); border:1px solid var(--rule); }
+
+.hero { padding-top:72px; padding-bottom:8px; }
+.eyebrow { text-transform:uppercase; letter-spacing:.12em; font-size:12px; font-weight:700;
+  color:var(--accent); margin:0 0 14px; }
+.hero h1 { font-size:clamp(38px, 6.5vw, 64px); line-height:1.03; letter-spacing:-.035em;
+  margin:0 0 18px; max-width:13ch; }
+.hero .lead { font-size:clamp(17px, 2vw, 20px); color:var(--muted); max-width:56ch; margin:0 0 28px; }
+.hero .actions { display:flex; gap:10px; flex-wrap:wrap; }
+.stats { display:flex; gap:40px; margin-top:44px; padding-top:22px; border-top:1px solid var(--rule);
+  flex-wrap:wrap; }
+.stats b { display:block; font-size:26px; letter-spacing:-.02em; font-variant-numeric:tabular-nums; }
+.stats span { color:var(--muted); font-size:13px; }
+
+.section-h { margin:48px 0 18px; font-size:13px; text-transform:uppercase; letter-spacing:.12em;
+  color:var(--muted); font-weight:700; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:20px;
+  padding:0; margin:0 0 64px; list-style:none; }
+.card { background:var(--surface); border:1px solid var(--rule); border-radius:16px; overflow:hidden;
+  box-shadow:var(--shadow); display:flex; flex-direction:column; text-decoration:none; height:100%;
+  transition:transform .2s ease, box-shadow .2s ease; }
+.card:hover { transform:translateY(-3px);
+  box-shadow:0 2px 4px rgba(16,24,40,.06), 0 18px 40px rgba(16,24,40,.13); }
+.card .thumb { aspect-ratio:16/10; background:#fff; border-bottom:1px solid var(--rule); overflow:hidden; }
+.card .thumb img { width:100%; height:100%; object-fit:contain; padding:12px; }
+.card .body { padding:18px 20px 22px; display:flex; flex-direction:column; gap:8px; flex:1; }
+.card h3 { font-size:19px; line-height:1.3; letter-spacing:-.01em; margin:0; }
+.card p { color:var(--muted); font-size:14.5px; margin:0; }
+.featured { grid-column:1 / -1; }
+.featured .card { flex-direction:row; }
+.featured .thumb { flex:1.25; aspect-ratio:auto; min-height:340px; border-bottom:0;
+  border-right:1px solid var(--rule); }
+.featured .body { flex:1; padding:36px; justify-content:center; gap:12px; }
+.featured h3 { font-size:clamp(23px, 3vw, 31px); line-height:1.2; }
+.featured p { font-size:16px; }
+@media (max-width:760px) {
+  .featured .card { flex-direction:column; }
+  .featured .thumb { min-height:0; aspect-ratio:16/10; border-right:0; border-bottom:1px solid var(--rule); }
+  .featured .body { padding:20px; }
+  .hero { padding-top:48px; } }
+
+.chips { display:flex; gap:10px; align-items:center; flex-wrap:wrap; font-size:12.5px; color:var(--muted); }
+.chip { display:inline-block; padding:3px 9px; border-radius:999px; background:var(--chip);
+  color:var(--chip-fg); font-weight:700; font-variant-numeric:tabular-nums; letter-spacing:.03em; }
+
+.post-head { padding:48px 0 8px; }
+.back { display:inline-block; color:var(--muted); text-decoration:none; font-size:14px; margin-bottom:28px; }
+.back:hover { color:var(--fg); }
+.post-head h1 { font-size:clamp(30px, 5vw, 46px); line-height:1.12; letter-spacing:-.025em;
+  margin:16px 0 14px; }
+.post-head .sub { font-size:19px; color:var(--muted); margin:0 0 8px; }
+.post-head .chips a { color:var(--muted); }
+.prose { font:19px/1.75 var(--serif); padding:16px 0 8px; }
+.prose p { margin:0 0 1.15em; }
+.prose h2, .prose h3, .prose h4 { font-family:var(--sans); letter-spacing:-.015em; line-height:1.25; }
+.prose h2 { font-size:26px; margin:2.1em 0 .7em; padding-top:.9em; border-top:1px solid var(--rule); }
+.prose h3 { font-size:20px; margin:1.8em 0 .6em; }
+.prose a { color:var(--accent); text-underline-offset:3px; }
+.prose ul, .prose ol { padding-left:1.3em; margin:0 0 1.2em; }
+.prose li { margin:.35em 0; }
+.prose figure { margin:2em 0; background:#fff; border:1px solid var(--rule); border-radius:14px;
+  padding:14px; box-shadow:var(--shadow); }
+.prose figure img { margin:0 auto; border-radius:6px; }
+.prose blockquote { margin:1.6em 0; padding:4px 0 4px 20px; border-left:3px solid var(--accent);
+  color:var(--muted); font-style:italic; }
+
+.cta { margin:40px 0 56px; padding:28px; border-radius:18px; color:#fff; font-family:var(--sans);
+  background:radial-gradient(120% 140% at 100% 0%, #ff5a6b 0%, #d6283b 45%, #8e1022 100%);
+  box-shadow:var(--shadow); }
+.cta h4 { margin:0 0 6px; font-size:20px; letter-spacing:-.01em; }
+.cta p { margin:0 0 16px; opacity:.92; font-size:15.5px; line-height:1.55; }
+.cta .btn { background:#fff; color:#b01d30; }
+
+footer.site { border-top:1px solid var(--rule); color:var(--muted); font-size:13.5px; padding:32px 0 48px; }
+footer.site .wrap { display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+footer.site p { margin:0; max-width:60ch; }
+footer.site nav { display:flex; gap:8px 18px; flex-wrap:wrap; }
+.top .links { display:flex; align-items:center; gap:16px; }
+.top .links a.plain { color:var(--muted); text-decoration:none; font-size:14px; font-weight:600; }
+.top .links a.plain:hover { color:var(--fg); }
+.tag { display:inline-block; padding:2px 9px; border-radius:999px; border:1px solid var(--rule);
+  color:var(--muted); text-decoration:none; font-weight:600; }
+a.tag:hover { color:var(--fg); border-color:var(--muted); }
+.filters { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 22px; }
+.filters a { padding:6px 13px; border-radius:999px; border:1px solid var(--rule); background:var(--surface);
+  text-decoration:none; font-size:14px; font-weight:600; color:var(--muted); }
+.filters a:hover, .filters a[aria-current] { color:var(--fg); border-color:var(--fg); }
+.filters a small { font-weight:500; margin-left:4px; }
+.share { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin:8px 0 0; font-size:14px;
+  color:var(--muted); font-family:var(--sans); }
+.share a { padding:6px 13px; border-radius:999px; border:1px solid var(--rule); text-decoration:none;
+  font-weight:600; color:var(--fg); }
+.share a:hover { border-color:var(--fg); }
+.cat-head .eyebrow { margin-top:56px; }
+.cat-head h1 { font-size:clamp(30px, 5vw, 44px); letter-spacing:-.025em; margin:0 0 24px; }
+.page h1 { font-size:clamp(30px, 5vw, 44px); letter-spacing:-.025em; margin:48px 0 18px; }
+.page h2 { font-family:var(--sans); font-size:21px; margin:1.8em 0 .5em; }
+.page p, .page li { font-size:17px; }
+@media (max-width:520px) { .top .links a.plain { display:none; } }
+.ad { margin:28px 0; min-height:100px; }
+footer.site a { text-decoration:none; }
+footer.site a:hover { color:var(--fg); }
+</style>
+<meta property="og:image" content="https://notes.hibiki-tech.com/images/2026-11-18-aisin-buyback-progress-thumb.png">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8065890671425926" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JJ4YKNLJJ1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-JJ4YKNLJJ1');</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "AISIN (7259 JP): the buyback's cash ceiling is running out ahead of its share ceiling", "description": "77.5% of the JPY 100bn limit used against 57.7% of the 65m-share limit, because the average price sits above the cap-implied JPY 1,538", "inLanguage": "en", "mainEntityOfPage": "https://notes.hibiki-tech.com/posts/2026-11-18-aisin-buyback-progress/", "publisher": {"@type": "Organization", "name": "Filed in Japan", "url": "https://notes.hibiki-tech.com/"}, "datePublished": "2026-11-18", "image": ["https://notes.hibiki-tech.com/images/2026-11-18-aisin-buyback-progress-thumb.png"]}</script>
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="brand" href="../../"><span class="mark" aria-hidden="true"></span>Filed in Japan</a><div class="links"><a class="plain" href="../../ja/">日本語</a><a class="plain" href="../../about/">About</a><a class="plain" href="https://bsky.app/profile/pochin-shachou.bsky.social" rel="me">Bluesky</a><a class="btn" href="https://pochin.substack.com/subscribe">Subscribe</a></div></div></header>
+<main>
+<article class="narrow">
+<div class="post-head"><a class="back" href="../../">&larr; All filings</a><div class="chips"><span class="chip">7259 JP</span><a class="tag" href="../../category/shareholder-returns/">Shareholder returns</a><a class="tag" href="../../category/transportation/">Transportation</a><time datetime="2026-11-18">Nov 18, 2026</time><span>·</span><a href="https://note.com/pochin_shachou/n/nb197189ca893" hreflang="ja" lang="ja">日本語版</a></div><h1>AISIN (7259 JP): the buyback&#x27;s cash ceiling is running out ahead of its share ceiling</h1>
+<p class="sub">77.5% of the JPY 100bn limit used against 57.7% of the 65m-share limit, because the average price sits above the cap-implied JPY 1,538</p>
+</div>
+<div class="prose">
+<p>When a buyback is announced with a ceiling of JPY 100bn, it is natural to assume the programme ends when that JPY 100bn is spent.</p>
+<p>AISIN's buyback has a second ceiling as well: a maximum number of shares.</p>
+<p>In the disclosure of November 5, 2026, the two ceilings were being used at visibly different rates.</p>
+<p><em>About this series: each post takes one listed Japanese company and reads its disclosures, from earnings releases to annual securities reports on EDINET, the regulator's filing system (Japan's counterpart to SEC EDGAR), where most documents are published only in Japanese.</em></p>
+<h2>Summary</h2>
+<ul>
+<li>By the end of October 2026, AISIN had used 77.5% of its JPY 100bn cash ceiling. Against the 65m-share ceiling, purchases came to 57.7%.</li>
+<li>Dividing JPY 100bn by 65m shares gives about JPY 1,538 per share. The actual average price was about JPY 2,069, above that level.</li>
+<li>Because the price paid is above the level implied by the two ceilings, the cash ceiling is the one that runs out first. At this level, the remaining cash cannot buy the remaining shares.</li>
+</ul>
+<p>&lt;!-- toc --&gt;</p>
+<h2>1. How far each ceiling had been used by the end of October</h2>
+<p>AISIN is headquartered in Kariya, Aichi Prefecture, and makes mobility products such as powertrains and body components (company website: <a href="https://www.aisin.com/jp/).">https://www.aisin.com/jp/).</a></p>
+<p>On April 28, 2026, its board of directors set two ceilings for a buyback.</p>
+<p>Up to 65m shares, and up to JPY 100bn.</p>
+<p>The purchase period runs from April 30, 2026 to March 31, 2027.</p>
+<p>The disclosure published on November 5 gave the cumulative totals as of October 31:</p>
+<ul>
+<li>Shares acquired: 37,485,100</li>
+<li>Amount acquired: JPY 77,545,942,000 (about JPY 77.5bn)</li>
+</ul>
+<p>Measured against the ceilings, that is 57.7% of the shares and 77.5% of the amount.</p>
+<figure><img src="https://notes.hibiki-tech.com/images/2026-11-18-aisin-buyback-progress-trend1.en.png" alt="Figure: share of each buyback ceiling used at the end of October 2026"></figure>
+<p>Over the same period the cash side is about 20 percentage points further along.</p>
+<p>What remains is 27,514,900 shares and about JPY 22.45bn.</p>
+<h2>2. Why the cash ceiling moves first</h2>
+<p>Divide one ceiling by the other.</p>
+<p>JPY 100bn divided by 65m shares is about JPY 1,538 per share.</p>
+<p>That is the average price at which both ceilings would be exhausted at the same moment.</p>
+<p>Pay more than that on average, and the cash runs out while shares remain.</p>
+<p>Pay less, and the shares run out first.</p>
+<p>What AISIN actually paid was the former.</p>
+<p>The cumulative average was about JPY 2,069, roughly JPY 530 above JPY 1,538.</p>
+<p>The breakdown points the same way: none of the disclosed average prices is below JPY 1,538.</p>
+<p>In the tender offer from April 30 to June 1, 2026, it bought 23,239,300 shares at JPY 1,986 each, for about JPY 46.15bn.</p>
+<p>Applications came in slightly above the 23,239,227 shares it had planned to buy, and were settled pro rata.</p>
+<p>Purchases other than the tender offer total 14,245,800 shares and about JPY 31.39bn.</p>
+<p>Per share, that is about JPY 2,204.</p>
+<figure><img src="https://notes.hibiki-tech.com/images/2026-11-18-aisin-buyback-progress-trend2.en.png" alt="Figure: average acquisition price per share, and the average the two ceilings imply"></figure>
+<p>"Other than the tender offer" means the methods in the resolution other than the tender offer.</p>
+<p>In the monthly disclosures, the August and October purchases are described as market purchases on the Tokyo Stock Exchange.</p>
+<h2>3. The remaining room is set by the cash, not the share count</h2>
+<p>August and October are the months with monthly disclosures, and the price level barely moved between them.</p>
+<p>In August it bought 4,498,600 shares for about JPY 10.06bn, or about JPY 2,236 per share.</p>
+<p>In October it bought 6,236,300 shares for about JPY 13.50bn, or about JPY 2,165 per share.</p>
+<p>Both are well above JPY 1,538.</p>
+<p>Spend the remaining JPY 22.45bn at October's JPY 2,165 and it buys about 10.37m shares.</p>
+<p>The share ceiling still has about 27.51m shares left, so roughly 17m shares would go unused.</p>
+<p>This is, of course, a calculation on the assumption that the price stays level with October.</p>
+<p>Keep buying below JPY 1,538 and the conclusion flips.</p>
+<p>But no average acquisition price in the disclosures is below JPY 1,538.</p>
+<p>On timing, the remaining JPY 22.45bn is about two months' worth at October's pace of JPY 13.50bn.</p>
+<p>The purchase period runs to March 31, 2027, leaving five months from the end of October.</p>
+<p>What this post can say is that, of the two ceilings the board approved, the one actually doing the work is the cash.</p>
+<p>Whether AISIN is in a hurry cannot be read from the disclosures.</p>
+<div class="ad"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8065890671425926" data-ad-slot="7843285162" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div>
+<h2>4. The 9.0% of shares outstanding does not fit inside the cash ceiling</h2>
+<p>The disclosure describes the 65m-share ceiling as 9.0% of the total number of shares outstanding, excluding treasury shares.</p>
+<p>Buy above JPY 1,538 with JPY 100bn and the company does not reach 65m shares, and does not reach 9.0%.</p>
+<p>The average to the end of October was about JPY 2,069.</p>
+<p>If that level persists, using the whole cash ceiling still leaves the number of shares bought below 65m.</p>
+<p>Read the size of the ceiling as a share ratio, then, and it looks larger than the purchase will actually be.</p>
+<p>To check progress in the monthly disclosures, watch two numbers: the cumulative amount, and the average price that can be derived from it.</p>
+<p>The ceiling is only a ceiling.</p>
+<p>AISIN has not committed to using all of it, and future purchase amounts are not disclosed.</p>
+<h2>Why it matters for global investors</h2>
+<p>A Japanese buyback like this one is approved as a pair of ceilings, a maximum number of shares and a maximum amount in yen, with a purchase period attached, and progress is disclosed month by month, as AISIN does here. That is why the two percentages can separate: the share ceiling and the cash ceiling only run out together at one particular average price, and the monthly notices are where the gap becomes visible. For AISIN the notices are published in Japanese, on TDnet, the timely disclosure service run by the Tokyo Stock Exchange, and on the company's Japanese IR pages, while the statutory filings sit on EDINET, the Financial Services Agency's disclosure system (Japan's counterpart to SEC EDGAR). The 9.0% is measured against shares outstanding excluding treasury shares, the denominator the notice itself uses.</p>
+<h2>Closing</h2>
+<p>A buyback ceiling read as one number and read as two numbers tells two different stories.</p>
+<p>Next time AISIN publishes its monthly notice, watch how close the cumulative amount has come to JPY 100bn.</p>
+<p>The share count should be lagging behind it.</p>
+<p>The gap comes from the relationship between the share price and the ceilings.</p>
+<p>The original Japanese version of this post is on note: <a href="https://note.com/pochin_shachou/n/nb197189ca893">https://note.com/pochin_shachou/n/nb197189ca893</a></p>
+<h2>Sources</h2>
+<ol>
+<li>AISIN, "Notice concerning the status of acquisition of own shares" (November 5, 2026) - <a href="https://www.release.tdnet.info/inbs/140120261105565013.pdf">https://www.release.tdnet.info/inbs/140120261105565013.pdf</a></li>
+<li>AISIN, "Notice concerning the status of acquisition of own shares" (September 4, 2026) - <a href="https://www.aisin.com/jp/news/uploads/20260904_1610_jp.pdf">https://www.aisin.com/jp/news/uploads/20260904_1610_jp.pdf</a></li>
+<li>AISIN, "Notice concerning the results of the tender offer for own shares" (June 2, 2026) - <a href="https://www.aisin.com/jp/news/uploads/20260602_j.pdf">https://www.aisin.com/jp/news/uploads/20260602_j.pdf</a></li>
+<li>AISIN, 2026 IR news list - <a href="https://www.aisin.com/jp/news/2026/ir/">https://www.aisin.com/jp/news/2026/ir/</a></li>
+<li>AISIN official website - <a href="https://www.aisin.com/jp/">https://www.aisin.com/jp/</a></li>
+<li>EDINET, the Financial Services Agency's disclosure system for Japanese listed companies - <a href="https://disclosure2.edinet-fsa.go.jp/">https://disclosure2.edinet-fsa.go.jp/</a></li>
+<li>TDnet, the Tokyo Stock Exchange's timely disclosure service - <a href="https://www.release.tdnet.info/">https://www.release.tdnet.info/</a></li>
+</ol>
+<blockquote><p>This post is for information only and is not investment advice. Make your own investment decisions, and check the primary sources linked above. Figures are translated from Japanese filings; in case of any difference, the original documents prevail.</p></blockquote>
+</div>
+<div class="share"><span>Share</span><a href="https://x.com/intent/post?text=AISIN%20%287259%20JP%29%3A%20the%20buyback%27s%20cash%20ceiling%20is%20running%20out%20ahead%20of%20its%20share%20ceiling&amp;url=https%3A%2F%2Fnotes.hibiki-tech.com%2Fposts%2F2026-11-18-aisin-buyback-progress%2F" rel="noopener" target="_blank">X</a><a href="https://bsky.app/intent/compose?text=AISIN%20%287259%20JP%29%3A%20the%20buyback%27s%20cash%20ceiling%20is%20running%20out%20ahead%20of%20its%20share%20ceiling%20https%3A%2F%2Fnotes.hibiki-tech.com%2Fposts%2F2026-11-18-aisin-buyback-progress%2F" rel="noopener" target="_blank">Bluesky</a><a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fnotes.hibiki-tech.com%2Fposts%2F2026-11-18-aisin-buyback-progress%2F" rel="noopener" target="_blank">LinkedIn</a></div>
+<div class="ad"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8065890671425926" data-ad-slot="2011152799" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div>
+<aside class="cta"><h4>Get the full filing pack</h4><p>Financial tables, shareholders, segments and risk factors for this company, translated from the Japanese filings. For paid subscribers on Substack.</p><a class="btn" href="https://pochin.substack.com/subscribe">Subscribe</a></aside>
+</article>
+</main>
+<footer class="site"><div class="wrap"><p>Information only, not investment advice. Figures are translated from Japanese filings (EDINET); the original filings prevail.</p><nav><a href="https://hibiki-tech.com/en/">HIBIKI (publisher)</a><a href="../../">Home</a><a href="../../about/">About</a><a href="../../contact/">Contact</a><a href="../../privacy/">Privacy</a><a href="../../feed.xml">RSS</a><a href="https://bsky.app/profile/pochin-shachou.bsky.social" rel="me">Bluesky</a><a href="https://pochin.substack.com/subscribe">Newsletter</a></nav></div></footer>
+</body>
+</html>
